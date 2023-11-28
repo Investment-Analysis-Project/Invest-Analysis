@@ -1,0 +1,100 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+.loginpage{
+    display: flex;
+    flex-direction: row;
+    height:100vh;
+}
+
+.blankcolumn{
+    background-color: #00143d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 70%;
+    padding: 20px;
+    gap: 50px;
+    background: url('./loginpic.png');
+    background-position: center;
+}
+
+.blankcolumn h1{
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.blankcolumn h4{
+    color: #ffffff;
+    font-size: large;
+}
+
+.loginpic{
+    margin-top: 50%;
+    height: 600px;
+    width:680px;
+}
+
+.login{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+    flex: 1;
+    background-color:#ffffff;
+}
+
+.login h1{
+    font-weight: 800;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.loginform{
+    margin-top: 40px;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap:20px;
+}
+
+.logintext{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap:10px;
+    width: 100%;
+    margin-bottom: 20px;  
+}
+
+.loginput{
+    border-top: 1.5px black;
+    border-left: 1.5px black;
+    border-right: 1.5px black;
+    padding-left: 5px;
+}
+
+.loginform input:focus {
+    outline: none;
+}
+
+.logbut{
+    background: #00143d;
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+button:focus{
+    outline: none;
+}
+
+.logbut:active{
+    transform: scale(1.05);
+  }

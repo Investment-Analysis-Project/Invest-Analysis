@@ -1,0 +1,79 @@
+*{
+    font-family: 'Geologica', sans-serif;
+}
+
+.navbar{
+    background-color: #00143d;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.items{
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    gap:7px;
+}
+
+.navbut{
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    color: #fff;
+    font-weight: 500;
+    font-size: medium;
+    outline: none;
+    padding: 5px;
+    transition: box-shadow 0.3s;
+}
+
+.navbut:active {
+    box-shadow: 1px 1px .1px .1px aliceblue;
+    outline: none;
+}
+
+.admin{
+    margin-top: 5px;
+}
+
+.logindropdown{
+    width:150px;
+    background: rgb(255, 252, 252);
+    box-shadow: 0px 0px 5px 1px  #4c5465;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    position: absolute;
+    top:72px;
+    right:0px;
+}
+
+.liststyle{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    list-style: none;
+    padding: 5px;
+}
+
+.profilelistitem{
+    color:#00143d;
+    cursor: pointer;
+}
+
+.profilelistitem:hover{
+    transform: scale(1.05);
+    color:#05b04f;
+}
+
+.depimage img{
+    background: #fff;
+    height: 70px;
+    object-fit: scale-down;
+}
