@@ -33,6 +33,10 @@
     background: #a4afc9;
 }
 
+.news-title img{
+    width: 100%;
+}
+
 .news-domain{
     font-weight: 500;  
     padding-left: 10px;
