@@ -3,6 +3,7 @@ import './login.css';
 import baseurl from '../../baseurl/baseurl';
 import { useNavigate } from 'react-router-dom';
 import { ProjectsContext } from '../../contextapi.js/projectscontext';
+import Navbar from '../../components/navbar/Navbar';
 import Home from '../home/Home';
 import jwt from 'jwt-decode';
 
@@ -56,12 +57,12 @@ const Login = () => {
     return(
         <>
             {!auth ? (<>
+            <Navbar/>
             <div className='loginpage'>
 
                 <div className='blankcolumn'>  
                     <h1>Welcome !</h1>   
-                    <h4>Your gateway to all the projects of CS department. Across <br/>different domains, 
-                    guided by faculties, completed and ongoing, all packed in here !</h4>
+                    <h4>Unleash the power of news to make informed and profitable investment decisions in real time</h4>
                 </div>   
 
                 <div className='login'>

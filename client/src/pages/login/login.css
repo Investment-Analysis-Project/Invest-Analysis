@@ -1,5 +1,6 @@
 *{
     font-family: 'Poppins', sans-serif;
+    margin: 0px;
 }
 
 .loginpage{
@@ -28,6 +29,7 @@
 .blankcolumn h4{
     color: #ffffff;
     font-size: large;
+    font-weight: 500;
 }
 
 .loginpic{

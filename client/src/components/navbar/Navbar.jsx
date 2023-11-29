@@ -1,9 +1,9 @@
 import React, { useContext, useState} from 'react';
 import './navbar.css';
+import { ProjectsContext } from '../../contextapi.js/projectscontext';
 import { useNavigate } from 'react-router-dom';
-import ReactDOM from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileAlt, faHome, faPerson, faPersonChalkboard, faPersonCircleCheck, faRightFromBracket, faSignIn, faUserCircle, faUserSecret } from '@fortawesome/free-solid-svg-icons';
+import {  faHome, faRightFromBracket, faSignIn, faUserCircle, faUserSecret } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = (props) => {
 
@@ -16,17 +16,12 @@ const Navbar = (props) => {
         setprofilevisible(!profilevisible);
     }
 
-    const {auth,setAuth,isAdmin,setisAdmin,user_id,setCurr_aof}=useContext(ProjectsContext);
+    const {auth,setAuth}=useContext(ProjectsContext);
 
     return(
         <div className='navbar'>
             {(!home || auth) && (<div className='items'>
-                <button className='navbut' onClick={()=>{navigate('/')}}><FontAwesomeIcon icon={faHome}/> Home</button>
-                
-                <button className='navbut' onClick={()=>{navigate('/projects')}}><FontAwesomeIcon icon={faFileAlt}/> Projects</button>
-                
-                <button className='navbut' onClick={()=>{navigate('/guides')}}><FontAwesomeIcon icon={faPersonChalkboard}/> Guides</button>
-                
+                <button className='navbut' onClick={()=>{navigate('/')}}><FontAwesomeIcon icon={faHome}/> Home</button>  
             </div>)}
 
             {auth ? (<div className='admin'>
@@ -35,11 +30,10 @@ const Navbar = (props) => {
                 {profilevisible && <div className='logindropdown'>
                     <ul className='liststyle'>
                         <li>
-                            {isAdmin && (<p className='profilelistitem' onClick={()=>{navigate('/adminpanel')}}><FontAwesomeIcon icon={faUserSecret}/> &nbsp;&nbsp;Admin Panel</p>)}
-                            {!isAdmin && (<p className='profilelistitem' onClick={()=>{navigate(`/guide/${user_id}`)}}><FontAwesomeIcon icon={faPersonCircleCheck}/> &nbsp;&nbsp;&nbsp;&nbsp;Profile</p>)}      
+                           <p className='profilelistitem' onClick={()=>{navigate('/')}}><FontAwesomeIcon icon={faUserSecret}/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Profile</p>  
                         </li>
                         <li>
-                            <p className='profilelistitem' onClick={()=>{setAuth(false); setisAdmin(false); localStorage.removeItem('token');navigate('/')}}><FontAwesomeIcon icon={faRightFromBracket}/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout</p>
+                            <p className='profilelistitem' onClick={()=>{setAuth(false); localStorage.removeItem('token');navigate('/')}}><FontAwesomeIcon icon={faRightFromBracket}/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout</p>
                         </li>
                     </ul>
                 </div>}

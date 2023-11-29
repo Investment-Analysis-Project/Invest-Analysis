@@ -1,7 +1,3 @@
-*{
-    font-family: 'Geologica', sans-serif;
-}
-
 .navbar{
     background-color: #00143d;
     height: 70px;
@@ -28,7 +24,7 @@
     font-weight: 500;
     font-size: medium;
     outline: none;
-    padding: 5px;
+    padding: 15px;
     transition: box-shadow 0.3s;
 }
 
