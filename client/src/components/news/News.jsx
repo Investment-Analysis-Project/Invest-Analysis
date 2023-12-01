@@ -9,7 +9,7 @@ const News = () => {
     useEffect(()=>{
         const fetchData =async()=>{
         try{
-            const response = await fetch(`https://newsapi.org/v2/everything?domains=investing.com,cnbc.com,bloomberg.com&apiKey=dd4dcc554dd94d61820961820e342242`)
+            const response = await fetch(`https://newsapi.org/v2/everything?domains=investing.com,cnbc.com,bloomberg.com&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`)
             const data = await response.json();
             const articles = data.articles;
             setNews(articles);

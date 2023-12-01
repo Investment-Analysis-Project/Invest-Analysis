@@ -77,15 +77,17 @@ const Login = () => {
 
             const value=response.data;
 
-            console.log(value.stat);
-
             if(!value.stat){
                 new_setMessage(value.message);
                 return;
             }
 
+            setUserName(new_user_name);
+            setPassword(new_user_password)
+           
             new_setMessage("Account Created");
-
+            
+            loginSubmit(e);
         }catch(err){
             console.log(err);
         }   
