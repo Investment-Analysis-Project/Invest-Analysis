@@ -7,8 +7,12 @@ export const ProjectsContextProvider = (props)=>{
 
     const [auth,setAuth]=useState(false);
     const [user_id,setUser_id]=useState("");
-    
-    const contextValues={auth,setAuth,user_id,setUser_id};
+    const [news_title,setNewtitle]=useState("");
+    const [news_desc,setNewsdesc]=useState("");
+    const [news_url,setNewsurl]=useState("");
+     
+    const contextValues={auth,setAuth,user_id,setUser_id,news_title,setNewtitle,
+        news_desc,setNewsdesc,news_url,setNewsurl};
 
     return(
         <ProjectsContext.Provider value={contextValues}>
