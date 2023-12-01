@@ -20,7 +20,7 @@ const login = async(req,res,next)=>{
 
         const token=jwt.sign(user_log,process.env.JWT);
         
-        res.json({auth:true,token:token,message:"Logined"});
+        res.json({auth:true,token:token});
     }catch(err){
         console.log(err);
     }
@@ -34,7 +34,8 @@ const create = async(req,res,next)=>{
         if(user.rowCount===1) return next(createError(404,"User already exists.")); 
 
         const {rows} = await db.query('INSERT INTO usertable (user_name,user_password,email) values ($1,$2,$3) RETURNING user_id',[user_name,user_password,email]);
-        res.json(rows[0]);
+        
+        res.json({stat:true});
     }catch(err){
         console.log(err);
     }

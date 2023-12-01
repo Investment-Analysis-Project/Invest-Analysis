@@ -11,6 +11,10 @@ const Login = () => {
     const [user_name,setUserName]=useState("");
     const [user_password,setPassword]=useState("");
     const [message,setMessage]=useState("");
+    const [new_user_name,new_setUserName]=useState("");
+    const [new_user_password,new_setPassword]=useState("");
+    const [new_email,new_setEmail]=useState("");
+    const [new_message,new_setMessage]=useState("");
   
     const {auth,setAuth,setUser_id}=useContext(ProjectsContext);
 
@@ -32,6 +36,8 @@ const Login = () => {
 
             const value=response.data;
 
+            console.log(value.auth);
+
             if(!value.auth){
                 setMessage(value.message);
                 return;
@@ -48,6 +54,37 @@ const Login = () => {
             console.log(value.auth);
               
             navigate('/');
+
+        }catch(err){
+            console.log(err);
+        }   
+    }
+
+    const createSubmit = async(e) =>{
+        e.preventDefault();
+
+        if(new_user_name===""||new_user_password===""||new_email===""){
+            new_setMessage("Credentials can't be empty!");
+            return;
+        }
+
+        try{
+            const response = await baseurl.post("/auth/create",{
+                user_name:new_user_name,
+                user_password:new_user_password,
+                email:new_email
+             });
+
+            const value=response.data;
+
+            console.log(value.stat);
+
+            if(!value.stat){
+                new_setMessage(value.message);
+                return;
+            }
+
+            new_setMessage("Account Created");
 
         }catch(err){
             console.log(err);
@@ -82,6 +119,31 @@ const Login = () => {
                         <span>{message}</span>
 
                         <button className='logbut' onClick={loginSubmit}>Login</button>
+                    </div>
+
+                    <h2>OR</h2>
+
+                    <h1>Create Account</h1>
+
+                    <div className='loginform'>
+                        <div className='logintext'>
+                            <span>Username</span>
+                            <input type="text" className='loginput' value={new_user_name} onChange={(e)=>new_setUserName(e.target.value)}/>
+                        </div>
+
+                        <div className='logintext'>
+                            <span>Password</span>
+                            <input type="password" className='loginput' value={new_user_password} onChange={(e)=>new_setPassword(e.target.value)}/>
+                        </div>
+
+                        <div className='logintext'>
+                            <span>Email</span>
+                            <input type="email" className='loginput' value={new_email} onChange={(e)=>new_setEmail(e.target.value)}/>
+                        </div>
+
+                        <span>{new_message}</span>
+
+                        <button className='logbut' onClick={createSubmit}>Create</button>
                     </div>
 
                 </div> 

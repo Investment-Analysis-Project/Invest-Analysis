@@ -3,7 +3,7 @@ import './navbar.css';
 import { ProjectsContext } from '../../contextapi.js/projectscontext';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faHome, faRightFromBracket, faSignIn, faUserCircle, faUserSecret } from '@fortawesome/free-solid-svg-icons';
+import {  faHouseUser, faRightFromBracket, faSignIn, faUserCircle, faUserSecret } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = (props) => {
 
@@ -21,7 +21,7 @@ const Navbar = (props) => {
     return(
         <div className='navbar'>
             {(!home || auth) && (<div className='items'>
-                <button className='navbut' onClick={()=>{navigate('/')}}><FontAwesomeIcon icon={faHome}/> Home</button>  
+                <button className='navbut' onClick={()=>{navigate('/')}}><FontAwesomeIcon icon={faHouseUser} /> Home</button>  
             </div>)}
 
             {auth ? (<div className='items'>

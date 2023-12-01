@@ -6,7 +6,6 @@
 .loginpage{
     display: flex;
     flex-direction: row;
-    height:100vh;
 }
 
 .blankcolumn{
@@ -42,27 +41,24 @@
 .login{
     display: flex;
     flex-direction: column;
-    height: 100%;
     padding: 20px;
+    gap:10px;
     flex: 1;
-    background-color:#ffffff;
+    background-color:rgb(220, 218, 230);
 }
 
-.login h1{
+.login h1,h2{
     font-weight: 800;
-    margin-top: 15px;
     text-align: center;
 }
 
 .loginform{
-    margin-top: 40px;
+    margin-top: 10px;
     border-radius: 5px;
-    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap:20px;
 }
 
 .logintext{
@@ -79,6 +75,7 @@
     border-left: 1.5px black;
     border-right: 1.5px black;
     padding-left: 5px;
+    border-radius: 5px;
 }
 
 .loginform input:focus {
@@ -89,6 +86,7 @@
     background: #00143d;
     color: rgb(255, 255, 255);
     border-radius: 10px;
+    width: 50%;
     border: none;
     outline: none;
     cursor: pointer;

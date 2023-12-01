@@ -30,8 +30,7 @@
 }
 
 .navbut:active {
-    background: white;
-    color: #00143d;
+    transform: scale(1.05);
     border-radius: 5px;
     outline: none;
 }
