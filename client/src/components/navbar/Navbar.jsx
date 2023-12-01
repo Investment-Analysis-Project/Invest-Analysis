@@ -24,7 +24,7 @@ const Navbar = (props) => {
                 <button className='navbut' onClick={()=>{navigate('/')}}><FontAwesomeIcon icon={faHome}/> Home</button>  
             </div>)}
 
-            {auth ? (<div className='admin'>
+            {auth ? (<div className='items'>
                 <button className='navbut' onClick={profileview}><FontAwesomeIcon icon={faUserCircle} size='xl'/></button>
 
                 {profilevisible && <div className='logindropdown'>
@@ -38,7 +38,7 @@ const Navbar = (props) => {
                     </ul>
                 </div>}
             </div>) :
-            (<div className='admin'>
+            (<div className='items'>
                 <button className='navbut' onClick={()=>{navigate('/login')}}><FontAwesomeIcon icon={faSignIn}/> Login</button>
             </div>)}
         </div>

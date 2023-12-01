@@ -10,9 +10,10 @@
     margin-top: 5px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-content: center;
     gap:7px;
+    padding:10px;
 }
 
 .navbut{
@@ -24,12 +25,14 @@
     font-weight: 500;
     font-size: medium;
     outline: none;
-    padding: 15px;
+    padding: 8px;
     transition: box-shadow 0.3s;
 }
 
 .navbut:active {
-    box-shadow: 1px 1px .1px .1px aliceblue;
+    background: white;
+    color: #00143d;
+    border-radius: 5px;
     outline: none;
 }
 
