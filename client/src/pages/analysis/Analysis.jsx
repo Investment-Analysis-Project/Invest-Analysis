@@ -19,9 +19,9 @@ const Analysis = () => {
             <div className='analysispage'>
                 <div className='analysiscontainer'>
                     <div className='analysiscontent'>
-                        <span className='analysistitle'>Anduril unveils Roadrunner, 'a fighter jet weapon that lands like a Falcon 9' | TechCrunch</span>
-                        <span className='analysisdesc'>Leading defense tech startup Anduril has developed a new product designed to take on the proliferation of low-cost, high-powered aerial threats.</span>
-                        <button className='analysisurl' onClick={()=>window.open(`https://techcrunch.com/2023/11/30/anduril-unveils-roadrunner-a-fighter-jet-weapon-that-lands-like-a-falcon-9/`)}>Read Article</button>      
+                        <span className='analysistitle'>{news_title}</span>
+                        <span className='analysisdesc'>{news_desc}</span>
+                        <button className='analysisurl' onClick={()=>window.open(news_url)}>Read Article</button>      
                         <span className='analysisdesc'>Sentiment Score <button className='analysisscore'>9.8</button></span>
                         <span className='analysisdesc'>Entities Found &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button className='analysisscore'>Company</button></span>
                     </div>
