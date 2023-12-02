@@ -15,6 +15,8 @@ const Login = () => {
     const [new_user_password,new_setPassword]=useState("");
     const [new_email,new_setEmail]=useState("");
     const [new_message,new_setMessage]=useState("");
+    const [login,setLogin]=useState(true);
+    const [signup,setSignup]=useState(false);
   
     const {auth,setAuth,setUser_id}=useContext(ProjectsContext);
 
@@ -105,9 +107,16 @@ const Login = () => {
                 </div>   
 
                 <div className='login'>
-                    <h1>User Login</h1>
 
-                    <div className='loginform'>
+                    <div className='loginoptions'>
+                        <button onClick={()=>{setLogin(true);setSignup(false)}}>Login</button>
+                        <span>OR</span>
+                        <button onClick={()=>{setLogin(false);setSignup(true)}}>Sign Up</button>
+                    </div>
+
+                    {login && (<><div className='loginform'>
+                        <h1>User Login</h1>
+
                         <div className='logintext'>
                             <span>Username</span>
                             <input type="text" className='loginput' value={user_name} onChange={(e)=>setUserName(e.target.value)}/>
@@ -121,13 +130,13 @@ const Login = () => {
                         <span>{message}</span>
 
                         <button className='logbut' onClick={loginSubmit}>Login</button>
-                    </div>
+                    </div></>)}
 
-                    <h2>OR</h2>
+                    
 
-                    <h1>Create Account</h1>
+                    {signup&&(<><div className='loginform'>
+                        <h1>Sign Up</h1>
 
-                    <div className='loginform'>
                         <div className='logintext'>
                             <span>Username</span>
                             <input type="text" className='loginput' value={new_user_name} onChange={(e)=>new_setUserName(e.target.value)}/>
@@ -146,8 +155,7 @@ const Login = () => {
                         <span>{new_message}</span>
 
                         <button className='logbut' onClick={createSubmit}>Create</button>
-                    </div>
-
+                    </div></>)}
                 </div> 
             </div></>) : <Home/>}
         </>

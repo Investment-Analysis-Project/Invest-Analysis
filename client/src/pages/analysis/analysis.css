@@ -50,5 +50,8 @@
 }
 
 .analysisscore{
-    width:10%;
+    width:20%;
+    background-color: rgb(220, 220, 3);
+    border: 0px;
+    border-radius: 5px;
 }
