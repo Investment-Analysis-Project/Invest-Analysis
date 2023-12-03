@@ -42,6 +42,7 @@
     border: 0px;
     border-radius: 5px;
     cursor: pointer;
+    margin-bottom: 20px;
 }
 
 .analaysisresult{
@@ -50,7 +51,7 @@
 }
 
 .analysisscore{
-    width:20%;
+    width:30%;
     background-color: rgb(220, 220, 3);
     border: 0px;
     border-radius: 5px;
