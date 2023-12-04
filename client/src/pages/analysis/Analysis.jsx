@@ -18,37 +18,47 @@ const Analysis = () => {
     {
         const query1 = async(data)=>
         {
-            const response = await fetch(
+            try{
+                const response = await fetch(
                 "https://api-inference.huggingface.co/models/ProsusAI/finbert",
                 {
+                    //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
                     headers: { Authorization: "Bearer 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" },
                     method: "POST",
                     body: JSON.stringify(data),
                 }
             );
-            const result = await response.json();
-            const senti =result[0][0];
-            setSentilabel(senti.label);
-            setSentiscore(senti.score);
-            console.log(result[0][0]);
-            return result;
+                const result = await response.json();
+                const senti =result[0][0];
+                setSentilabel(senti.label);
+                setSentiscore(senti.score);
+                console.log(result[0][0]);
+                return result;
+            }catch(err){
+                console.log(err)
+            }
         }
 
         const query2 = async(data)=> 
         {
             //"https://api-inference.huggingface.co/models/dslim/bert-base-NER"
-            const response = await fetch(
+            try{
+                const response = await fetch(
                 "https://api-inference.huggingface.co/models/mdarhri00/named-entity-recognition",
                 {
+                    //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
                     headers: { Authorization: "Bearer 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" },
                     method: "POST",
                     body: JSON.stringify(data),
                 }
             );
-            const result = await response.json();
-            setentity(result);
-            console.log(entity);
-            return result;
+                const result = await response.json();
+                setentity(result);
+                console.log(entity);
+                return result;
+            }catch(err){
+                console.log(err)
+            }
         }
           
         query1({"inputs":news_title}).then((response)=>{});
@@ -66,14 +76,16 @@ const Analysis = () => {
                         <button className='analysisurl' onClick={()=>window.open(news_url)}>Read Article</button>      
                         <span className='analysisdesc'>
                             <h4>Sentiment Score</h4> 
-                            <button className='analysisscore'>{sentiscore} ({sentilabel})</button>
+                            <button className='analysisscore'>{sentiscore} ({sentilabel} impact)</button>
                         </span>
                         <span className='analysisdesc'>
                             <h4>Entities Found</h4>
                             {Array.isArray(entity) && entity.map((res,i)=>{
                                 return(
-                                    <div>
-                                        <button className='analysisscore'>{res.entity_group} : {res.word}</button>
+                                    <div key={i}>
+                                        <button className='analysisscore'>
+                                            {(res.entity_group==="Brand_vehicule" || res.entity_group==="Model_vehicule") ?("Organization_Name") :res.entity_group} : {res.word}
+                                        </button>
                                     </div>
                                 )
                             })}
