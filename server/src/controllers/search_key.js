@@ -1,6 +1,4 @@
 const createError = require('../utils/error');
-const jwt=require('jsonwebtoken');
-const db = require('../db');
 const axios = require('axios');
 
 const recent_news = async(req,res,next)=>{
