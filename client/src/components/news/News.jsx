@@ -13,7 +13,7 @@ const News = () => {
         const fetchData =async()=>{
         try{
             //dd4dcc554dd94d61820961820e342242
-            const response = await fetch(`https://newsapi.org/v2/everything?domains=investing.com,bloomberg.com&language=en&sortBy=popularity&apiKey=afcd39b2d9c546cc9293d168cee038e7`)
+            const response = await fetch(`https://newsapi.org/v2/everything?q=google OR apple OR samsung&language=en&sortBy=popularity&apiKey=afcd39b2d9c546cc9293d168cee038e7`)
             const data = await response.json();
             const articles = data.articles;
             setNews(articles);

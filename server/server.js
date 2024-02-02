@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const auth_routes = require('./src/routes/auth');
+const search_key = require('./src/routes/search_key');
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use('/api/auth',auth_routes);
+app.use('/api/search_key',search_key);
 
 app.use((err,req,res,next)=>{ 
     const errorStatus = err.status|| 500;
