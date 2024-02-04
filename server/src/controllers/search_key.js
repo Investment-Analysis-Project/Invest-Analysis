@@ -7,8 +7,8 @@ const resultArray = [];
 
 const recent_news = async(req,res,next)=>{
     try{
+        const resultArray = [];
         const {keyword}=req.params;
-        
         const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&searchIn=title&from=2024-01-20&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
 
         const five_news = response.data.articles.slice(0,5);
@@ -21,8 +21,10 @@ const recent_news = async(req,res,next)=>{
         processNewsArray(newsArray);
 
         if(resultArray.length)
-            console.log(resultArray);
-        console.log("\n\n")
+        {
+            console.log(resultArray)
+            res.json(resultArray);
+        }
     }catch(err){
         console.log(err);
     }
