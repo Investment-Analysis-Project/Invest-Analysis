@@ -4,6 +4,9 @@ import Home from './pages/home/Home'
 import Search from "./components/search/Search";
 import { ProjectsContextProvider } from './contextapi.js/projectscontext';
 import Analysis from "./pages/analysis/Analysis";
+import Profile from "./pages/profile/Profile";
+import Result from "./pages/result/Result";
+
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
             <Route path="/analysis" element={<Analysis/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/search_key" element={<Search/>}/>
+            <Route path="/profile" element={<Profile/>}/>
+            <Route path="/result" element={<Result/>} />
+
           </Routes>
         </BrowserRouter>
       </>
