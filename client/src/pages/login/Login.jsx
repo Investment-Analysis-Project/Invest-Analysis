@@ -98,7 +98,7 @@ const Login = () => {
     return(
         <>
             {!auth ? (<>
-            <Navbar/>
+            <Navbar login_page={true}/>
             <div className='loginpage'>
 
                 <div className='blankcolumn'>  

@@ -5,7 +5,7 @@ const db = require('../db');
 const login = async(req,res,next)=>{
     try{
         const {user_name,user_password}=req.body;
-
+    
         const user = await db.query('SELECT * FROM usertable where user_name=$1',[user_name]);
         if(user.rowCount===0) return next(createError(404,"User not found ! Create an account."));   
      

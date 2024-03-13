@@ -7,7 +7,7 @@ import {  faHouseUser, faRightFromBracket, faSignIn, faUserCircle, faUserSecret 
 
 const Navbar = (props) => {
 
-    const {home}=props;
+    const {home,login_page}=props;
 
     const navigate = useNavigate();
     const [profilevisible,setprofilevisible]=useState(false);
@@ -38,7 +38,7 @@ const Navbar = (props) => {
                     </ul>
                 </div>}
             </div>) :
-            (<div className='items'>
+            (!login_page && <div className='items'>
                 <button className='navbut' onClick={()=>{navigate('/login')}}><FontAwesomeIcon icon={faSignIn}/> Login</button>
             </div>)}
         </div>
