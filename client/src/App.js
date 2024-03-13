@@ -20,7 +20,7 @@ function App() {
             <Route path="/search_key" element={<Search/>}/>
             <Route path="/profile" element={<Profile/>}/>
             <Route path="/result" element={<Result/>} />
-
+            
           </Routes>
         </BrowserRouter>
       </>

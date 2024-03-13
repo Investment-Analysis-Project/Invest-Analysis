@@ -1,40 +1,16 @@
 import React, { useEffect } from 'react';
-/* eslint-disable no-undef */
 
-function TrendGraph() {
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = 'https://ssl.gstatic.com/trends_nrtr/3620_RC01/embed_loader.js';
-        script.async = true;
-
-        // Define the rendering logic function
-        window.renderTrendGraph = () => {
-            trends.embed.renderExploreWidget(
-                "TIMESERIES",
-                {"comparisonItem":[{"keyword":"pepsi","geo":"IN","time":"now 1-d"}],"category":0,"property":""},
-                {"exploreQuery":"q=pepsi&date=now%201-d&geo=IN&hl=en-GB","guestPath":"https://trends.google.com:443/trends/embed/"}
-            );
-        };
-
-        script.onload = () => {
-            // Once the script is loaded, call the rendering logic function
-            window.renderTrendGraph();
-        };
-
-         document.body.appendChild(script);
-
-        // Clean up
-        return () => {
-            document.body.removeChild(script);
-            delete window.renderTrendGraph;
-        };
-    }, []);
+const TrendGraph = () => {
 
     return (
-        <div id="trend-graph-container" style={{ width: '500px', height: '300px' }}>
-            {/* This div will be used as the container for the TrendGraph */}
-        </div>
+      <iframe
+        id="google-trends-iframe"
+        title="Google Trends Widget"
+        src="https://trends.google.com:443/trends/embed/explore/TIMESERIES?req=%7B%22comparisonItem%22%3A%5B%7B%22keyword%22%3A%22pepsi%22%2C%22geo%22%3A%22IN%22%2C%22time%22%3A%22now%201-d%22%7D%5D%2C%22category%22%3A0%2C%22property%22%3A%22%22%7D&tz=-330&hl=en-GB"
+        width="500"
+        height="350"
+      ></iframe>
     );
-}
+  };
 
 export default TrendGraph;
