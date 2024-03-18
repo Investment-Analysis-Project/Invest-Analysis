@@ -65,4 +65,5 @@
 .newsitem:hover{
     transform: scale(1.01);
     box-shadow: 0px 3px 2px 2px #b1b7c5;
+    z-index: -1;
 }
