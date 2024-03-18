@@ -36,8 +36,8 @@ const News = () => {
                             <span className='news-title'>{res.title}</span>
                             <img src={res.urlToImage || img} alt="" />
                             <div className='news-source'>
-                            <span>{res.source.name}</span>
-                            <span>{res.publishedAt}</span>
+                                <span>{res.source.name}</span>
+                                <span>{res.publishedAt}</span>
                             </div>
                         </div>
                     )
