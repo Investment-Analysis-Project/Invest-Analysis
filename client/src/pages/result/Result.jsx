@@ -12,7 +12,7 @@ const Result = () => {
   
   return (
     <div>
-      <Navbar home={true}/>
+      <Navbar result={true}/>
       <div className='homecontainer'>              
         </div>
 

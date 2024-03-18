@@ -7,18 +7,18 @@ import {  faHouseUser, faRightFromBracket, faSignIn, faUserCircle, faUserSecret 
 
 const Navbar = (props) => {
 
-    const {login_page}=props;
+    const {login_page,result}=props;
 
     const navigate = useNavigate();
-    const [profilevisible,setprofilevisible]=useState(true);
+    const [profilevisible,setprofilevisible]=useState(false);
 
     const profileview=()=>{
         setprofilevisible(!profilevisible);
     }
 
     const {auth,setAuth}=useContext(ProjectsContext);
-    setAuth(false);
-
+    setAuth(true);
+    
     return(
         <div className='navbar'>
             <div className="nav_container">
@@ -27,7 +27,7 @@ const Navbar = (props) => {
                 </div>
 
                 {auth ? (<div className='items'>
-                    <button className='navbut' onClick={()=>{navigate('/login')}}>Search For Company&nbsp;&nbsp; <FontAwesomeIcon icon={faSearch} style={{color: "#ffffff",}} size="sm"/></button>
+                    {!result && (<button className='navbut' onClick={()=>{navigate('/result')}}>Search For Company&nbsp;&nbsp; <FontAwesomeIcon icon={faSearch} style={{color: "#ffffff",}} size="sm"/></button>)}
 
                     <button className='navbut' onClick={profileview}><FontAwesomeIcon icon={faUser} style={{color: "#ffffff",}} size="xl"/></button>
 
