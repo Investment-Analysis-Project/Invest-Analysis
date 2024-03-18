@@ -1,7 +1,4 @@
-:root{
-    --main_green:#08b584;
-    --main_blue:#00143d;
-}
+@import url('../../styles/styles.css');
 
 .navbar{
     background-color: var(--main_green);

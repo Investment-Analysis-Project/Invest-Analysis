@@ -96,10 +96,12 @@ const Login = () => {
     }
 
     return(
-        <>
+        <div className='logincomponent'>
             {!auth ? (<>
             <Navbar login_page={true}/>
             <div className='loginpage'>
+
+                <div className="logincontainer">
 
                 <div className='blankcolumn'>  
                     <h1>Welcome !</h1>   
@@ -156,9 +158,10 @@ const Login = () => {
 
                         <button className='logbut' onClick={createSubmit}>Create</button>
                     </div></>)}
+                </div>
                 </div> 
             </div></>) : <Home/>}
-        </>
+        </div>
     )
 }
 
