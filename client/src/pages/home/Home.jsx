@@ -1,5 +1,6 @@
 import React from 'react'
 import './home.css';
+
 import Navbar from '../../components/navbar/Navbar';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,7 +15,7 @@ const Home = () => {
       <Navbar home={true}/>
       <div className='homecontainer'>
           <div className='homeintro'>
-            <h1>Welcome to InvestAnalysis</h1>   
+            <h1>Welcome to InvestAnalysis.</h1>   
             <p>
               Unleash the power of news to make informed and profitable investment decisions in real time
             </p>
