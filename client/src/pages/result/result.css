@@ -50,7 +50,7 @@ body{
 
 .header{
   position: sticky;
-  top:70px;
+  top:20px;
   min-height: 50px;
   border-radius: 20px;
   width: 90%;
@@ -104,13 +104,12 @@ body{
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
   position: fixed;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar-title {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 20px 20px 20px;
   margin-bottom: 30px;
 }
 
@@ -119,8 +118,14 @@ body{
 }
 
 .sidebar-brand {
-  margin-top: 15px;
-  font-size: 20px;
+  margin-top: 10px;
+  margin-left: 0;
+}
+
+.sidebar-brand span{
+  color: var(--main_green);
+  cursor: pointer;
+  font-size: 15px;
   font-weight: 700;
 }
 
@@ -128,6 +133,8 @@ body{
   padding: 0;
   margin-top: 15px;
   list-style-type: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar-list-item {
@@ -135,13 +142,8 @@ body{
 }
 
 .sidebar-list-item:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--main_green);
   cursor: pointer;
-}
-
-.sidebar-list-item > a {
-  text-decoration: none;
-  color: #9799ab;
 }
 
 .sidebar-responsive {
@@ -156,7 +158,6 @@ body{
   z-index: 12 !important;
 }
 
-
 /* ---------- MAIN ---------- */
 
 .main-container {
@@ -170,6 +171,7 @@ body{
 .main-title {
   display: flex;
   justify-content: space-between;
+  margin-top: 50px;
 }
 
 .main-title > p {

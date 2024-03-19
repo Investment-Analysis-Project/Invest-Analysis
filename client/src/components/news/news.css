@@ -10,7 +10,7 @@
 
 .newscontainer{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     margin-top: 20px;
     gap: 40px;
     border-radius: 5px;
