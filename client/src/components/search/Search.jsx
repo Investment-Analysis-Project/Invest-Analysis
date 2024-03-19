@@ -1,4 +1,3 @@
-import './search.css';
 import { useEffect,useState } from 'react';
 import baseurl from '../../baseurl/baseurl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
