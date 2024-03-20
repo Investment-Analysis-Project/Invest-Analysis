@@ -38,10 +38,6 @@ body{
   background: var(--main_green);
 }
 
-.graph{
-  width: 100%; 
-}
-
 /* ---------- HEADER ---------- */
 
 .header{
@@ -99,6 +95,15 @@ body{
   display: flex;
   flex-direction: column;
   border-right: 2px solid var(--main_green);
+}
+
+.side_foot{
+  text-align: center;
+  position: fixed;
+  bottom:0;
+  left:3px;
+  color: rgb(101, 106, 107);
+  font-style: italic;
 }
 
 .sidebar-title {
@@ -160,7 +165,6 @@ body{
   display: flex;
   flex-direction: column;
   margin-top: 20px;
-  
 }
 
 .main-title {
@@ -174,8 +178,10 @@ body{
 
 .main-cards {
   gap: 20px;
-
   margin-bottom: 20px;
+  width:100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .senti_button{
@@ -183,11 +189,16 @@ body{
   margin-bottom: 20px;
   border: none;
   outline: none;
-  border-radius: 5px;
-  width: 50%;
+  border-radius: 10px;
+  width: fit-content;
   text-align: left;
-  background: var(--main_green);
+  background: var(--main_blue);
   color: white;
+  padding: 5px;
+}
+
+.main-container-graph{
+  margin-top: 50px;
 }
 
 

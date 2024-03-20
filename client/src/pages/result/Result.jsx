@@ -41,6 +41,8 @@ const Result = () => {
                 <span class="material-icons-outlined"><FontAwesomeIcon icon={faRightFromBracket} />&nbsp; Logout</span>
             </li>
           </ul>
+
+          <span className="side_foot">All Rights Served</span>
         </aside>
 
         <div class="grid-container">
@@ -56,87 +58,96 @@ const Result = () => {
           </header>
           
           <main class="main-container">
-            <div class="main-title">
-              <h3 class="font-weight-bold">Top Results</h3>
+
+            <div className="main-container-news">
+
+              <div class="main-title">
+                <h3 class="font-weight-bold">Top Results</h3>
+              </div>
+
+              <button className='senti_button'>Overall sentiment of latest news : Negative</button>
+
+              <div className="newscontainer">
+                <div className='newsitem' id="newspointer">
+                    <span className='news-title'>Anker power banks and wireless chargers are up to 43 percent off for the Amazon Spring Sale</span>
+                    <img src="https://img.freepik.com/free-vector/banking-business-facebook-template_23-2150971682.jpg?t=st=1710874848~exp=1710878448~hmac=440ae8aa2ab1ba105fa057be926c1c73e10a2abc25a20c6f23b6878d0461f870&w=900" alt="" />
+                    <div className='news-source'>
+                      <span>CNBC</span>
+                      <span>26-11-2024 10:30 PM</span>
+                    </div>
+                </div>
+
+                <div className='newsitem' id="newspointer">
+                    <span className='news-title'>Anker power banks and wireless chargers are up to 43 percent off for the Amazon Spring Sale</span>
+                    <img src="https://img.freepik.com/free-vector/banking-business-facebook-template_23-2150971682.jpg?t=st=1710874848~exp=1710878448~hmac=440ae8aa2ab1ba105fa057be926c1c73e10a2abc25a20c6f23b6878d0461f870&w=900" alt="" />
+                    <div className='news-source'>
+                      <span>CNBC</span>
+                      <span>26-11-2024 10:30 PM</span>
+                    </div>
+                </div>
+
+                <div className='newsitem' id="newspointer">
+                    <span className='news-title'>Anker power banks and wireless chargers are up to 43 percent off for the Amazon Spring Sale</span>
+                    <img src="https://img.freepik.com/free-vector/banking-business-facebook-template_23-2150971682.jpg?t=st=1710874848~exp=1710878448~hmac=440ae8aa2ab1ba105fa057be926c1c73e10a2abc25a20c6f23b6878d0461f870&w=900" alt="" />
+                    <div className='news-source'>
+                      <span>CNBC</span>
+                      <span>26-11-2024 10:30 PM</span>
+                    </div>
+                </div>
+
+                <div className='newsitem' id="newspointer">
+                    <span className='news-title'>Anker power banks and wireless chargers are up to 43 percent off for the Amazon Spring Sale</span>
+                    <img src="https://img.freepik.com/free-vector/banking-business-facebook-template_23-2150971682.jpg?t=st=1710874848~exp=1710878448~hmac=440ae8aa2ab1ba105fa057be926c1c73e10a2abc25a20c6f23b6878d0461f870&w=900" alt="" />
+                    <div className='news-source'>
+                      <span>CNBC</span>
+                      <span>26-11-2024 10:30 PM</span>
+                    </div>
+                </div>
+
+                <div className='newsitem' id="newspointer">
+                    <span className='news-title'>Anker power banks and wireless chargers are up to 43 percent off for the Amazon Spring Sale</span>
+                    <img src="https://img.freepik.com/free-vector/banking-business-facebook-template_23-2150971682.jpg?t=st=1710874848~exp=1710878448~hmac=440ae8aa2ab1ba105fa057be926c1c73e10a2abc25a20c6f23b6878d0461f870&w=900" alt="" />
+                    <div className='news-source'>
+                      <span>CNBC</span>
+                      <span>26-11-2024 10:30 PM</span>
+                    </div>
+                </div>
+
+                <div className='newsitem' id="newspointer">
+                    <span className='news-title'>Anker power banks and wireless chargers are up to 43 percent off for the Amazon Spring Sale</span>
+                    <img src="https://img.freepik.com/free-vector/banking-business-facebook-template_23-2150971682.jpg?t=st=1710874848~exp=1710878448~hmac=440ae8aa2ab1ba105fa057be926c1c73e10a2abc25a20c6f23b6878d0461f870&w=900" alt="" />
+                    <div className='news-source'>
+                      <span>CNBC</span>
+                      <span>26-11-2024 10:30 PM</span>
+                    </div>
+                </div>
+              </div>
             </div>
 
-            <button className='senti_button'>Overall sentiment of latest news : Negative</button>
-
-            <div className="newscontainer">
-              <div className='newsitem' id="newspointer">
-                  <span className='news-title'>Anker power banks and wireless chargers are up to 43 percent off for the Amazon Spring Sale</span>
-                  <img src="https://img.freepik.com/free-vector/banking-business-facebook-template_23-2150971682.jpg?t=st=1710874848~exp=1710878448~hmac=440ae8aa2ab1ba105fa057be926c1c73e10a2abc25a20c6f23b6878d0461f870&w=900" alt="" />
-                  <div className='news-source'>
-                    <span>CNBC</span>
-                    <span>26-11-2024 10:30 PM</span>
-                  </div>
+            <div className="main-container-graph">
+              <div class="main-title">
+                <h3 class="font-weight-bold">Google Trends Search</h3>
               </div>
-
-              <div className='newsitem' id="newspointer">
-                  <span className='news-title'>Anker power banks and wireless chargers are up to 43 percent off for the Amazon Spring Sale</span>
-                  <img src="https://img.freepik.com/free-vector/banking-business-facebook-template_23-2150971682.jpg?t=st=1710874848~exp=1710878448~hmac=440ae8aa2ab1ba105fa057be926c1c73e10a2abc25a20c6f23b6878d0461f870&w=900" alt="" />
-                  <div className='news-source'>
-                    <span>CNBC</span>
-                    <span>26-11-2024 10:30 PM</span>
-                  </div>
-              </div>
-
-              <div className='newsitem' id="newspointer">
-                  <span className='news-title'>Anker power banks and wireless chargers are up to 43 percent off for the Amazon Spring Sale</span>
-                  <img src="https://img.freepik.com/free-vector/banking-business-facebook-template_23-2150971682.jpg?t=st=1710874848~exp=1710878448~hmac=440ae8aa2ab1ba105fa057be926c1c73e10a2abc25a20c6f23b6878d0461f870&w=900" alt="" />
-                  <div className='news-source'>
-                    <span>CNBC</span>
-                    <span>26-11-2024 10:30 PM</span>
-                  </div>
-              </div>
-
-              <div className='newsitem' id="newspointer">
-                  <span className='news-title'>Anker power banks and wireless chargers are up to 43 percent off for the Amazon Spring Sale</span>
-                  <img src="https://img.freepik.com/free-vector/banking-business-facebook-template_23-2150971682.jpg?t=st=1710874848~exp=1710878448~hmac=440ae8aa2ab1ba105fa057be926c1c73e10a2abc25a20c6f23b6878d0461f870&w=900" alt="" />
-                  <div className='news-source'>
-                    <span>CNBC</span>
-                    <span>26-11-2024 10:30 PM</span>
-                  </div>
-              </div>
-
-              <div className='newsitem' id="newspointer">
-                  <span className='news-title'>Anker power banks and wireless chargers are up to 43 percent off for the Amazon Spring Sale</span>
-                  <img src="https://img.freepik.com/free-vector/banking-business-facebook-template_23-2150971682.jpg?t=st=1710874848~exp=1710878448~hmac=440ae8aa2ab1ba105fa057be926c1c73e10a2abc25a20c6f23b6878d0461f870&w=900" alt="" />
-                  <div className='news-source'>
-                    <span>CNBC</span>
-                    <span>26-11-2024 10:30 PM</span>
-                  </div>
-              </div>
-
-              <div className='newsitem' id="newspointer">
-                  <span className='news-title'>Anker power banks and wireless chargers are up to 43 percent off for the Amazon Spring Sale</span>
-                  <img src="https://img.freepik.com/free-vector/banking-business-facebook-template_23-2150971682.jpg?t=st=1710874848~exp=1710878448~hmac=440ae8aa2ab1ba105fa057be926c1c73e10a2abc25a20c6f23b6878d0461f870&w=900" alt="" />
-                  <div className='news-source'>
-                    <span>CNBC</span>
-                    <span>26-11-2024 10:30 PM</span>
-                  </div>
-              </div>
+              <div class="main-cards">
+                <div className="graph" >
+                    <TrendGraph/>
+                </div>
+                <div className="graph" >
+                    <TrendGraph/>
+                </div>
+                <div className="graph" >
+                    <TrendGraph/>
+                </div>
+                <div className="graph" >
+                    <TrendGraph/>
+                </div>
+                <div className="graph" >
+                    <TrendGraph/>
+                </div>
+                <div className="graph" >
+                    <TrendGraph/>
+                </div>
             </div>
-
-            <div class="main-title">
-              <h3 class="font-weight-bold">Google Trends Search</h3>
-            </div>
-            <div class="main-cards">
-              <div className="graph" >
-                  <TrendGraph/>
-              </div>
-
-              <div className="graph" >
-                  <TrendGraph/>
-              </div>
-
-              <div className="graph" >
-                  <TrendGraph/>
-              </div>
-
-              <div className="graph" >
-                  <TrendGraph/>
-              </div>
             </div>
           </main>
         </div>
