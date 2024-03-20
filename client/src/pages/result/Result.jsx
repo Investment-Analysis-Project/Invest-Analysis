@@ -5,7 +5,7 @@ import { useEffect,useRef} from 'react';
 import img from '../../components/news/img.jpg'
 import TrendGraph from '../../components/trendGraph/TrendGraph';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faBars } from '@fortawesome/free-solid-svg-icons';
+import {  faBars,faMagnifyingGlass,faUser,faClockRotateLeft,faGear,faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 /* eslint-disable no-undef */
 
 
@@ -26,20 +26,19 @@ const Result = () => {
 
           <ul class="sidebar-list">
             <li class="sidebar-list-item">
-                <span class="material-icons-outlined">Profile</span>
+                <span class="material-icons-outlined"><FontAwesomeIcon icon={faUser} /> &nbsp; Profile</span>
             </li>
 
             <li class="sidebar-list-item">
-              
-                <span class="material-icons-outlined">History</span>
+                <span class="material-icons-outlined"><FontAwesomeIcon icon={faClockRotateLeft} /> &nbsp;History</span>
             </li>
             
             <li class="sidebar-list-item">
-                <span class="material-icons-outlined">Settings</span>
+                <span class="material-icons-outlined"><FontAwesomeIcon icon={faGear} />&nbsp; Settings</span>
             </li>
           
             <li class="sidebar-list-item"> 
-                <span class="material-icons-outlined">Logout</span>
+                <span class="material-icons-outlined"><FontAwesomeIcon icon={faRightFromBracket} />&nbsp; Logout</span>
             </li>
           </ul>
         </aside>
@@ -52,14 +51,17 @@ const Result = () => {
             </div>
             <div class="header-left">
               <input type="text" id="company" name="name" placeholder="Search For a Company"/>
-              <button className='search_button'>Search</button>
+              <button className='search_button'><FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#ffffff",}}/></button>
             </div>
           </header>
           
           <main class="main-container">
             <div class="main-title">
-              <p class="font-weight-bold">Top Results</p>
+              <h3 class="font-weight-bold">Top Results</h3>
             </div>
+
+            <button className='senti_button'>Overall sentiment of latest news : Negative</button>
+
             <div className="newscontainer">
               <div className='newsitem' id="newspointer">
                   <span className='news-title'>Anker power banks and wireless chargers are up to 43 percent off for the Amazon Spring Sale</span>
@@ -117,7 +119,7 @@ const Result = () => {
             </div>
 
             <div class="main-title">
-              <p class="font-weight-bold">Google Trends Search</p>
+              <h3 class="font-weight-bold">Google Trends Search</h3>
             </div>
             <div class="main-cards">
               <div className="graph" >
