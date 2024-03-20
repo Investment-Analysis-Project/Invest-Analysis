@@ -2,9 +2,10 @@ CREATE DATABASE investanalysis;
 
 CREATE TABLE usertable(
   user_id SERIAL PRIMARY KEY,
-  user_name VARCHAR(20) NOT NULL UNIQUE,
-  user_password VARCHAR(20) NOT NULL,
+  user_name VARCHAR(60) NOT NULL UNIQUE,
+  user_password VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL UNIQUE,
+  is_admin BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMP DEFAULT NOW()
 );
 
