@@ -3,7 +3,7 @@ import './navbar.css';
 import { ProjectsContext } from '../../contextapi.js/projectscontext';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faHouseUser, faRightFromBracket, faSignIn, faUserCircle, faUserSecret ,faUser,faSearch } from '@fortawesome/free-solid-svg-icons';
+import {  faUser,faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = (props) => {
 
