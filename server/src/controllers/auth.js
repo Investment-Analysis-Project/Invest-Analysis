@@ -1,7 +1,8 @@
-const createError = require('../utils/error');
 const jwt=require('jsonwebtoken');
 const db = require('../db');
 const bcrypt = require('bcrypt');
+const createError = require('../utils/error');
+const createSuccess = require('../utils/success');
 
 const login = async(req,res,next)=>{
     try{
@@ -20,11 +21,12 @@ const login = async(req,res,next)=>{
             isadmin:user.rows[0].is_admin
         }
 
-        const token=jwt.sign(user_log,process.env.JWT);
+        const token=jwt.sign(user_log,process.env.JWT_SECRET);
         
-        res.json({auth:true,token:token});
+        res.json(createSuccess(200,"Login Success",{token}));
     }catch(err){
         console.log(err);
+        next(createError(500,"Server Error"));
     }
 };
 
@@ -39,9 +41,10 @@ const create = async(req,res,next)=>{
 
         const {rows} = await db.query('INSERT INTO usertable (user_name,user_password,email) values ($1,$2,$3) RETURNING user_id',[user_name,hashedPassword,email]);
         
-        res.json({stat:true});
+        res.json(createSuccess(201,"User Created",{user_name:rows[0].user_name}));
     }catch(err){
         console.log(err);
+        next(createError(500,"Server Error"));
     }
 }
 
