@@ -171,10 +171,10 @@ body{
 }
 
 .result-dash{
-  margin-top: 50px;
+  margin-top: 20px;
   width: 100%;
   display: flex;
-  gap: 20px;
+  gap: 15px;
 }
 
 .result-dash-news{
@@ -220,7 +220,7 @@ body{
   flex-direction: column;
   padding: 50px;
   gap: 15px;
-  background:rgba(135, 206, 250, 0.678);
+  background:rgba(124, 188, 228, 0.678);
   height: fit-content;
   border-radius: 15px;
 }
