@@ -115,6 +115,13 @@ const Result = () => {
                     <h3>Sentiment Analysis</h3>
                     <span className='result-dash-senti-data'>Positive Article : 0</span>
                     <span className='result-dash-senti-data'>Negative Article : 6</span>
+                    <span className='result-dash-senti-data'>Neutral Article : 0</span>
+
+                    <br></br>
+                    <h3>Entities Found</h3>
+                    <span>Google</span>
+                    <span>Apple</span>
+                    <span>Nvidia</span>
                 </div>
               </div>
 

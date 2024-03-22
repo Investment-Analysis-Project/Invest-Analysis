@@ -199,7 +199,8 @@ body{
 .result-dash-news-detail button{
   border: none;
   border-radius: 5px;
-  background:rgba(135, 206, 250, 0.678);
+  background:#4ea0d3;
+  color: rgb(255, 243, 243);
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
@@ -220,13 +221,13 @@ body{
   flex-direction: column;
   padding: 50px;
   gap: 15px;
-  background:rgba(124, 188, 228, 0.678);
+  background:#4ea0d3;
   height: fit-content;
   border-radius: 15px;
 }
 
 .result-dash-senti h3{
-  color: aliceblue;
+  color: rgb(0, 0, 0);
 }
 
 .result-dash-senti span{
