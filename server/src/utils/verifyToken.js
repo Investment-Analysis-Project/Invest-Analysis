@@ -24,4 +24,15 @@ const verifyToken = (req, res, next) => {
     });
 };
 
-module.exports = verifyToken;
+const verifyUser = (req,res,next)=>{
+    verifyToken(req,res,()=>{
+        if(req.user.user_id===parseInt(req.query.id)){  
+            next();
+        }
+        else{
+            return next(createError(401,"You are not authorized user !"));
+        }
+    });
+}
+
+module.exports = {verifyToken,verifyUser};
