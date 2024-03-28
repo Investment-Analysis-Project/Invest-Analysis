@@ -21,7 +21,7 @@ const login = async(req,res,next)=>{
             isadmin:user.rows[0].is_admin
         }
 
-        const token=jwt.sign(user_log,process.env.JWT_SECRET);
+        const token=jwt.sign(user_log,process.env.JWT_SECRET,{expiresIn:"24h"});
         
         res.json(createSuccess(200,"Login Success",{token}));
     }catch(err){
@@ -41,7 +41,7 @@ const create = async(req,res,next)=>{
 
         const {rows} = await db.query('INSERT INTO usertable (user_name,user_password,email) values ($1,$2,$3) RETURNING user_id',[user_name,hashedPassword,email]);
         
-        res.json(createSuccess(201,"User Created",{user_name:rows[0].user_name}));
+        res.json(createSuccess(201,"User Created",{user_name:rows[0].user_name,user_id:rows[0].user_id}));
     }catch(err){
         console.log(err);
         next(createError(500,"Server Error"));
