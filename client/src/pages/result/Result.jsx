@@ -103,12 +103,6 @@ const Result = () => {
                     <span>Zomato’s ‘pure veg food’ scheme is pure casteism. Here’s why many people don’t get that</span>
                     <button>Negative</button>
                   </div>
-
-                  <div className="result-dash-news-detail">
-                  <img src="https://yt3.googleusercontent.com/rhqKhfZPaVKRfPi1UvaoekFcSVkipICyGmshnUT9SYMR2JMI8G40YqtaOqz94Ao5rdu_NE0nAw=s900-c-k-c0x00ffffff-no-rj" alt="" />
-                    <span>Zomato’s ‘pure veg food’ scheme is pure casteism. Here’s why many people don’t get that</span>
-                    <button>Negative</button>
-                  </div>
                 </div>
         
                 <div className="result-dash-senti">

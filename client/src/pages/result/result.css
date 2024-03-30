@@ -101,9 +101,9 @@ body{
   text-align: center;
   position: fixed;
   bottom:0;
-  left:3px;
+  left:30px;
+  font-size:10px;
   color: rgb(101, 106, 107);
-  font-style: italic;
 }
 
 .sidebar-title {
@@ -182,7 +182,6 @@ body{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap:10px;
 }
 
 .result-dash-news-detail{
@@ -220,7 +219,7 @@ body{
   display: flex;
   flex-direction: column;
   padding: 50px;
-  gap: 15px;
+  gap: 5px;
   background:#4ea0d3;
   height: fit-content;
   border-radius: 15px;
