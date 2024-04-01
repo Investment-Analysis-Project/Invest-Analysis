@@ -9,7 +9,7 @@ const recent_news = async(req,res,next)=>{
     try{
         const resultArray = [];
         const {keyword}=req.params;
-        const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&searchIn=title&from=2024-01-20&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
+        const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&excludeDomains=engadget.com&searchIn=title&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
 
         const five_news = response.data.articles.slice(0,5);
         const newsArray = [];
@@ -18,12 +18,12 @@ const recent_news = async(req,res,next)=>{
             newsArray.push({url,title});
         });
 
-        processNewsArray(newsArray);
+        const x = await processNewsArray(newsArray);
 
-        if(resultArray.length)
+        if(x.length)
         {
-            console.log(resultArray)
-            res.json(resultArray);
+            console.log(x)
+            res.json(x);
         }
     }catch(err){
         console.log(err);
@@ -32,9 +32,12 @@ const recent_news = async(req,res,next)=>{
 
 const processNewsArray = async(newsArray)=>
 {
-    newsArray.forEach((news)=>{
-        query({"inputs": news.title},news);
-    });
+    for (let i = 0; i <newsArray.length; i++){
+        const news = newsArray[i];
+        await query({"inputs": news.title},news);
+    }
+    
+    return resultArray;
 };
 
 const query = async(data,news)=>
