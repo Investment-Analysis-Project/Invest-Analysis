@@ -5,7 +5,7 @@ import { ProjectsContext } from '../../contextapi.js/projectscontext';
 import { useNavigate} from 'react-router-dom';
 import TrendGraph from '../../components/trendGraph/TrendGraph';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faBars,faMagnifyingGlass,faUser,faClockRotateLeft,faGear,faRightFromBracket,faMagic,faKey } from '@fortawesome/free-solid-svg-icons';
+import {  faBars,faMagnifyingGlass,faUser,faClockRotateLeft,faGear,faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 const Result = () => {
   const navigate = useNavigate();
@@ -14,9 +14,11 @@ const Result = () => {
 
   const [company,setCompany]=useState("");
   const [value,setValue]=useState([]);
-  const [pos,setpos]=useState(0);
-  const [neg,setneg]=useState(0);
-  const [neu,setneu]=useState(0);
+  let sentimentCount = {
+    positive: 0,
+    negative: 0,
+    neutral: 0
+  };
 
   const searchForCompany = async(e)=>{
     e.preventDefault();
@@ -57,14 +59,6 @@ const Result = () => {
             <li className="sidebar-list-item"> 
                 <span className="material-icons-outlined" onClick={()=>{setAuth(false); localStorage.removeItem('token');navigate('/')}}><FontAwesomeIcon icon={faRightFromBracket} />&nbsp; Logout</span>
             </li>
-
-            <li className="sidebar-list-item">
-                <span className="material-icons-outlined"><FontAwesomeIcon icon={faMagic} />&nbsp; Another</span>
-            </li>            
-
-            <li className="sidebar-list-item">
-                <span className="material-icons-outlined"><FontAwesomeIcon icon={faKey} />&nbsp; About</span>
-            </li>
           </ul>
 
           <span className="side_foot">All Rights Served</span>
@@ -78,7 +72,7 @@ const Result = () => {
             </div>
             <div className="header-left">
               <input type="text" id="company" name="name" placeholder="Search For a Company" value={company} onChange={e=>setCompany(e.target.value)}/>
-              <button className='search_button'><FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#ffffff",}}/></button>
+              <button className='search_button' onClick={searchForCompany}><FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#ffffff",}}/></button>
             </div>
           </header>
           
@@ -92,13 +86,26 @@ const Result = () => {
 
               <div className="result-dash">
                 <div className="result-dash-news">
-                  {value.map((res,i)=>{
-                              
+                  {value.map((res,i)=>{ 
+
+                    switch (res.news_sentiment.label) 
+                    {
+                      case 'positive':
+                        sentimentCount.positive++;
+                        break;
+                      case 'negative':
+                        sentimentCount.negative++;
+                        break;
+                      default:
+                        sentimentCount.neutral++;
+                        break;
+                    }  
+
                     return(
                       <div className="result-dash-news-detail" key={i}>
                           <img src="https://yt3.googleusercontent.com/rhqKhfZPaVKRfPi1UvaoekFcSVkipICyGmshnUT9SYMR2JMI8G40YqtaOqz94Ao5rdu_NE0nAw=s900-c-k-c0x00ffffff-no-rj" alt="" />
                           <span>{res.news_title}</span>
-                          <button>{res.news_sentiment}</button>
+                          <button>{res.news_sentiment.label}</button>
                       </div>
                     )
                   })}
@@ -106,9 +113,9 @@ const Result = () => {
         
                 <div className="result-dash-senti">
                     <h3>Entities Found</h3>
-                    <span>Google</span>
-                    <span>Apple</span>
-                    <span>Nvidia</span>
+                    <span>pos : {sentimentCount.negative}</span>
+                    <span>neg : {sentimentCount.positive} </span>
+                    <span>neu : {sentimentCount.neutral}</span>
                 </div>
               </div>
 

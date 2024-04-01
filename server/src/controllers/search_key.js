@@ -8,7 +8,7 @@ const recent_news = async(req,res,next)=>{
         const {keyword}=req.params;
         const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&excludeDomains=engadget.com&searchIn=title&sortBy=relevancy&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
 
-        const five_news = response.data.articles.slice(0,6);
+        const five_news = response.data.articles.slice(0,5);
         const newsArray = [];
         five_news.forEach(news => {
             const {url,title} = news;
