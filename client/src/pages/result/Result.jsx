@@ -1,5 +1,6 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState,useEffect} from 'react';
 import './result.css';
+import baseurl from '../../baseurl/baseurl';
 import { ProjectsContext } from '../../contextapi.js/projectscontext';
 import { useNavigate} from 'react-router-dom';
 import TrendGraph from '../../components/trendGraph/TrendGraph';
@@ -10,108 +11,100 @@ const Result = () => {
   const navigate = useNavigate();
 
   const {auth,setAuth}=useContext(ProjectsContext);
-  
+
+  const [company,setCompany]=useState("");
+  const [value,setValue]=useState([]);
+  const [pos,setpos]=useState(0);
+  const [neg,setneg]=useState(0);
+  const [neu,setneu]=useState(0);
+
+  const searchForCompany = async(e)=>{
+    e.preventDefault();
+    
+    try{
+      const response = await baseurl.get(`/search_key/${company}`);
+      setValue(response.data);
+    }catch(err){
+      console.log(err);
+    }
+  }
+
   return (
     <div>
       <div className="result_page">
       <div className="result_container">
         <aside id="sidebar">
-          <div class="sidebar-title">
-            <div class="sidebar-brand">
+          <div className="sidebar-title">
+            <div className="sidebar-brand">
               <span onClick={()=>{navigate('/')}}>InvestAnalysis.</span>  
             </div>
-            <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+            <span className="material-icons-outlined">close</span>
           </div>
 
-          <ul class="sidebar-list">
-            <li class="sidebar-list-item">
-                <span class="material-icons-outlined"><FontAwesomeIcon icon={faUser} /> &nbsp; Profile</span>
+          <ul className="sidebar-list">
+            <li className="sidebar-list-item">
+                <span className="material-icons-outlined"><FontAwesomeIcon icon={faUser} /> &nbsp; Profile</span>
             </li>
 
-            <li class="sidebar-list-item">
-                <span class="material-icons-outlined"><FontAwesomeIcon icon={faClockRotateLeft} /> &nbsp;History</span>
+            <li className="sidebar-list-item">
+                <span className="material-icons-outlined"><FontAwesomeIcon icon={faClockRotateLeft} /> &nbsp;History</span>
             </li>
             
-            <li class="sidebar-list-item">
-                <span class="material-icons-outlined"><FontAwesomeIcon icon={faGear} />&nbsp; Settings</span>
+            <li className="sidebar-list-item">
+                <span className="material-icons-outlined"><FontAwesomeIcon icon={faGear} />&nbsp; Settings</span>
             </li>
           
-            <li class="sidebar-list-item"> 
-                <span class="material-icons-outlined" onClick={()=>{setAuth(false); localStorage.removeItem('token');navigate('/')}}><FontAwesomeIcon icon={faRightFromBracket} />&nbsp; Logout</span>
+            <li className="sidebar-list-item"> 
+                <span className="material-icons-outlined" onClick={()=>{setAuth(false); localStorage.removeItem('token');navigate('/')}}><FontAwesomeIcon icon={faRightFromBracket} />&nbsp; Logout</span>
             </li>
 
-            <li class="sidebar-list-item">
-                <span class="material-icons-outlined"><FontAwesomeIcon icon={faMagic} />&nbsp; Another</span>
+            <li className="sidebar-list-item">
+                <span className="material-icons-outlined"><FontAwesomeIcon icon={faMagic} />&nbsp; Another</span>
             </li>            
 
-            <li class="sidebar-list-item">
-                <span class="material-icons-outlined"><FontAwesomeIcon icon={faKey} />&nbsp; About</span>
+            <li className="sidebar-list-item">
+                <span className="material-icons-outlined"><FontAwesomeIcon icon={faKey} />&nbsp; About</span>
             </li>
           </ul>
 
           <span className="side_foot">All Rights Served</span>
         </aside>
 
-        <div class="grid-container">
+        <div className="grid-container">
 
-          <header class="header">
-            <div class="menu-icon" onclick="openSidebar()">
-              <span class="material-icons-outlined"><FontAwesomeIcon icon={faBars} /></span>
+          <header className="header">
+            <div className="menu-icon">
+              <span className="material-icons-outlined"><FontAwesomeIcon icon={faBars} /></span>
             </div>
-            <div class="header-left">
-              <input type="text" id="company" name="name" placeholder="Search For a Company"/>
+            <div className="header-left">
+              <input type="text" id="company" name="name" placeholder="Search For a Company" value={company} onChange={e=>setCompany(e.target.value)}/>
               <button className='search_button'><FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#ffffff",}}/></button>
             </div>
           </header>
           
-          <main class="main-container">
+          <main className="main-container">
 
             <div className="main-container-news">
 
-              <div class="main-title">
-                <h3 class="font-weight-bold">Top Results</h3>
+              <div className="main-title">
+                <h3 className="font-weight-bold">Top Results</h3>
               </div>
 
               <div className="result-dash">
                 <div className="result-dash-news">
-                  <div className="result-dash-news-detail">
-                  <img src="https://yt3.googleusercontent.com/rhqKhfZPaVKRfPi1UvaoekFcSVkipICyGmshnUT9SYMR2JMI8G40YqtaOqz94Ao5rdu_NE0nAw=s900-c-k-c0x00ffffff-no-rj" alt="" />
-                  <span>Zomato’s ‘pure veg food’ scheme is pure casteism. Here’s why many people don’t get that</span>
-                    <button>Negative</button>
-                  </div>
-
-                  <div className="result-dash-news-detail">
-                    <img src="https://yt3.googleusercontent.com/rhqKhfZPaVKRfPi1UvaoekFcSVkipICyGmshnUT9SYMR2JMI8G40YqtaOqz94Ao5rdu_NE0nAw=s900-c-k-c0x00ffffff-no-rj" alt="" />
-                    <span>Zomato’s ‘pure veg food’ scheme is pure casteism. Here’s why many people don’t get that</span>
-                    <button>Negative</button>
-                  </div>
-
-                  <div className="result-dash-news-detail">
-                  <img src="https://yt3.googleusercontent.com/rhqKhfZPaVKRfPi1UvaoekFcSVkipICyGmshnUT9SYMR2JMI8G40YqtaOqz94Ao5rdu_NE0nAw=s900-c-k-c0x00ffffff-no-rj" alt="" />
-                  <span>Zomato’s ‘pure veg food’ scheme is pure casteism. Here’s why many people don’t get that</span>
-                    <button>Negative</button>
-                  </div>
-
-                  <div className="result-dash-news-detail">
-                  <img src="https://yt3.googleusercontent.com/rhqKhfZPaVKRfPi1UvaoekFcSVkipICyGmshnUT9SYMR2JMI8G40YqtaOqz94Ao5rdu_NE0nAw=s900-c-k-c0x00ffffff-no-rj" alt="" />
-                    <span>Zomato’s ‘pure veg food’ scheme is pure casteism. Here’s why many people don’t get that</span>
-                    <button>Negative</button>
-                  </div>
-
-                  <div className="result-dash-news-detail">
-                  <img src="https://yt3.googleusercontent.com/rhqKhfZPaVKRfPi1UvaoekFcSVkipICyGmshnUT9SYMR2JMI8G40YqtaOqz94Ao5rdu_NE0nAw=s900-c-k-c0x00ffffff-no-rj" alt="" />
-                    <span>Zomato’s ‘pure veg food’ scheme is pure casteism. Here’s why many people don’t get that</span>
-                    <button>Negative</button>
-                  </div>
+                  {value.map((res,i)=>{
+                              
+                    return(
+                      <div className="result-dash-news-detail" key={i}>
+                          <img src="https://yt3.googleusercontent.com/rhqKhfZPaVKRfPi1UvaoekFcSVkipICyGmshnUT9SYMR2JMI8G40YqtaOqz94Ao5rdu_NE0nAw=s900-c-k-c0x00ffffff-no-rj" alt="" />
+                          <span>{res.news_title}</span>
+                          <button>{res.news_sentiment}</button>
+                      </div>
+                    )
+                  })}
                 </div>
         
                 <div className="result-dash-senti">
-                    <h3>Sentiment Analysis</h3>
-                    <span className='result-dash-senti-data'>Positive Article : 0</span>
-                    <span className='result-dash-senti-data'>Negative Article : 6</span>
-                    <span className='result-dash-senti-data'>Neutral Article : 0</span>
-
-                    <br></br>
                     <h3>Entities Found</h3>
                     <span>Google</span>
                     <span>Apple</span>
@@ -122,10 +115,10 @@ const Result = () => {
             </div>
 
             <div className="main-container-graph">
-              <div class="main-title">
-                <h3 class="font-weight-bold">Google Trends Search</h3>
+              <div className="main-title">
+                <h3 className="font-weight-bold">Google Trends Search</h3>
               </div>
-              <div class="main-cards">
+              <div className="main-cards">
                 <div className="graph" >
                     <TrendGraph/>
                 </div>

@@ -5,7 +5,7 @@ const createSuccess = require('../utils/success');
 const previousSearch = async(req,res,next)=>{
     try{
 
-        const recent_search = ["Pepsi","Coco cola", "Adani"]
+        const recent_search = ["Pepsi","Coke", "Adani"]
         const data = {
             user: req.user,
             recent_search: recent_search

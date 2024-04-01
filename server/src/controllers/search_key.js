@@ -1,17 +1,14 @@
 const createError = require('../utils/error');
 const axios = require('axios');
-//const fetch = require('node-fetch');
-//http://localhost:5000/api/search_key/apple
 
-const resultArray = [];
+let resultArray = [];
 
 const recent_news = async(req,res,next)=>{
     try{
-        const resultArray = [];
         const {keyword}=req.params;
-        const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&excludeDomains=engadget.com&searchIn=title&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
+        const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&excludeDomains=engadget.com&searchIn=title&sortBy=relevancy&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
 
-        const five_news = response.data.articles.slice(0,5);
+        const five_news = response.data.articles.slice(0,6);
         const newsArray = [];
         five_news.forEach(news => {
             const {url,title} = news;
@@ -21,10 +18,7 @@ const recent_news = async(req,res,next)=>{
         const x = await processNewsArray(newsArray);
 
         if(x.length)
-        {
-            console.log(x)
             res.json(x);
-        }
     }catch(err){
         console.log(err);
     }
@@ -32,6 +26,8 @@ const recent_news = async(req,res,next)=>{
 
 const processNewsArray = async(newsArray)=>
 {
+    resultArray = [];
+
     for (let i = 0; i <newsArray.length; i++){
         const news = newsArray[i];
         await query({"inputs": news.title},news);
@@ -63,9 +59,10 @@ const query = async(data,news)=>
         const result2 = await response2.json();
         
         const news_title=news.title;
+        const news_url=news.url;
         const news_sentiment=result1[0][0];
         const news_entities=result2;
-        resultArray.push({news_title,news_sentiment,news_entities});
+        resultArray.push({news_title,news_url,news_sentiment,news_entities});
     }catch(err){
         console.log(err)
     }
