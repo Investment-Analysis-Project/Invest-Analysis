@@ -60,8 +60,6 @@ const Result = () => {
                 <span className="material-icons-outlined" onClick={()=>{setAuth(false); localStorage.removeItem('token');navigate('/')}}><FontAwesomeIcon icon={faRightFromBracket} />&nbsp; Logout</span>
             </li>
           </ul>
-
-          <span className="side_foot">All Rights Served</span>
         </aside>
 
         <div className="grid-container">

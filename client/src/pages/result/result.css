@@ -7,7 +7,7 @@ body{
 }
   
 .material-icons-outlined {
-  color: #708090;
+  color: #f6fafe;
   font-size: 12px;
   font-weight: 600;
 }
@@ -33,9 +33,8 @@ body{
   flex-direction: column;
   align-items: center;
   flex:1;
-  margin-left: 144px;
   height: 100vh;
-  background: var(--main_green);
+  background: rgb(255, 255, 255);
 }
 
 /* ---------- HEADER ---------- */
@@ -88,28 +87,19 @@ body{
 #sidebar {
   height: 100%;
   color: var(--main_blue);
-  background: #ffffff;
+  background: var(--main_green);
   overflow-x: hidden;
   transition: all 0.5s;
-  position: fixed;
+  width: 10%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   border-right: 2px solid var(--main_green);
-}
-
-.side_foot{
-  text-align: center;
-  position: fixed;
-  bottom:0;
-  left:30px;
-  font-size:10px;
-  color: rgb(101, 106, 107);
 }
 
 .sidebar-title {
   display: flex;
   margin-bottom: 10px;
-  
 }
 
 .sidebar-brand {
@@ -118,11 +108,11 @@ body{
 }
 
 .sidebar-brand span{
-  color: var(--main_green);
+  color: rgb(3, 42, 109);
   cursor: pointer;
   font-size: 15px;
   font-weight: 700;
-  border-bottom: 2px solid var(--main_blue);
+  border-bottom: 2px solid white;
 }
 
 .sidebar-list {
@@ -137,7 +127,7 @@ body{
   width: 100%;
   display: flex;
   align-items: center;
-  padding-left: 60%;
+  justify-content: center;
 }
 
 .sidebar-list-item:hover {
