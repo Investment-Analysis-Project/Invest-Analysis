@@ -5,7 +5,7 @@ import { ProjectsContext } from '../../contextapi.js/projectscontext';
 import { useNavigate} from 'react-router-dom';
 import TrendGraph from '../../components/trendGraph/TrendGraph';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faBars,faMagnifyingGlass,faUser,faClockRotateLeft,faGear,faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import {  faBars,faMagnifyingGlass,faUserCheck,faClockRotateLeft,faGear,faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 const Result = () => {
   const navigate = useNavigate();
@@ -47,19 +47,23 @@ const Result = () => {
 
           <ul className="sidebar-list">
             <li className="sidebar-list-item">
-                <span className="material-icons-outlined"><FontAwesomeIcon icon={faUser} /> &nbsp; Profile</span>
+                <FontAwesomeIcon icon={faUserCheck} style={{color: "#ffffff",}}/>
+                <span className="material-icons-outlined">Profile</span>
             </li>
 
             <li className="sidebar-list-item">
-                <span className="material-icons-outlined"><FontAwesomeIcon icon={faClockRotateLeft} /> &nbsp;History</span>
+                <FontAwesomeIcon icon={faClockRotateLeft} style={{color: "#ffffff",}}/>
+                <span className="material-icons-outlined">History</span>
             </li>
             
             <li className="sidebar-list-item">
-                <span className="material-icons-outlined"><FontAwesomeIcon icon={faGear} />&nbsp; Settings</span>
+                <FontAwesomeIcon icon={faGear} style={{color: "#ffffff",}}/>
+                <span className="material-icons-outlined">Settings</span>
             </li>
           
             <li className="sidebar-list-item"> 
-                <span className="material-icons-outlined" onClick={()=>{setAuth(false); localStorage.removeItem('token');navigate('/')}}><FontAwesomeIcon icon={faRightFromBracket} />&nbsp; Logout</span>
+                <FontAwesomeIcon icon={faRightFromBracket} style={{color: "#ffffff",}}/>
+                <span className="material-icons-outlined" onClick={()=>{setAuth(false); localStorage.removeItem('token');navigate('/')}}>Logout</span>
             </li>
           </ul>
         </aside>
