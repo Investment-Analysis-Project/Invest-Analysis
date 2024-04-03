@@ -92,7 +92,7 @@ const Result = () => {
                 <div className="result-dash-news">
                   {value.map((res,i)=>{ 
 
-                    switch (res.news_sentiment.label) 
+                    switch (res.news_sentiment) 
                     {
                       case "positive":
                         sentimentCount.positive++;
@@ -110,7 +110,7 @@ const Result = () => {
                       for(let j=0;j<res.news_entities[i].length;j++)
                       {
                         const x = res.news_entities[i][j].entity_group
-                        if(x.localeCompare("ORG")==0)
+                        if(x.localeCompare("ORG")===0)
                           entities.add(res.news_entities[i][j].word)
                       }
                     }
@@ -122,19 +122,21 @@ const Result = () => {
 
                     return(
                       <div className="result-dash-news-detail" key={i}>
+                        <div className="result-dash-news-detail-content">
                           <img src="https://yt3.googleusercontent.com/rhqKhfZPaVKRfPi1UvaoekFcSVkipICyGmshnUT9SYMR2JMI8G40YqtaOqz94Ao5rdu_NE0nAw=s900-c-k-c0x00ffffff-no-rj" alt="" />
                           <span>{res.news_title}</span>
-                          <button>{res.news_sentiment.label}</button>
+                        </div>
+                        <button>{res.news_sentiment.toUpperCase()}</button>
                       </div>
                     )
                   })}
                 </div>
         
                 <div className="result-dash-senti">
-                    <h3>Entities Found</h3>
-                    <span>pos : {sentimentCount.positive}</span>
-                    <span>neg : {sentimentCount.negative} </span>
-                    <span>neu : {sentimentCount.neutral}</span>
+                    <h3>Article Sentiment</h3>
+                    <span>Positve&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{sentimentCount.positive}</span>
+                    <span>Negative : &nbsp;{sentimentCount.negative} </span>
+                    <span>Neutral&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{sentimentCount.neutral}</span>
                 </div>
               </div>
 
@@ -146,22 +148,22 @@ const Result = () => {
               </div>
               <div className="main-cards">
                 <div className="graph" >
-                    <TrendGraph/>
+                    <TrendGraph company={company}/>
                 </div>
                 <div className="graph" >
-                    <TrendGraph/>
+                    <TrendGraph company={company}/>
                 </div>
                 <div className="graph" >
-                    <TrendGraph/>
+                    <TrendGraph company={company}/>
                 </div>
                 <div className="graph" >
-                    <TrendGraph/>
+                    <TrendGraph company={company}/>
                 </div>
                 <div className="graph" >
-                    <TrendGraph/>
+                    <TrendGraph company={company}/>
                 </div>
                 <div className="graph" >
-                    <TrendGraph/>
+                    <TrendGraph company={company}/>
                 </div>
             </div>
             </div>
