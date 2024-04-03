@@ -14,6 +14,7 @@ const Result = () => {
 
   const [company,setCompany]=useState("");
   const [value,setValue]=useState([]);
+  let entities = new Set();
   let sentimentCount = {
     positive: 0,
     negative: 0,
@@ -26,6 +27,7 @@ const Result = () => {
     try{
       const response = await baseurl.get(`/search_key/${company}`);
       setValue(response.data);
+      console.log(response.data)
     }catch(err){
       console.log(err);
     }
@@ -88,16 +90,31 @@ const Result = () => {
 
                     switch (res.news_sentiment.label) 
                     {
-                      case 'positive':
+                      case "positive":
                         sentimentCount.positive++;
                         break;
-                      case 'negative':
+                      case "negative":
                         sentimentCount.negative++;
                         break;
                       default:
                         sentimentCount.neutral++;
                         break;
                     }  
+
+                    for(let i=0;i<res.news_entities.length;i++)
+                    {
+                      for(let j=0;j<res.news_entities[i].length;j++)
+                      {
+                        const x = res.news_entities[i][j].entity_group
+                        if(x.localeCompare("ORG")==0)
+                          entities.add(res.news_entities[i][j].word)
+                      }
+                    }
+
+                    let x=Array.from(entities);
+                    let filteredArray = x.filter(str => /^[a-zA-Z0-9]+$/.test(str));
+
+                    console.log(filteredArray)
 
                     return(
                       <div className="result-dash-news-detail" key={i}>
@@ -111,8 +128,8 @@ const Result = () => {
         
                 <div className="result-dash-senti">
                     <h3>Entities Found</h3>
-                    <span>pos : {sentimentCount.negative}</span>
-                    <span>neg : {sentimentCount.positive} </span>
+                    <span>pos : {sentimentCount.positive}</span>
+                    <span>neg : {sentimentCount.negative} </span>
                     <span>neu : {sentimentCount.neutral}</span>
                 </div>
               </div>
