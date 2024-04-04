@@ -118,12 +118,10 @@ const Result = () => {
                     let x=Array.from(entities);
                     let filteredArray = x.filter(str => /^[a-zA-Z0-9]+$/.test(str));
 
-                    console.log(filteredArray)
-
                     return(
                       <div className="result-dash-news-detail" key={i}>
                         <div className="result-dash-news-detail-content">
-                          <img src="https://yt3.googleusercontent.com/rhqKhfZPaVKRfPi1UvaoekFcSVkipICyGmshnUT9SYMR2JMI8G40YqtaOqz94Ao5rdu_NE0nAw=s900-c-k-c0x00ffffff-no-rj" alt="" />
+                          <img src="https://yt3.googleusercontent.com/rhqKhfZPaVKRfPi1UvaoekFcSVkipICyGmshnUT9SYMR2JMI8G40YqtaOqz94Ao5rdu_NE0nAw=s900-c-k-c0x00ffffff-no-rj"/>
                           <span>{res.news_title}</span>
                         </div>
                         <button>{res.news_sentiment.toUpperCase()}</button>
