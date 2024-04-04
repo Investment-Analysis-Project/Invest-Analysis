@@ -1,0 +1,44 @@
+const response1 = await fetch(
+"https://api-inference.huggingface.co/models/ProsusAI/finbert",
+{
+    //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
+    //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
+    headers: { Authorization: "Bearer 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" },
+    method: "POST",
+    body: JSON.stringify({"inputs":news_scraped[i]})
+});
+
+const response2 = await fetch(
+"https://api-inference.huggingface.co/models/dslim/bert-base-NER",
+{
+    headers: { Authorization: "Bearer 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" },
+    method: "POST",
+    body: JSON.stringify({"inputs":news_scraped[i]}),
+});
+
+const findMajorityElement = (arr) => 
+{
+    let count = 0;
+    let candidate = '';
+
+    for (let i = 0; i < arr.length; i++) 
+    {
+        if (count === 0)
+            candidate = arr[i];
+        
+        if (arr[i] === candidate) 
+            count++;
+        else 
+            count--;  
+    }
+
+    count = 0;
+    for (let i = 0; i < arr.length; i++) 
+        if (arr[i] === candidate) 
+            count++;
+
+    console.log(candidate);
+    return candidate;
+}
+
+const news_sentiment = findMajorityElement(news_sentiment_array);
