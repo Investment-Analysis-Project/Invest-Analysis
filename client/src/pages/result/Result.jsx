@@ -14,7 +14,6 @@ const Result = () => {
 
   const [company,setCompany]=useState("");
   const [value,setValue]=useState([]);
-  let entities = new Set();
   let sentimentCount = {
     positive: 0,
     negative: 0,
@@ -92,12 +91,12 @@ const Result = () => {
                 <div className="result-dash-news">
                   {value.map((res,i)=>{ 
 
-                    switch (res.news_sentiment) 
+                    switch (res.news_sentiment.sentiment) 
                     {
-                      case "positive":
+                      case "Positive":
                         sentimentCount.positive++;
                         break;
-                      case "negative":
+                      case "Negative":
                         sentimentCount.negative++;
                         break;
                       default:
@@ -105,26 +104,13 @@ const Result = () => {
                         break;
                     }  
 
-                    for(let i=0;i<res.news_entities.length;i++)
-                    {
-                      for(let j=0;j<res.news_entities[i].length;j++)
-                      {
-                        const x = res.news_entities[i][j].entity_group
-                        if(x.localeCompare("ORG")===0)
-                          entities.add(res.news_entities[i][j].word)
-                      }
-                    }
-
-                    let x=Array.from(entities);
-                    let filteredArray = x.filter(str => /^[a-zA-Z0-9]+$/.test(str));
-
                     return(
                       <div className="result-dash-news-detail" key={i}>
                         <div className="result-dash-news-detail-content">
                           <img src="https://yt3.googleusercontent.com/rhqKhfZPaVKRfPi1UvaoekFcSVkipICyGmshnUT9SYMR2JMI8G40YqtaOqz94Ao5rdu_NE0nAw=s900-c-k-c0x00ffffff-no-rj"/>
                           <span>{res.news_title}</span>
                         </div>
-                        <button>{res.news_sentiment.toUpperCase()}</button>
+                        <button>{res.news_sentiment.sentiment.toUpperCase()}</button>
                       </div>
                     )
                   })}
