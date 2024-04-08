@@ -8,79 +8,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass,faUser,faClockRotateLeft,faGear,faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import {Chart as ChartJS} from 'chart.js/auto';
 import {Bar,Line,Doughnut} from "react-chartjs-2";
+import Loading from '../../components/loading/Loading';
 
 const Result = () => {
   const navigate = useNavigate();
 
   const {setAuth}=useContext(ProjectsContext);
+  const [loaded,setLoaded]=useState(false);
+  const [searched,setSearched]=useState(false);
   const [company,setCompany]=useState("Apple");
-  const [value,setValue]=useState([
-    {
-        "news_title": "Google adds more AI in shopping.Google marks upcoming total solar eclipse with Search animation",
-        "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
-        "news_sentiment": 
-            {
-                sentiment: "neutral",
-                score: 0.8970250487327576
-            }
-    },
-    {
-      "news_title": "Google adds more AI in shopping.Google marks upcoming total solar eclipse with Search animation",
-      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
-      "news_sentiment": 
-          {
-              sentiment: "neutral",
-              score: 0.8970250487327576
-          }
-    },
-    {
-    "news_title": "Google adds more AI in shopping.Google marks upcoming total solar eclipse with Search animation",
-    "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
-    "news_sentiment": 
-        {
-            sentiment: "neutral",
-            score: 0.8970250487327576
-        }
-    },
-    {
-      "news_title": "Google adds more AI in shopping.Google marks upcoming total solar eclipse with Search animation",
-      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
-      "news_sentiment": 
-          {
-              sentiment: "neutral",
-              score: 0.8970250487327576
-          }
-    },
-    {
-      "news_title": "Google adds more AI in shopping.Google marks upcoming total solar eclipse with Search animation",
-      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
-      "news_sentiment": 
-          {
-              sentiment: "neutral",
-              score: 0.8970250487327576
-          }
-    }]);
+  const [value,setValue]=useState([]);
 
   let sentimentCount = {
     positive: 0,
     negative: 0,
     neutral: 0
   };
-
-  const data={
-      labels: ['Negtaive', 'Posistive', 'Neutral'],
-      datasets: [{
-          data: [2, 1, 5],
-          backgroundColor: [
-              'rgb(227, 4, 46)',
-              'rgb(11, 182, 4)',
-              'rgb(227, 221, 4)'
-          ],
-          borderWidth:0,
-          hoverOffset: 4
-      }]
-  };
-
+  let data;
   const options = {
     plugins: {
         legend: {
@@ -100,9 +44,12 @@ const Result = () => {
     e.preventDefault();
     
     try{
+      setSearched(true);
+      setLoaded(false);
       const response = await baseurl.get(`/search_key/${company}`);
       setValue(response.data);
-      console.log(response.data)
+      setSearched(false);
+      setLoaded(true);
     }catch(err){
       console.log(err);
     }
@@ -150,8 +97,10 @@ const Result = () => {
               <button className='search_button' onClick={searchForCompany}><FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#ffffff",}}/></button>
             </div>
           </header>
+
+          {!loaded && searched && <Loading/>}
           
-          <main className="main-container">
+          {loaded && <><main className="main-container">
 
             <div className="main-container-news">
 
@@ -175,6 +124,20 @@ const Result = () => {
                         sentimentCount.neutral++;
                         break;
                     }  
+
+                    data={
+                      labels: ['Negtaive', 'Posistive', 'Neutral'],
+                      datasets: [{
+                          data: [sentimentCount.negative,sentimentCount.positive,sentimentCount.neutral],
+                          backgroundColor: [
+                              'rgb(227, 4, 46)',
+                              'rgb(11, 182, 4)',
+                              'rgb(227, 221, 4)'
+                          ],
+                          borderWidth:0,
+                          hoverOffset: 4
+                      }]
+                  };
 
 
                     return(
@@ -223,9 +186,9 @@ const Result = () => {
                 <div className="graph" >
                     <TrendGraph company={company}/>
                 </div>
+              </div>
             </div>
-            </div>
-          </main>
+          </main></>}
         </div>
       </div>
     </div>
