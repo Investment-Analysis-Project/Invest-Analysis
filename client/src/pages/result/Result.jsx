@@ -6,16 +6,17 @@ import { useNavigate} from 'react-router-dom';
 import TrendGraph from '../../components/trendGraph/TrendGraph';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass,faUser,faClockRotateLeft,faGear,faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import {Chart as ChartJS} from 'chart.js/auto';
+import {Bar,Line,Doughnut} from "react-chartjs-2";
 
 const Result = () => {
   const navigate = useNavigate();
 
   const {setAuth}=useContext(ProjectsContext);
-
   const [company,setCompany]=useState("Apple");
   const [value,setValue]=useState([
     {
-        "news_title": "Google adds more AI in shopping",
+        "news_title": "Google adds more AI in shopping.Google marks upcoming total solar eclipse with Search animation",
         "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
         "news_sentiment": 
             {
@@ -24,7 +25,7 @@ const Result = () => {
             }
     },
     {
-      "news_title": "Google adds more AI in shopping",
+      "news_title": "Google adds more AI in shopping.Google marks upcoming total solar eclipse with Search animation",
       "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
       "news_sentiment": 
           {
@@ -33,7 +34,7 @@ const Result = () => {
           }
     },
     {
-    "news_title": "Google adds more AI in shopping",
+    "news_title": "Google adds more AI in shopping.Google marks upcoming total solar eclipse with Search animation",
     "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
     "news_sentiment": 
         {
@@ -42,7 +43,7 @@ const Result = () => {
         }
     },
     {
-      "news_title": "Google adds more AI in shopping",
+      "news_title": "Google adds more AI in shopping.Google marks upcoming total solar eclipse with Search animation",
       "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
       "news_sentiment": 
           {
@@ -51,7 +52,7 @@ const Result = () => {
           }
     },
     {
-      "news_title": "Google adds more AI in shopping",
+      "news_title": "Google adds more AI in shopping.Google marks upcoming total solar eclipse with Search animation",
       "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
       "news_sentiment": 
           {
@@ -64,6 +65,35 @@ const Result = () => {
     positive: 0,
     negative: 0,
     neutral: 0
+  };
+
+  const data={
+      labels: ['Negtaive', 'Posistive', 'Neutral'],
+      datasets: [{
+          data: [2, 1, 5],
+          backgroundColor: [
+              'rgb(227, 4, 46)',
+              'rgb(11, 182, 4)',
+              'rgb(227, 221, 4)'
+          ],
+          borderWidth:0,
+          hoverOffset: 4
+      }]
+  };
+
+  const options = {
+    plugins: {
+        legend: {
+            labels: {
+                color: 'white',
+                font:{
+                  family:'Poppins',
+                  size:15
+                },
+                boxWidth: 10 
+            }
+        }
+    }
   };
 
   const searchForCompany = async(e)=>{
@@ -146,6 +176,7 @@ const Result = () => {
                         break;
                     }  
 
+
                     return(
                       <div className="result-dash-news-detail" key={i}>
                         <div className="result-dash-news-detail-content">
@@ -160,9 +191,10 @@ const Result = () => {
         
                 <div className="result-dash-senti">
                     <h3>Article Sentiment</h3>
-                    <span>Positve&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{sentimentCount.positive}</span>
+                    <Doughnut data={data} options={options} />
+                    {/* <span>Positve&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{sentimentCount.positive}</span>
                     <span>Negative : &nbsp;{sentimentCount.negative} </span>
-                    <span>Neutral&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{sentimentCount.neutral}</span>
+                    <span>Neutral&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{sentimentCount.neutral}</span> */}
                 </div>
               </div>
 
