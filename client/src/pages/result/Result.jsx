@@ -1,19 +1,65 @@
-import React, {useContext, useState,useEffect} from 'react';
+import React, {useContext, useState,} from 'react';
 import './result.css';
 import baseurl from '../../baseurl/baseurl';
 import { ProjectsContext } from '../../contextapi.js/projectscontext';
 import { useNavigate} from 'react-router-dom';
 import TrendGraph from '../../components/trendGraph/TrendGraph';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faBars,faMagnifyingGlass,faUserCheck,faClockRotateLeft,faGear,faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass,faUser,faClockRotateLeft,faGear,faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 const Result = () => {
   const navigate = useNavigate();
 
-  const {auth,setAuth}=useContext(ProjectsContext);
+  const {setAuth}=useContext(ProjectsContext);
 
-  const [company,setCompany]=useState("");
-  const [value,setValue]=useState([]);
+  const [company,setCompany]=useState("Apple");
+  const [value,setValue]=useState([
+    {
+        "news_title": "Google adds more AI in shopping",
+        "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+        "news_sentiment": 
+            {
+                sentiment: "neutral",
+                score: 0.8970250487327576
+            }
+    },
+    {
+      "news_title": "Google adds more AI in shopping",
+      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+      "news_sentiment": 
+          {
+              sentiment: "neutral",
+              score: 0.8970250487327576
+          }
+    },
+    {
+    "news_title": "Google adds more AI in shopping",
+    "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+    "news_sentiment": 
+        {
+            sentiment: "neutral",
+            score: 0.8970250487327576
+        }
+    },
+    {
+      "news_title": "Google adds more AI in shopping",
+      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+      "news_sentiment": 
+          {
+              sentiment: "neutral",
+              score: 0.8970250487327576
+          }
+    },
+    {
+      "news_title": "Google adds more AI in shopping",
+      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+      "news_sentiment": 
+          {
+              sentiment: "neutral",
+              score: 0.8970250487327576
+          }
+    }]);
+
   let sentimentCount = {
     positive: 0,
     negative: 0,
@@ -41,28 +87,27 @@ const Result = () => {
             <div className="sidebar-brand">
               <span onClick={()=>{navigate('/')}}>InvestAnalysis.</span>  
             </div>
-            <span className="material-icons-outlined">close</span>
           </div>
 
           <ul className="sidebar-list">
             <li className="sidebar-list-item">
-                <FontAwesomeIcon icon={faUserCheck} style={{color: "#ffffff",}}/>
-                <span className="material-icons-outlined">Profile</span>
+                <FontAwesomeIcon icon={faUser} style={{color: "#ffffff",}}/>
+                <span>Profile</span>
             </li>
 
             <li className="sidebar-list-item">
                 <FontAwesomeIcon icon={faClockRotateLeft} style={{color: "#ffffff",}}/>
-                <span className="material-icons-outlined">History</span>
+                <span >History</span>
             </li>
             
             <li className="sidebar-list-item">
                 <FontAwesomeIcon icon={faGear} style={{color: "#ffffff",}}/>
-                <span className="material-icons-outlined">Settings</span>
+                <span >Settings</span>
             </li>
           
             <li className="sidebar-list-item"> 
                 <FontAwesomeIcon icon={faRightFromBracket} style={{color: "#ffffff",}}/>
-                <span className="material-icons-outlined" onClick={()=>{setAuth(false); localStorage.removeItem('token');navigate('/')}}>Logout</span>
+                <span  onClick={()=>{setAuth(false); localStorage.removeItem('token');navigate('/')}}>Logout</span>
             </li>
           </ul>
         </aside>
@@ -70,9 +115,6 @@ const Result = () => {
         <div className="grid-container">
 
           <header className="header">
-            <div className="menu-icon">
-              <span className="material-icons-outlined"><FontAwesomeIcon icon={faBars} /></span>
-            </div>
             <div className="header-left">
               <input type="text" id="company" name="name" placeholder="Search For a Company" value={company} onChange={e=>setCompany(e.target.value)}/>
               <button className='search_button' onClick={searchForCompany}><FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#ffffff",}}/></button>
@@ -107,7 +149,7 @@ const Result = () => {
                     return(
                       <div className="result-dash-news-detail" key={i}>
                         <div className="result-dash-news-detail-content">
-                          <img src="https://yt3.googleusercontent.com/rhqKhfZPaVKRfPi1UvaoekFcSVkipICyGmshnUT9SYMR2JMI8G40YqtaOqz94Ao5rdu_NE0nAw=s900-c-k-c0x00ffffff-no-rj"/>
+                          <img alt="" src="https://yt3.googleusercontent.com/rhqKhfZPaVKRfPi1UvaoekFcSVkipICyGmshnUT9SYMR2JMI8G40YqtaOqz94Ao5rdu_NE0nAw=s900-c-k-c0x00ffffff-no-rj"/>
                           <span>{res.news_title}</span>
                         </div>
                         <button>{res.news_sentiment.sentiment.toUpperCase()}</button>
