@@ -17,13 +17,12 @@ const Navbar = (props) => {
     }
 
     const {auth,setAuth}=useContext(ProjectsContext);
-    setAuth(true);
     
     return(
         <div className='navbar'>
             <div className="nav_container">
                 <div className='logo'>
-                    <span onClick={()=>{navigate('/')}}>InvestAnalysis.</span>  
+                    <span onClick={()=>{navigate('/');window.scrollTo(0, 0)}}>InvestAnalysis.</span>  
                 </div>
 
                 {auth ? (<div className='items'>

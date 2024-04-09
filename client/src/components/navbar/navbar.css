@@ -27,6 +27,12 @@
     font-weight: 800;
     font-size: 25px;
     color: white;
+    border-bottom: 3px solid transparent;
+    transition: .2s;
+}
+
+.logo span:hover{
+    border-bottom: 3px solid var(--main_blue);
 }
 
 .items{
@@ -50,6 +56,7 @@
     transition: box-shadow 0.3s;
     display: flex;
     align-items: center;
+    border-bottom: 3px solid transparent;
 }
 
 .navbut:active{
@@ -59,6 +66,7 @@
 .navbut:hover{
     outline: none;
     border-bottom: 3px solid var(--main_blue);
+    transition: .2s;
 }
 
 .logindropdown{
@@ -88,6 +96,6 @@
 }
 
 .profilelistitem:hover{
-    transform: scale(1.05);
+    transition: .2s;
     color:var(--main_green);
 }

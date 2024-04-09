@@ -25,12 +25,12 @@
 }
 
 .news-title{
-    font-weight: 500;
+    font-weight: 600;
     height: 100px;
-    font-size: 15px;
+    font-size: 17px;
     color: mintcream;
     padding: 10px;
-    background: #031239;
+    background: orangered;
     overflow:hidden;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
