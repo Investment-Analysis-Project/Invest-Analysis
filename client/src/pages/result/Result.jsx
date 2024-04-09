@@ -17,7 +17,62 @@ const Result = () => {
   const [loaded,setLoaded]=useState(false);
   const [searched,setSearched]=useState(false);
   const [company,setCompany]=useState("Apple");
-  const [value,setValue]=useState([]);
+  const [value,setValue]=useState([
+    {
+      "news_title": "Strong Buy Alert! Why Alphabet Stock Will Leap Higher in 2024",
+      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+      "news_sentiment": 
+          {
+              "sentiment": "neutral",
+              "score": 0.8970250487327576
+          }
+    },
+    {
+      "news_title": "Strong Buy Alert! Why Alphabet Stock Will Leap Higher in 2024",
+      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+      "news_sentiment": 
+          {
+              "sentiment": "neutral",
+              "score": 0.8970250487327576
+          }
+    },
+    {
+      "news_title": "Strong Buy Alert! Why Alphabet Stock Will Leap Higher in 2024",
+      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+      "news_sentiment": 
+          {
+              "sentiment": "neutral",
+              "score": 0.8970250487327576
+          }
+    },
+    {
+      "news_title": "Google adds more AI in shopping.",
+      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+      "news_sentiment": 
+          {
+              "sentiment": "neutral",
+              "score": 0.8970250487327576
+          }
+    },
+    {
+      "news_title": "Google adds more AI in shopping.",
+      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+      "news_sentiment": 
+          {
+              "sentiment": "neutral",
+              "score": 0.8970250487327576
+          }
+    },
+    {
+      "news_title": "Google adds more AI in shopping.",
+      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+      "news_sentiment": 
+          {
+              "sentiment": "neutral",
+              "score": 0.8970250487327576
+          }
+    }
+  ]);
 
   let sentimentCount = {
     positive: 0,
@@ -34,7 +89,8 @@ const Result = () => {
                   family:'Poppins',
                   size:15
                 },
-                boxWidth: 10 
+                boxWidth: 10,
+                height:200 
             }
         }
     }
@@ -46,8 +102,8 @@ const Result = () => {
     try{
       setSearched(true);
       setLoaded(false);
-      const response = await baseurl.get(`/search_key/${company}`);
-      setValue(response.data);
+      // const response = await baseurl.get(`/search_key/${company}`);
+      // setValue(response.data);
       setSearched(false);
       setLoaded(true);
     }catch(err){
@@ -155,9 +211,6 @@ const Result = () => {
                 <div className="result-dash-senti">
                     <h3>Article Sentiment</h3>
                     <Doughnut data={data} options={options} />
-                    {/* <span>Positve&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{sentimentCount.positive}</span>
-                    <span>Negative : &nbsp;{sentimentCount.negative} </span>
-                    <span>Neutral&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{sentimentCount.neutral}</span> */}
                 </div>
               </div>
 

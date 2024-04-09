@@ -23,7 +23,7 @@ body{
   align-items: center;
   flex:1;
   height: 100vh;
-  background: rgb(236, 235, 235);
+  background: rgb(255, 255, 255);
 }
 
 /* ---------- HEADER ---------- */
@@ -163,9 +163,8 @@ body{
 }
 
 .result-dash-news{
-  width: 65%;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
   gap: 10px;
 }
@@ -174,9 +173,10 @@ body{
   padding: 10px;
   border-radius: 10px;
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   justify-content:space-between;
-  align-items: center;
-  gap: 20px;
+  gap: 10px;
   background: rgb(255, 255, 255);
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
   transition: .5s;
@@ -187,6 +187,7 @@ body{
   align-items: center;
   padding: 5px;
   gap:5px;
+  overflow: hidden;
 }
 
 .result-dash-news-detail button{
@@ -195,21 +196,23 @@ body{
   padding:5px;
   font-size: 12px;
   border-radius: 5px;
-  background:#048a35;
+  background:var(--main_orange);
   color: rgb(255, 243, 243);
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .result-dash-news-detail img{
-  width:5%;
+  width:10%;
 }
 
 .result-dash-news-detail span{
   background-color: rgba(227, 239, 175, 0.911);
   padding: 10px;
   border-radius: 10px;
-  font-size: 15px;
+  font-size: 13px;
   flex: 1;
+  height: 100px;
+  overflow-y: scroll;
 }
 
 .result-dash-senti{
@@ -261,7 +264,7 @@ body{
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #8d8d8d;
+  background-color: #ffffff;
   border-radius: 10px;
 }
 
