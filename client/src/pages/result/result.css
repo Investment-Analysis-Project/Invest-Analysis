@@ -77,7 +77,7 @@ body{
 #sidebar {
   height: 100%;
   color: var(--main_blue);
-  background: var(--main_orange);
+  background: var(--main_green);
   overflow-x: hidden;
   transition: all 0.5s;
   width: 10%;
@@ -131,10 +131,7 @@ body{
   font-weight: 600;
 }
 
-.sidebar-list-item:hover {
-  /* background-color: rgba(255, 255, 255, 0.274);
-  border-radius: 10px; */
-  border-bottom: 2px solid white;
+.sidebar-list-item :hover {
   cursor: pointer;
 }
 

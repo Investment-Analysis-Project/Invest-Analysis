@@ -17,6 +17,7 @@ const Navbar = (props) => {
     }
 
     const {auth,setAuth}=useContext(ProjectsContext);
+    setAuth(true);
     
     return(
         <div className='navbar'>
