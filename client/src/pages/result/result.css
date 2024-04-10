@@ -212,7 +212,7 @@ body{
   border-radius: 10px;
   font-size: 15px;
   flex: 1;
-  min-height: 50px;
+  min-height: 100px;
 }
 
 .result-dash-senti{
