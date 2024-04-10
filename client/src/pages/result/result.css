@@ -175,8 +175,7 @@ body{
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content:space-between;
-  gap: 10px;
+ 
   background: rgb(255, 255, 255);
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
   transition: .5s;
@@ -210,10 +209,9 @@ body{
   background-color: rgba(248, 190, 220, 0.911);
   padding: 10px;
   border-radius: 10px;
-  font-size: 13px;
+  font-size: 15px;
   flex: 1;
-  height: 100px;
-  overflow-y: auto;
+  min-height: 100px;
 }
 
 .result-dash-senti{
@@ -231,7 +229,7 @@ body{
 }
 
 .result-dash-senti h3{
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
 .result-dash-senti span{
@@ -251,6 +249,15 @@ body{
 
 .main-container-graph{
   margin-top: 50px;
+}
+
+.graph-chart{
+  border-radius:10px;
+  padding-bottom:10px;
+  background:var(--main_blue);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
 }
 
 

@@ -25,7 +25,8 @@ const Result = () => {
           {
               "sentiment": "neutral",
               "score": 0.8970250487327576
-          }
+          },
+      "news_time":'20-10-2023 12.30'
     },
     {
       "news_title": "Strong Buy Alert! Why Alphabet Stock Will Leap Higher in 2024",
@@ -34,7 +35,8 @@ const Result = () => {
           {
               "sentiment": "neutral",
               "score": 0.8970250487327576
-          }
+          },
+          "news_time":'20-10-2023 12.30'
     },
     {
       "news_title": "Strong Buy Alert! Why Alphabet Stock Will Leap Higher in 2024",
@@ -43,7 +45,8 @@ const Result = () => {
           {
               "sentiment": "neutral",
               "score": 0.8970250487327576
-          }
+          },
+          "news_time":'20-10-2023 12.30'
     },
     {
       "news_title": "Google adds more AI in shopping.",
@@ -52,7 +55,8 @@ const Result = () => {
           {
               "sentiment": "neutral",
               "score": 0.8970250487327576
-          }
+          },
+          "news_time":'20-10-2023 12.30'
     },
     {
       "news_title": "Google adds more AI in shopping.",
@@ -61,7 +65,8 @@ const Result = () => {
           {
               "sentiment": "neutral",
               "score": 0.8970250487327576
-          }
+          },
+          "news_time":'20-10-2023 12.30'
     },
     {
       "news_title": "Google adds more AI in shopping.",
@@ -70,7 +75,38 @@ const Result = () => {
           {
               "sentiment": "neutral",
               "score": 0.8970250487327576
-          }
+          },
+          "news_time":'20-10-2023 12.30'
+    },
+    {
+      "news_title": "With Vids, Google thinks it has the next big productivity tool for work.",
+      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+      "news_sentiment": 
+          {
+              "sentiment": "neutral",
+              "score": 0.8970250487327576
+          },
+          "news_time":'20-10-2023 12.30'
+    },
+    {
+      "news_title": "With Vids, Google thinks it has the next big productivity tool for work.",
+      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+      "news_sentiment": 
+          {
+              "sentiment": "neutral",
+              "score": 0.8970250487327576
+          },
+          "news_time":'20-10-2023 12.30'
+    },
+    {
+      "news_title": "With Vids, Google thinks it has the next big productivity tool for work.",
+      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+      "news_sentiment": 
+          {
+              "sentiment": "neutral",
+              "score": 0.8970250487327576
+          },
+          "news_time":'20-10-2023 12.30'
     }
   ]);
 
@@ -80,6 +116,15 @@ const Result = () => {
     neutral: 0
   };
   let data;
+  let line_data ={
+    labels: ['20-10-2023 12.30','20-10-2023 12.30','20-10-2023 12.30','20-10-2023 12.30','20-10-2023 12.30','20-10-2023 12.30','20-10-2023 12.30','20-10-2023 12.30','20-10-2023 12.30'],
+    datasets: [{
+      label:'Plot',
+      data: ['Positive', 'Negative', 'Neutral','Positive', 'Positive', 'Neutral','Positive','Positive','Positive'],
+      borderColor: 'white',
+      tension: 0.1
+    }]
+  };
   const options = {
     plugins: {
         legend: {
@@ -95,6 +140,33 @@ const Result = () => {
         }
     }
   };
+  const line_options = {
+    scales: {
+      x: {
+        ticks: {
+          color: 'white',
+          fontWeight:'bold'
+        }
+      },
+      y: {
+        type: 'category',
+        labels: ['Positive', 'Neutral', 'Negative'],
+        ticks: {
+          color: '#07CE43',
+          font: {
+            family:'Poppins'
+          }
+        }
+      }
+    },
+    plugins: {
+        legend:{
+          display: false
+        }
+    }
+}
+
+
 
   const searchForCompany = async(e)=>{
     e.preventDefault();
@@ -202,6 +274,7 @@ const Result = () => {
                           <img alt="" src="https://yt3.googleusercontent.com/rhqKhfZPaVKRfPi1UvaoekFcSVkipICyGmshnUT9SYMR2JMI8G40YqtaOqz94Ao5rdu_NE0nAw=s900-c-k-c0x00ffffff-no-rj"/>
                           <span>{res.news_title}</span>
                         </div>
+                        <button>{res.news_time}</button>
                         <button>{res.news_sentiment.sentiment.toUpperCase()}</button>
                       </div>
                     )
@@ -209,8 +282,11 @@ const Result = () => {
                 </div>
         
                 <div className="result-dash-senti">
-                    <h3>Article Sentiment</h3>     
-                    <Doughnut data={data} options={options}/>
+                    <h3>Article Sentiment</h3>
+                    <div style={{borderRadius:'10px',paddingBottom:'10px',background:'#0a3878',boxShadow: 'rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px'}}>
+                      <Doughnut data={data} options={options}/>
+                    </div>     
+                    <TrendGraph company={company}/>
                 </div>
               </div>
 
@@ -218,26 +294,11 @@ const Result = () => {
 
             <div className="main-container-graph">
               <div className="main-title">
-                <h3 className="font-weight-bold">Google Trends Search</h3>
+                <h3 className="font-weight-bold">Sentiment Time Series</h3>
               </div>
               <div className="main-cards">
-                <div className="graph" >
-                    <TrendGraph company={company}/>
-                </div>
-                <div className="graph" >
-                    <TrendGraph company={company}/>
-                </div>
-                <div className="graph" >
-                    <TrendGraph company={company}/>
-                </div>
-                <div className="graph" >
-                    <TrendGraph company={company}/>
-                </div>
-                <div className="graph" >
-                    <TrendGraph company={company}/>
-                </div>
-                <div className="graph" >
-                    <TrendGraph company={company}/>
+                <div className="graph-chart" >
+                    <Line data={line_data} options={line_options}/>
                 </div>
               </div>
             </div>
