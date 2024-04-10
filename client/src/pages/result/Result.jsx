@@ -7,7 +7,8 @@ import TrendGraph from '../../components/trendGraph/TrendGraph';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass,faUser,faClockRotateLeft,faGear,faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import {Chart as ChartJS} from 'chart.js/auto';
-import {Bar,Line,Doughnut} from "react-chartjs-2";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import {Line,Doughnut} from "react-chartjs-2";
 import Loading from '../../components/loading/Loading';
 
 const Result = () => {
@@ -23,7 +24,7 @@ const Result = () => {
       "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
       "news_sentiment": 
           {
-              "sentiment": "neutral",
+              "sentiment": "Positive",
               "score": 0.8970250487327576
           },
       "news_time":'20-10-2023 12.30'
@@ -33,7 +34,7 @@ const Result = () => {
       "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
       "news_sentiment": 
           {
-              "sentiment": "neutral",
+              "sentiment": "Negative",
               "score": 0.8970250487327576
           },
           "news_time":'20-10-2023 12.30'
@@ -43,7 +44,7 @@ const Result = () => {
       "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
       "news_sentiment": 
           {
-              "sentiment": "neutral",
+              "sentiment": "Positive",
               "score": 0.8970250487327576
           },
           "news_time":'20-10-2023 12.30'
@@ -53,7 +54,7 @@ const Result = () => {
       "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
       "news_sentiment": 
           {
-              "sentiment": "neutral",
+              "sentiment": "Positive",
               "score": 0.8970250487327576
           },
           "news_time":'20-10-2023 12.30'
@@ -63,7 +64,7 @@ const Result = () => {
       "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
       "news_sentiment": 
           {
-              "sentiment": "neutral",
+              "sentiment": "Positive",
               "score": 0.8970250487327576
           },
           "news_time":'20-10-2023 12.30'
@@ -73,7 +74,7 @@ const Result = () => {
       "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
       "news_sentiment": 
           {
-              "sentiment": "neutral",
+              "sentiment": "Negative",
               "score": 0.8970250487327576
           },
           "news_time":'20-10-2023 12.30'
@@ -117,35 +118,53 @@ const Result = () => {
   };
   let data;
   let line_data ={
-    labels: ['20-10-2023 12.30','20-10-2023 12.30','20-10-2023 12.30','20-10-2023 12.30','20-10-2023 12.30','20-10-2023 12.30','20-10-2023 12.30','20-10-2023 12.30','20-10-2023 12.30'],
+    labels: ['20-10-2023 12.30','20-11-2023 12.30','20-13-2023 12.30','20-14-2023 12.30','20-15-2023 12.30','20-16-2023 12.30','20-16-2023 12.30','20-17-2023 12.30','20-17-2023 12.30'],
     datasets: [{
       label:'Plot',
-      data: ['Positive', 'Negative', 'Neutral','Positive', 'Positive', 'Neutral','Positive','Positive','Positive'],
+      data: ['Positive', 'Negative', 'Neutral','Positive', 'Positive', 'Neutral','Positive','Positive','Positive','Positive','Positive','Positive','Positive'],
       borderColor: 'white',
       tension: 0.1
     }]
   };
-  const options = {
-    plugins: {
-        legend: {
-            labels: {
-                color: 'white',
-                font:{
-                  family:'Poppins',
-                  size:15
-                },
-                boxWidth: 10,
-                height:200 
-            }
+  
+  const options = 
+  {
+    plugins: 
+    {
+      legend: 
+      {
+        labels: 
+        {
+            color: 'black',
+            font:
+            {
+              family:'Poppins',
+              size:15
+            },
+            boxWidth: 10,
         }
+      },
+      datalabels: 
+      {
+        color: 'white',
+        font:
+        {
+          family:'Poppins',
+          weight:'bold'
+        }
+      }
     }
   };
+  
   const line_options = {
     scales: {
       x: {
         ticks: {
           color: 'white',
-          fontWeight:'bold'
+          font: {
+            family:'Poppins',
+            size:10
+          }
         }
       },
       y: {
@@ -165,7 +184,6 @@ const Result = () => {
         }
     }
 }
-
 
 
   const searchForCompany = async(e)=>{
@@ -254,13 +272,13 @@ const Result = () => {
                     }  
 
                     data={
-                      labels: ['Negtaive', 'Posistive', 'Neutral'],
+                      labels: ['Negtaive', 'Positive', 'Neutral'],
                       datasets: [{
                           data: [sentimentCount.negative,sentimentCount.positive,sentimentCount.neutral],
                           backgroundColor: [
-                              'rgb(227, 4, 46)',
-                              'rgb(11, 182, 4)',
-                              'rgb(227, 221, 4)'
+                              '#C70039',
+                              '#28B463',
+                              '#F7582B'
                           ],
                           borderWidth:0,
                           hoverOffset: 4
@@ -280,25 +298,18 @@ const Result = () => {
                     )
                   })}
                 </div>
+
+                <div className="graph-chart" >
+                    <h4>Sentiment Time Series</h4>
+                    <Line data={line_data} options={line_options} height={50}/>
+                </div> 
         
                 <div className="result-dash-senti">
+                  <div className='pie-chart'>
                     <h3>Article Sentiment</h3>
-                    <div style={{borderRadius:'10px',paddingBottom:'10px',background:'#0a3878',boxShadow: 'rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px'}}>
-                      <Doughnut data={data} options={options}/>
-                    </div>     
-                    <TrendGraph company={company}/>
-                </div>
-              </div>
-
-            </div>
-
-            <div className="main-container-graph">
-              <div className="main-title">
-                <h3 className="font-weight-bold">Sentiment Time Series</h3>
-              </div>
-              <div className="main-cards">
-                <div className="graph-chart" >
-                    <Line data={line_data} options={line_options}/>
+                    <Doughnut data={data} options={options} plugins={[ChartDataLabels]} />
+                  </div>  
+                  <TrendGraph company={company}/>
                 </div>
               </div>
             </div>
