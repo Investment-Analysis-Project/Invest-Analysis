@@ -151,6 +151,13 @@ body{
   justify-content: space-between;
 }
 
+.main-title select {
+  border:none;
+  background:#042548;
+  color:white;
+  border-radius: 5px;
+}
+
 .font-weight-bold{
   color: var(--main_blue);
 }
@@ -176,7 +183,7 @@ body{
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
- 
+  cursor: pointer;
   background: rgb(255, 255, 255);
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
   transition: .5s;

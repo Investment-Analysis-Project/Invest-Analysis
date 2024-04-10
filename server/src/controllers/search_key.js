@@ -9,9 +9,9 @@ let resultArray = [{
             "sentiment": "Positive",
             "score": 0.8970250487327576
         },
-    "news_time":'20-10-2023 12.30'
-  },
-  {
+    "news_time":"2024-03-14T09:46:00Z"
+},
+{
     "news_title": "Strong Buy Alert! Why Alphabet Stock Will Leap Higher in 2024",
     "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
     "news_sentiment": 
@@ -19,9 +19,9 @@ let resultArray = [{
             "sentiment": "Negative",
             "score": 0.8970250487327576
         },
-        "news_time":'20-10-2023 12.30'
-  },
-  {
+    "news_time":"2024-03-27T14:07:00Z"
+},
+{
     "news_title": "Strong Buy Alert! Why Alphabet Stock Will Leap Higher in 2024",
     "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
     "news_sentiment": 
@@ -29,9 +29,9 @@ let resultArray = [{
             "sentiment": "Positive",
             "score": 0.8970250487327576
         },
-        "news_time":'20-10-2023 12.30'
-  },
-  {
+    "news_time":"2024-03-26T17:24:00Z"
+},
+{
     "news_title": "Google adds more AI in shopping.",
     "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
     "news_sentiment": 
@@ -39,9 +39,9 @@ let resultArray = [{
             "sentiment": "Positive",
             "score": 0.8970250487327576
         },
-        "news_time":'20-10-2023 12.30'
-  },
-  {
+    "news_time":"2024-03-15T14:27:00Z"
+},
+{
     "news_title": "Google adds more AI in shopping.",
     "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
     "news_sentiment": 
@@ -49,9 +49,9 @@ let resultArray = [{
             "sentiment": "Positive",
             "score": 0.8970250487327576
         },
-        "news_time":'20-10-2023 12.30'
-  },
-  {
+    "news_time":"2024-04-08T23:20:33Z"
+},
+{
     "news_title": "Google adds more AI in shopping.",
     "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
     "news_sentiment": 
@@ -59,59 +59,57 @@ let resultArray = [{
             "sentiment": "Negative",
             "score": 0.8970250487327576
         },
-        "news_time":'20-10-2023 12.30'
-  },
-  {
+    "news_time":"2024-03-21T22:43:02Z"
+},
+{
     "news_title": "With Vids, Google thinks it has the next big productivity tool for work.",
     "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
     "news_sentiment": 
         {
-            "sentiment": "neutral",
+            "sentiment": "Neutral",
             "score": 0.8970250487327576
         },
-        "news_time":'20-10-2023 12.30'
-  },
-  {
+    "news_time":"2024-03-12T19:50:15Z"
+},
+{
     "news_title": "With Vids, Google thinks it has the next big productivity tool for work.",
     "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
     "news_sentiment": 
         {
-            "sentiment": "neutral",
+            "sentiment": "Neutral",
             "score": 0.8970250487327576
         },
-        "news_time":'20-10-2023 12.30'
-  },
-  {
+    "news_time":"2024-03-22T18:30:09Z"
+},
+{
     "news_title": "With Vids, Google thinks it has the next big productivity tool for work.",
     "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
     "news_sentiment": 
         {
-            "sentiment": "neutral",
+            "sentiment": "Neutral",
             "score": 0.8970250487327576
         },
-        "news_time":'20-10-2023 12.30'
-  }]
+    "news_time":"2024-04-02T14:02:53Z"
+}];
 
 const recent_news = async(req,res,next)=>{
     try{
         const {time} =req.query;
         const {keyword}=req.params;
-        console.log(time);
-        console.log(keyword)
-        const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&domains=cnbc.com&searchIn=title&sortBy=relevancy&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
-        const five_news = response.data.articles.slice(0,9);
+
+        // const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&domains=cnbc.com&searchIn=title&sortBy=relevancy&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
+        // const five_news = response.data.articles.slice(0,9);
         
-        const newsArray = [];
-        five_news.forEach(news => {
-            const {url,title} = news;
-            newsArray.push({url,title});
-        });
+        // const newsArray = [];
+        // five_news.forEach(news => {
+        //     const {url,title,publishedAt,urlToImage} = news;
+        //     newsArray.push({url,title,publishedAt,urlToImage});
+        // });
             
         //const x = await processNewsArray(newsArray);
 
-        //if(x.length)
-            //res.json(x);
-
+        // if(x.length)
+        //     res.json(x);
         res.json(resultArray);
     }catch(err){
         console.log(err);
@@ -172,7 +170,9 @@ const query = async(news_scraped,news)=>
         }
         const news_title=news.title;
         const news_url=news.url;
-        resultArray.push({news_title,news_url,news_sentiment,news_entities});
+        const news_time=news.publishedAt;
+        const news_img=news.news_img_url
+        resultArray.push({news_title,news_url,news_sentiment,news_entities,news_time,news_img});
     }catch(err){
         console.log(err)
     }

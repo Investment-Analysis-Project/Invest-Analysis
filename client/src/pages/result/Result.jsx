@@ -18,8 +18,12 @@ const Result = () => {
   const [loaded,setLoaded]=useState(false);
   const [searched,setSearched]=useState(false);
   const [company,setCompany]=useState();
-  const [time,setTime]=useState('week');
+  const [time,setTime]=useState('day');
   const [value,setValue]=useState([]);
+  const [shouldFetch, setShouldFetch] = useState(false);
+
+  const labels=[];
+  const senti_data=[];
 
   let sentimentCount = {
     positive: 0,
@@ -29,17 +33,7 @@ const Result = () => {
 
   let data;
 
-  let line_data =
-  {
-    labels: ['20-10-2023 12.30','20-11-2023 12.30','20-13-2023 12.30','20-14-2023 12.30','20-15-2023 12.30','20-16-2023 12.30','20-16-2023 12.30','20-17-2023 12.30','20-17-2023 12.30'],
-    datasets: [
-    {
-      label:'Plot',
-      data: ['Positive', 'Negative', 'Neutral','Positive', 'Positive', 'Neutral','Positive','Positive','Positive','Positive','Positive','Positive','Positive'],
-      borderColor: 'white',
-      tension: 0.1
-    }]
-  };
+  let line_data;
   
   const options = 
   {
@@ -82,7 +76,7 @@ const Result = () => {
           font: 
           {
             family:'Poppins',
-            size:10
+            size:8
           }
         }
       },
@@ -95,7 +89,8 @@ const Result = () => {
           color: '#07CE43',
           font: 
           {
-            family:'Poppins'
+            family:'Poppins',
+            size:10
           }
         }
       }
@@ -111,13 +106,16 @@ const Result = () => {
 
   useEffect(()=>
   {
-    searchForCompany();  
-  },[time]);
+    if(shouldFetch) 
+    {
+      searchForCompany();
+    }
+  },[time,shouldFetch]);
 
   const handleSearchButtonClick = (e) => 
   {
     e.preventDefault();
-    searchForCompany();
+    setShouldFetch(true);
   };
   
   const searchForCompany = async()=>
@@ -174,7 +172,7 @@ const Result = () => {
           <header className="header">
             <div className="header-left">
               <input type="text" id="company" name="name" placeholder="Search For a Company" value={company} onChange={e=>setCompany(e.target.value)}/>
-              <button className='search_button' onClick={searchForCompany}><FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#ffffff",}}/></button>
+              <button className='search_button' onClick={handleSearchButtonClick}><FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#ffffff",}}/></button>
             </div>
           </header>
 
@@ -196,6 +194,9 @@ const Result = () => {
                 <div className="result-dash-news">
                   {value.map((res,i)=>{ 
 
+                    labels.push(res.news_time);
+                    senti_data.push(res.news_sentiment.sentiment);
+
                     switch (res.news_sentiment.sentiment) 
                     {
                       case "Positive":
@@ -209,7 +210,8 @@ const Result = () => {
                         break;
                     }  
 
-                    data={
+                    data=
+                    {
                       labels: ['Negtaive', 'Positive', 'Neutral'],
                       datasets: [{
                           data: [sentimentCount.negative,sentimentCount.positive,sentimentCount.neutral],
@@ -221,11 +223,23 @@ const Result = () => {
                           borderWidth:0,
                           hoverOffset: 4
                       }]
-                  };
+                    };
+
+                    line_data =
+                    {
+                      labels: labels,
+                      datasets: [
+                      {
+                        label:'Plot',
+                        data: senti_data,
+                        borderColor: 'white',
+                        tension: 0.1
+                      }]
+                    };
 
 
                     return(
-                      <div className="result-dash-news-detail" key={i}>
+                      <div className="result-dash-news-detail" key={i} onClick={()=>window.open(res.news_url)}>
                         <div className="result-dash-news-detail-content">
                           <img alt="" src="https://yt3.googleusercontent.com/rhqKhfZPaVKRfPi1UvaoekFcSVkipICyGmshnUT9SYMR2JMI8G40YqtaOqz94Ao5rdu_NE0nAw=s900-c-k-c0x00ffffff-no-rj"/>
                           <span>{res.news_title}</span>
