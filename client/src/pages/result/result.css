@@ -192,13 +192,14 @@ body{
 
 .result-dash-news-detail button{
   border: none;
+  background: white;
   min-width:10%;
   padding:5px;
   font-size: 12px;
+  font-weight: 600;
   border-radius: 5px;
-  background:var(--main_orange);
-  color: rgb(255, 243, 243);
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  text-align: right;
+  color: var(--main_blue);
 }
 
 .result-dash-news-detail img{
@@ -206,13 +207,13 @@ body{
 }
 
 .result-dash-news-detail span{
-  background-color: rgba(227, 239, 175, 0.911);
+  background-color: rgba(248, 190, 220, 0.911);
   padding: 10px;
   border-radius: 10px;
   font-size: 13px;
   flex: 1;
   height: 100px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .result-dash-senti{
@@ -222,9 +223,11 @@ body{
   align-items: center;
   padding: 20px;
   gap: 5px;
-  background:var(--main_orange);
+  background:var(--light_blue);
   height: fit-content;
   border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  cursor: pointer;
 }
 
 .result-dash-senti h3{

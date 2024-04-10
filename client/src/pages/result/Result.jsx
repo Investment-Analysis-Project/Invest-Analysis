@@ -209,8 +209,8 @@ const Result = () => {
                 </div>
         
                 <div className="result-dash-senti">
-                    <h3>Article Sentiment</h3>
-                    <Doughnut data={data} options={options} />
+                    <h3>Article Sentiment</h3>     
+                    <Doughnut data={data} options={options}/>
                 </div>
               </div>
 
