@@ -9,21 +9,26 @@ const News = () => {
 
     const {news_title,setNewtitle,news_desc,setNewsdesc,news_url,setNewsurl}=useContext(ProjectsContext);
 
-    useEffect(()=>{
-        const fetchData =async()=>{
-        try{
-            //dd4dcc554dd94d61820961820e342242
-            //afcd39b2d9c546cc9293d168cee038e7
-            // const response = await fetch(`https://newsapi.org/v2/everything?q=apple&domains=cnbc.com&excludeDomains=engadget.com&language=en&sortBy=popularity&apiKey=afcd39b2d9c546cc9293d168cee038e7`)
-            // const data = await response.json();
-            // const articles = data.articles;
-            // setNews(articles);
-        }catch(err){
-            console.log(err)
-        }
-    };
+    useEffect(()=>
+    {
+        const fetchData =async()=>
+        {
+            try
+            {
+                //dd4dcc554dd94d61820961820e342242
+                //afcd39b2d9c546cc9293d168cee038e7
+                // const response = await fetch(`https://newsapi.org/v2/everything?q=apple&domains=cnbc.com&excludeDomains=engadget.com&language=en&sortBy=popularity&apiKey=afcd39b2d9c546cc9293d168cee038e7`)
+                // const data = await response.json();
+                // const articles = data.articles;
+                // setNews(articles);
+            }
+            catch(err)
+            {
+                console.log(err)
+            }
+        };
         fetchData();    
-  },[]);
+    },[]);
 
     let navigate = useNavigate();
 

@@ -1,11 +1,103 @@
 const createError = require('../utils/error');
 const axios = require('axios');
 
-let resultArray = []
+let resultArray = [{
+    "news_title": "Strong Buy Alert! Why Alphabet Stock Will Leap Higher in 2024",
+    "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+    "news_sentiment": 
+        {
+            "sentiment": "Positive",
+            "score": 0.8970250487327576
+        },
+    "news_time":'20-10-2023 12.30'
+  },
+  {
+    "news_title": "Strong Buy Alert! Why Alphabet Stock Will Leap Higher in 2024",
+    "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+    "news_sentiment": 
+        {
+            "sentiment": "Negative",
+            "score": 0.8970250487327576
+        },
+        "news_time":'20-10-2023 12.30'
+  },
+  {
+    "news_title": "Strong Buy Alert! Why Alphabet Stock Will Leap Higher in 2024",
+    "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+    "news_sentiment": 
+        {
+            "sentiment": "Positive",
+            "score": 0.8970250487327576
+        },
+        "news_time":'20-10-2023 12.30'
+  },
+  {
+    "news_title": "Google adds more AI in shopping.",
+    "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+    "news_sentiment": 
+        {
+            "sentiment": "Positive",
+            "score": 0.8970250487327576
+        },
+        "news_time":'20-10-2023 12.30'
+  },
+  {
+    "news_title": "Google adds more AI in shopping.",
+    "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+    "news_sentiment": 
+        {
+            "sentiment": "Positive",
+            "score": 0.8970250487327576
+        },
+        "news_time":'20-10-2023 12.30'
+  },
+  {
+    "news_title": "Google adds more AI in shopping.",
+    "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+    "news_sentiment": 
+        {
+            "sentiment": "Negative",
+            "score": 0.8970250487327576
+        },
+        "news_time":'20-10-2023 12.30'
+  },
+  {
+    "news_title": "With Vids, Google thinks it has the next big productivity tool for work.",
+    "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+    "news_sentiment": 
+        {
+            "sentiment": "neutral",
+            "score": 0.8970250487327576
+        },
+        "news_time":'20-10-2023 12.30'
+  },
+  {
+    "news_title": "With Vids, Google thinks it has the next big productivity tool for work.",
+    "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+    "news_sentiment": 
+        {
+            "sentiment": "neutral",
+            "score": 0.8970250487327576
+        },
+        "news_time":'20-10-2023 12.30'
+  },
+  {
+    "news_title": "With Vids, Google thinks it has the next big productivity tool for work.",
+    "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+    "news_sentiment": 
+        {
+            "sentiment": "neutral",
+            "score": 0.8970250487327576
+        },
+        "news_time":'20-10-2023 12.30'
+  }]
 
 const recent_news = async(req,res,next)=>{
     try{
+        const {time} =req.query;
         const {keyword}=req.params;
+        console.log(time);
+        console.log(keyword)
         const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&domains=cnbc.com&searchIn=title&sortBy=relevancy&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
         const five_news = response.data.articles.slice(0,9);
         
@@ -15,10 +107,12 @@ const recent_news = async(req,res,next)=>{
             newsArray.push({url,title});
         });
             
-        const x = await processNewsArray(newsArray);
+        //const x = await processNewsArray(newsArray);
 
-        if(x.length)
-            res.json(x);
+        //if(x.length)
+            //res.json(x);
+
+        res.json(resultArray);
     }catch(err){
         console.log(err);
     }

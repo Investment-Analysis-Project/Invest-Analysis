@@ -1,4 +1,4 @@
-import React, {useContext, useState,} from 'react';
+import React, {useContext, useState,useEffect} from 'react';
 import './result.css';
 import baseurl from '../../baseurl/baseurl';
 import { ProjectsContext } from '../../contextapi.js/projectscontext';
@@ -17,99 +17,9 @@ const Result = () => {
   const {setAuth}=useContext(ProjectsContext);
   const [loaded,setLoaded]=useState(false);
   const [searched,setSearched]=useState(false);
-  const [company,setCompany]=useState("Apple");
-  const [value,setValue]=useState([
-    {
-      "news_title": "Strong Buy Alert! Why Alphabet Stock Will Leap Higher in 2024",
-      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
-      "news_sentiment": 
-          {
-              "sentiment": "Positive",
-              "score": 0.8970250487327576
-          },
-      "news_time":'20-10-2023 12.30'
-    },
-    {
-      "news_title": "Strong Buy Alert! Why Alphabet Stock Will Leap Higher in 2024",
-      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
-      "news_sentiment": 
-          {
-              "sentiment": "Negative",
-              "score": 0.8970250487327576
-          },
-          "news_time":'20-10-2023 12.30'
-    },
-    {
-      "news_title": "Strong Buy Alert! Why Alphabet Stock Will Leap Higher in 2024",
-      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
-      "news_sentiment": 
-          {
-              "sentiment": "Positive",
-              "score": 0.8970250487327576
-          },
-          "news_time":'20-10-2023 12.30'
-    },
-    {
-      "news_title": "Google adds more AI in shopping.",
-      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
-      "news_sentiment": 
-          {
-              "sentiment": "Positive",
-              "score": 0.8970250487327576
-          },
-          "news_time":'20-10-2023 12.30'
-    },
-    {
-      "news_title": "Google adds more AI in shopping.",
-      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
-      "news_sentiment": 
-          {
-              "sentiment": "Positive",
-              "score": 0.8970250487327576
-          },
-          "news_time":'20-10-2023 12.30'
-    },
-    {
-      "news_title": "Google adds more AI in shopping.",
-      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
-      "news_sentiment": 
-          {
-              "sentiment": "Negative",
-              "score": 0.8970250487327576
-          },
-          "news_time":'20-10-2023 12.30'
-    },
-    {
-      "news_title": "With Vids, Google thinks it has the next big productivity tool for work.",
-      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
-      "news_sentiment": 
-          {
-              "sentiment": "neutral",
-              "score": 0.8970250487327576
-          },
-          "news_time":'20-10-2023 12.30'
-    },
-    {
-      "news_title": "With Vids, Google thinks it has the next big productivity tool for work.",
-      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
-      "news_sentiment": 
-          {
-              "sentiment": "neutral",
-              "score": 0.8970250487327576
-          },
-          "news_time":'20-10-2023 12.30'
-    },
-    {
-      "news_title": "With Vids, Google thinks it has the next big productivity tool for work.",
-      "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
-      "news_sentiment": 
-          {
-              "sentiment": "neutral",
-              "score": 0.8970250487327576
-          },
-          "news_time":'20-10-2023 12.30'
-    }
-  ]);
+  const [company,setCompany]=useState();
+  const [time,setTime]=useState('week');
+  const [value,setValue]=useState([]);
 
   let sentimentCount = {
     positive: 0,
@@ -199,16 +109,25 @@ const Result = () => {
     }
   }
 
-  const searchForCompany = async(e)=>
+  useEffect(()=>
+  {
+    searchForCompany();  
+  },[time]);
+
+  const handleSearchButtonClick = (e) => 
   {
     e.preventDefault();
-    
+    searchForCompany();
+  };
+  
+  const searchForCompany = async()=>
+  {
     try
     {
       setSearched(true);
       setLoaded(false);
-      // const response = await baseurl.get(`/search_key/${company}`);
-      // setValue(response.data);
+      const response = await baseurl.get(`/search_key/${company}?time=${time}`);
+      setValue(response.data);
       setSearched(false);
       setLoaded(true);
     }catch(err){
@@ -267,6 +186,10 @@ const Result = () => {
 
               <div className="main-title">
                 <h3 className="font-weight-bold">Top Results</h3>
+                <select value={time} onChange={e=>setTime(e.target.value)}>
+                  <option value="day">For Last Day</option>
+                  <option value="week">For Last Week</option>
+                </select>
               </div>
 
               <div className="result-dash">
