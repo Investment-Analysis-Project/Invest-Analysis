@@ -18,12 +18,13 @@ const login = async(req,res,next)=>{
         const user_log={
             user_id:user.rows[0].user_id,
             user_name:user.rows[0].user_name,
-            isadmin:user.rows[0].is_admin
+            isadmin:user.rows[0].is_admin,
+            auth:true
         }
 
-        const token=jwt.sign(user_log,process.env.JWT_SECRET,{expiresIn:"24h"});
+        const token=jwt.sign(user_log,process.env.JWT,{expiresIn:"24h"});
         
-        res.json(createSuccess(200,"Login Success",{token}));
+        res.json({auth:true,token:token});
     }catch(err){
         console.log(err);
         next(createError(500,"Server Error"));

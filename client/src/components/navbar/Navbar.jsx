@@ -16,8 +16,7 @@ const Navbar = (props) => {
         setprofilevisible(!profilevisible);
     }
 
-    const {auth,setAuth}=useContext(ProjectsContext);
-    setAuth(true);
+    const {auth,setAuth,setUser_id}=useContext(ProjectsContext);
     
     return(
         <div className='navbar'>
@@ -37,7 +36,7 @@ const Navbar = (props) => {
                             <p className='profilelistitem' onClick={()=>{navigate('/')}}>Profile</p>  
                             </li>
                             <li>
-                                <p className='profilelistitem' onClick={()=>{setAuth(false); localStorage.removeItem('token');navigate('/')}}>Logout</p>
+                                <p className='profilelistitem' onClick={()=>{setAuth(false);setUser_id(""); localStorage.removeItem('token');navigate('/')}}>Logout</p>
                             </li>
                         </ul>
                     </div>}

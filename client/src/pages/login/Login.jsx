@@ -36,9 +36,7 @@ const Login = () => {
                 user_password
              });
 
-            const value=response.data;
-
-            console.log(value.auth);
+            const value = response.data;
 
             if(!value.auth){
                 setMessage(value.message);
@@ -52,11 +50,8 @@ const Login = () => {
 
             setAuth(value.auth);
             setUser_id(decodedToken.user_id);
-            console.log(decodedToken.user_id);
-            console.log(value.auth);
               
             navigate('/');
-
         }catch(err){
             console.log(err);
         }   
@@ -77,19 +72,17 @@ const Login = () => {
                 email:new_email
              });
 
-            const value=response.data;
+            const value = await response.data;
+
+            new_setMessage(value.message);
 
             if(!value.stat){
-                new_setMessage(value.message);
+                setUserName(new_user_name);
+                setPassword(new_user_password);
+                loginSubmit(e);
                 return;
             }
 
-            setUserName(new_user_name);
-            setPassword(new_user_password)
-           
-            new_setMessage("Account Created");
-            
-            loginSubmit(e);
         }catch(err){
             console.log(err);
         }   
