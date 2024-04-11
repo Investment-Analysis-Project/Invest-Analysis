@@ -306,9 +306,20 @@ body{
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   color: var(--main_text_blue);
-  padding: 10px;
+  padding: 10px; 
 }
 
+.trends_stat table{
+  background: var(--main_back_blue);
+  border: none;
+  border-collapse: collapse;
+  color: var(--main_green);
+}
+
+.trends_stat th{
+  font-weight: 400;
+  border: 1px solid white;
+}
 
 /* ---------- SCROLLBARS ---------- */
 

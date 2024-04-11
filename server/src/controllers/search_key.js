@@ -121,7 +121,7 @@ const recent_news = async(req,res,next)=>{
 
         // if(x.length)
         //     res.json(x);
-        
+        resultArray.sort((a,b)=>a.news_time.localeCompare(b.news_time))
         res.json(resultArray);
     }catch(err){
         console.log(err);

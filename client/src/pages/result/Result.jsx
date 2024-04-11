@@ -25,6 +25,8 @@ const Result = () => {
   const labels=[];
   const senti_data=[];
   let color;
+  let score=0;
+  let score_array=[];
  
   let sentimentCount = {
     positive: 0,
@@ -59,7 +61,6 @@ const Result = () => {
         font:
         {
           family:'Poppins',
-          weight:'bold'
         }
       }
     }
@@ -90,15 +91,15 @@ const Result = () => {
         labels: ['Positive', 'Neutral', 'Negative'],
         ticks: 
         {
-          color: '#07CE43',
+          color: '#24E921 ',
           font: 
           {
             family:'Poppins',
-            size:10
+            size:11
           }
         },
         grid: {
-          color: '#07CE43'
+          color: '#24E921'
         }
       }
     },
@@ -185,7 +186,6 @@ const Result = () => {
                 <button className='search_button' onClick={handleSearchButtonClick}><FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#ffffff",}}/></button>
               }
               
-              
             </div>
           </header>
 
@@ -211,22 +211,26 @@ const Result = () => {
                   {value.map((res,i)=>{ 
 
                     labels.push(res.news_time);
-                    labels.sort();
                     senti_data.push(res.news_sentiment.sentiment);
 
                     switch (res.news_sentiment.sentiment) 
                     {
                       case "Positive":
                         sentimentCount.positive++;
-                        color="#C70039";
+                        color="#28B463";
+                        score_array.push(1);
+                        ++score;
                         break;
                       case "Negative":
                         sentimentCount.negative++;
-                        color="#28B463";
+                        color="#C70039";
+                        score_array.push(-1);
+                        --score;
                         break;
                       default:
                         sentimentCount.neutral++;
                         color="#F7582B";
+                        score_array.push(0);
                         break;
                     }  
 
@@ -241,7 +245,6 @@ const Result = () => {
                               '#F7582B'
                           ],
                           borderWidth:0,
-                          hoverOffset: 4
                       }]
                     };
 
@@ -255,7 +258,6 @@ const Result = () => {
                         tension: 0.1
                       }]
                     };
-
 
                     return(
                       <div className="result-dash-news-detail" key={i} onClick={()=>window.open(res.news_url)}>
@@ -277,14 +279,33 @@ const Result = () => {
                   </div> 
                   <div className='trends_stat'> 
                     <span>
-                      There are 9 articles from 2024-04-02T14:02:53Z to 2024-04-02T14:02:53Z.
+                      <text style={{ fontWeight:'600'}}>10</text> recent articles have been analyzed from time series <text style={{ fontWeight:'600'}}>{labels[0]}</text> <br></br> to <text style={{ fontWeight:'600'}}>{labels[9]}</text>
                     </span>
                     <span>                    
-                      Out of 9 the 4 articles showed postive and 3 neutral . The company sounds Good from the recent news
+                      <button style={{ backgroundColor: '#28B463' , color:'white',  border:'none' }}>{sentimentCount.positive} articles sounded Postive</button>--<button style={{ backgroundColor: '#C70039' , color:'white', border:'none'}}>{sentimentCount.negative} sounded Negative</button>--<button style={{ backgroundColor: '#F7582B' , color:'white' , border:'none'}}>{sentimentCount.neutral} sounded Neutral</button>
                     </span>
+
+                    <table>
+                      <tr>
+                        <th>Time Frame</th>
+                        <th>Score</th>
+                      </tr>
+                      <tr>
+                        <th>{labels[0]} - {labels[3]}</th>
+                        <th>{((score_array[0]+score_array[1]+score_array[2]+score_array[3])/4).toFixed(2)}</th>
+                      </tr>
+                      <tr>
+                        <th>{labels[4]} - {labels[6]}</th>
+                        <th>{((score_array[4]+score_array[5]+score_array[6])/3).toFixed(2)}</th>
+                      </tr>
+                      <tr>
+                        <th>{labels[7]} - {labels[9]}</th>
+                        <th>{((score_array[7]+score_array[8]+score_array[9])/3).toFixed(2)}</th>
+                      </tr>
+                    </table>
+                    
                     <span>
-                      There are 9 articles from 2024-04-02T14:02:53Z to 2024-04-02T14:02:53Z.
-                      Out of 9 the 4 articles showed postive and 3 neutral . The company sounds Good from the recent news
+                      The company sounds overall {score > 2 ? <text style={{ color: '#28B463' ,fontWeight:'600'}}>Very Good</text>  : (score >= 0 ? <text style={{ color: '#F7582B',fontWeight:'600' }}>Good</text> : <text style={{ color: '#C70039',fontWeight:'600' }}>Not Good</text>)} performance for the past {time}
                     </span>
                   </div> 
                 </div>
