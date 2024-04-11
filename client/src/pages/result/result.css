@@ -55,7 +55,7 @@ body{
   padding: 5px;
   font-size: 15px;
   text-align:center;
-  background: rgb(238, 235, 235);
+  background: rgb(236, 243, 255);
 }
 
 .search_button{
@@ -155,7 +155,7 @@ body{
   border:none;
   outline: none;
   background:#ffffff;
-  color:rgb(5, 11, 124);
+  color: var(--main_text_blue);
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 5px;
@@ -223,7 +223,7 @@ body{
   font-size: 12px;
   flex: 1;
   min-height: 100px;
-  color:rgb(0, 75, 250) ;
+  color: var(--main_text_blue)
 }
 
 .result-dash-senti{
@@ -292,6 +292,7 @@ body{
 .pie-chart h3{
   text-align: center;
   font-weight: 500;
+   color: var(--main_green)
 }
 
 .trends_stat{
@@ -304,7 +305,7 @@ body{
 .trends_stat span{
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  color: rgb(28, 75, 244);
+  color: var(--main_text_blue);
   padding: 10px;
 }
 

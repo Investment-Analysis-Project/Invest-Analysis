@@ -73,12 +73,15 @@ const Result = () => {
       {
         ticks: 
         {
-          color: 'white',
+          color: 'yellow',
           font: 
           {
             family:'Poppins',
             size:8
           }
+        },
+        grid: {
+          color: 'yellow'
         }
       },
       y: 
@@ -93,6 +96,9 @@ const Result = () => {
             family:'Poppins',
             size:10
           }
+        },
+        grid: {
+          color: '#07CE43'
         }
       }
     },
@@ -272,10 +278,8 @@ const Result = () => {
                   <div className='trends_stat'> 
                     <span>
                       There are 9 articles from 2024-04-02T14:02:53Z to 2024-04-02T14:02:53Z.
-                      Out of 9 the 4 articles showed postive and 3 neutral . The company sounds Good from the recent news
                     </span>
-                    <span>
-                      There are 9 articles from 2024-04-02T14:02:53Z to 2024-04-02T14:02:53Z.
+                    <span>                    
                       Out of 9 the 4 articles showed postive and 3 neutral . The company sounds Good from the recent news
                     </span>
                     <span>
