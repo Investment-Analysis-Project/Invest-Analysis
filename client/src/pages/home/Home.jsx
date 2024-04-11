@@ -11,7 +11,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className='universal'>
       <Navbar home={true}/>
       <div className='homecontainer'>
           <div className='homeintro'>

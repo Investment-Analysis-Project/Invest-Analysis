@@ -153,9 +153,12 @@ body{
 
 .main-title select {
   border:none;
-  background:#042548;
-  color:white;
-  border-radius: 5px;
+  outline: none;
+  background:#ffffff;
+  color:rgb(5, 11, 124);
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 5px;
 }
 
 .font-weight-bold{

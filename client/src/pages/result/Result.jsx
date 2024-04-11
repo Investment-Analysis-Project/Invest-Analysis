@@ -19,8 +19,8 @@ const Result = () => {
   const [searched,setSearched]=useState(false);
   const [company,setCompany]=useState();
   const [time,setTime]=useState('day');
-  const [value,setValue]=useState([]);
   const [shouldFetch, setShouldFetch] = useState(false);
+  const [value,setValue]=useState([]);
 
   const labels=[];
   const senti_data=[];
@@ -111,7 +111,7 @@ const Result = () => {
     {
       searchForCompany();
     }
-  },[time,shouldFetch]);
+  },[time,shouldFetch,]);
 
   const handleSearchButtonClick = (e) => 
   {
@@ -173,7 +173,13 @@ const Result = () => {
           <header className="header">
             <div className="header-left">
               <input type="text" id="company" name="name" placeholder="Search For a Company" value={company} onChange={e=>setCompany(e.target.value)}/>
-              <button className='search_button' onClick={handleSearchButtonClick}><FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#ffffff",}}/></button>
+              
+              {(!loaded && searched) ? 
+                (<button className='search_button'><FontAwesomeIcon icon={faMagnifyingGlass} beat style={{color: "#ffffff",}} /></button>):
+                <button className='search_button' onClick={handleSearchButtonClick}><FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#ffffff",}}/></button>
+              }
+              
+              
             </div>
           </header>
 

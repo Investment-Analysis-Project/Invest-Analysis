@@ -149,7 +149,7 @@ const Login = () => {
 
                         <span>{new_message}</span>
 
-                        <button className='logbut' onClick={createSubmit}>Create</button>
+                        <button className='logbut' onClick={createSubmit}>Sign up</button>
                     </div></>)}
                 </div>
                 </div> 

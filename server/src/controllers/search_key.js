@@ -121,6 +121,7 @@ const recent_news = async(req,res,next)=>{
 
         // if(x.length)
         //     res.json(x);
+        
         res.json(resultArray);
     }catch(err){
         console.log(err);

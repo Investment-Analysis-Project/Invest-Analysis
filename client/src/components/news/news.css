@@ -6,9 +6,11 @@
     max-width: 1094px; 
     margin: 0 auto;
     padding: 0 8px;
+    background: var(--main_back_blue);
 }
 
 .newscontainer{
+    
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     margin-top: 20px;
@@ -30,7 +32,7 @@
     font-size: 17px;
     color: mintcream;
     padding: 10px;
-    background: orangered;
+    background: var(--main_green);
     overflow:hidden;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;

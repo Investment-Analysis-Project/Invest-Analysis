@@ -72,7 +72,7 @@
     width: 30%;
     border:0px;
     border-radius: 5px;
-    background-color: orangered;
+    background-color: var(--main_green);
     color: white;
     cursor: pointer;
 }
@@ -118,7 +118,7 @@
     border: none;
     outline: none;
     cursor: pointer;
-    background-color: orangered;
+    background-color: var(--main_blue);
 }
 
 button:focus{
