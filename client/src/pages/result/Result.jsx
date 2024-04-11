@@ -24,7 +24,8 @@ const Result = () => {
 
   const labels=[];
   const senti_data=[];
-
+  let color;
+ 
   let sentimentCount = {
     positive: 0,
     negative: 0,
@@ -191,22 +192,29 @@ const Result = () => {
               </div>
 
               <div className="result-dash">
+                
+                <TrendGraph company={company}/>
+
                 <div className="result-dash-news">
                   {value.map((res,i)=>{ 
 
                     labels.push(res.news_time);
+                    labels.sort();
                     senti_data.push(res.news_sentiment.sentiment);
 
                     switch (res.news_sentiment.sentiment) 
                     {
                       case "Positive":
                         sentimentCount.positive++;
+                        color="#C70039";
                         break;
                       case "Negative":
                         sentimentCount.negative++;
+                        color="#28B463";
                         break;
                       default:
                         sentimentCount.neutral++;
+                        color="#F7582B";
                         break;
                     }  
 
@@ -230,7 +238,6 @@ const Result = () => {
                       labels: labels,
                       datasets: [
                       {
-                        label:'Plot',
                         data: senti_data,
                         borderColor: 'white',
                         tension: 0.1
@@ -245,24 +252,37 @@ const Result = () => {
                           <span>{res.news_title}</span>
                         </div>
                         <button>{res.news_time}</button>
-                        <button>{res.news_sentiment.sentiment.toUpperCase()}</button>
+                        <button style={{color:color}}>{res.news_sentiment.sentiment.toUpperCase()}</button>
                       </div>
                     )
                   })}
+                </div>
+        
+                <div className="result-dash-senti">
+                  <div className='pie-chart'>
+                    <h3>Article Sentiment Result</h3>
+                    <Doughnut data={data} options={options} plugins={[ChartDataLabels]} height={30}/>
+                  </div> 
+                  <div className='trends_stat'> 
+                    <span>
+                      There are 9 articles from 2024-04-02T14:02:53Z to 2024-04-02T14:02:53Z.
+                      Out of 9 the 4 articles showed postive and 3 neutral . The company sounds Good from the recent news
+                    </span>
+                    <span>
+                      There are 9 articles from 2024-04-02T14:02:53Z to 2024-04-02T14:02:53Z.
+                      Out of 9 the 4 articles showed postive and 3 neutral . The company sounds Good from the recent news
+                    </span>
+                    <span>
+                      There are 9 articles from 2024-04-02T14:02:53Z to 2024-04-02T14:02:53Z.
+                      Out of 9 the 4 articles showed postive and 3 neutral . The company sounds Good from the recent news
+                    </span>
+                  </div> 
                 </div>
 
                 <div className="graph-chart" >
                     <h4>Sentiment Time Series</h4>
                     <Line data={line_data} options={line_options} height={50}/>
                 </div> 
-        
-                <div className="result-dash-senti">
-                  <div className='pie-chart'>
-                    <h3>Article Sentiment</h3>
-                    <Doughnut data={data} options={options} plugins={[ChartDataLabels]} />
-                  </div>  
-                  <TrendGraph company={company}/>
-                </div>
               </div>
             </div>
           </main></>}

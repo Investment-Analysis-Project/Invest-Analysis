@@ -90,7 +90,18 @@ let resultArray = [{
             "score": 0.8970250487327576
         },
     "news_time":"2024-04-02T14:02:53Z"
-}];
+},
+{
+    "news_title": "With Vids, Google thinks it has the next big productivity tool for work.",
+    "news_url": "https://www.theverge.com/2024/3/27/24113485/google-shopping-generative-ai-image-generation-rating-style",
+    "news_sentiment": 
+        {
+            "sentiment": "Neutral",
+            "score": 0.8970250487327576
+        },
+    "news_time":"2024-04-10T14:02:53Z"
+}
+];
 
 const recent_news = async(req,res,next)=>{
     try{

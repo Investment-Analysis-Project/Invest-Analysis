@@ -11,7 +11,7 @@ const TrendGraph = (props) => {
       title="Google Trends Widget"
       src={url}
       width="100%"
-      height="350"
+      height="420"
     ></iframe>
   );
 };
