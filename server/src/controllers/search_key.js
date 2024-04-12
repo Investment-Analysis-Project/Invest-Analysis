@@ -100,8 +100,7 @@ let resultArray = [{
             "score": 0.8970250487327576
         },
     "news_time":"2024-04-10T14:02:53Z"
-}
-];
+}];
 
 const recent_news = async(req,res,next)=>{
     try{
@@ -109,7 +108,7 @@ const recent_news = async(req,res,next)=>{
         const {keyword}=req.params;
 
         // const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&domains=cnbc.com&searchIn=title&sortBy=relevancy&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
-        // const five_news = response.data.articles.slice(0,9);
+        // const five_news = response.data.articles.slice(0,10);
         
         // const newsArray = [];
         // five_news.forEach(news => {
@@ -117,10 +116,13 @@ const recent_news = async(req,res,next)=>{
         //     newsArray.push({url,title,publishedAt,urlToImage});
         // });
             
-        //const x = await processNewsArray(newsArray);
+        // const x = await processNewsArray(newsArray);
 
         // if(x.length)
+        // {
+        //     x.sort((a,b)=>a.news_time.localeCompare(b.news_time))
         //     res.json(x);
+        // }
         resultArray.sort((a,b)=>a.news_time.localeCompare(b.news_time))
         res.json(resultArray);
     }catch(err){

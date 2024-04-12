@@ -18,16 +18,23 @@ const Result = () => {
   const [loaded,setLoaded]=useState(false);
   const [searched,setSearched]=useState(false);
   const [company,setCompany]=useState();
-  const [time,setTime]=useState('day');
+  const [time,setTime]=useState('month');
   const [shouldFetch, setShouldFetch] = useState(false);
   const [value,setValue]=useState([]);
 
   const labels=[];
   const senti_data=[];
+  let current_day = new Date();
+  
   let color;
-  let score=0;
   let score_array=[];
- 
+  let count=0;
+  let last_phase= []
+  let mid_phase= [];
+  let first_phase= [];
+  let sum1=0,sum2=0,sum3=0;
+  let score=0;
+  
   let sentimentCount = {
     positive: 0,
     negative: 0,
@@ -117,8 +124,9 @@ const Result = () => {
     if(shouldFetch) 
     {
       searchForCompany();
+      setShouldFetch(false);
     }
-  },[time,shouldFetch,]);
+  },[time,shouldFetch]);
 
   const handleSearchButtonClick = (e) => 
   {
@@ -197,9 +205,10 @@ const Result = () => {
 
               <div className="main-title">
                 <h3 className="font-weight-bold">Top Results</h3>
-                <select value={time} onChange={e=>setTime(e.target.value)}>
-                  <option value="day">For Last Day</option>
+                <select value={time} onChange={e=>{setTime(e.target.value);setShouldFetch(true);}}>
+                  <option value="day">For Last Days</option>
                   <option value="week">For Last Week</option>
+                  <option value="month">For Last Month</option>
                 </select>
               </div>
 
@@ -210,6 +219,12 @@ const Result = () => {
                 <div className="result-dash-news">
                   {value.map((res,i)=>{ 
 
+                    ++count;
+
+                    const dateObject = new Date(res.news_time);
+
+                    const x = parseInt((current_day-dateObject) / (1000 * 60 * 60 * 24))
+
                     labels.push(res.news_time);
                     senti_data.push(res.news_sentiment.sentiment);
 
@@ -219,13 +234,11 @@ const Result = () => {
                         sentimentCount.positive++;
                         color="#28B463";
                         score_array.push(1);
-                        ++score;
                         break;
                       case "Negative":
                         sentimentCount.negative++;
                         color="#C70039";
                         score_array.push(-1);
-                        --score;
                         break;
                       default:
                         sentimentCount.neutral++;
@@ -233,6 +246,13 @@ const Result = () => {
                         score_array.push(0);
                         break;
                     }  
+
+                    if(x<=7)
+                      first_phase.push(i)
+                    else if(x<=14)
+                      mid_phase.push(i);
+                    else
+                      last_phase.push(i)
 
                     data=
                     {
@@ -279,32 +299,50 @@ const Result = () => {
                   </div> 
                   <div className='trends_stat'> 
                     <span>
-                      <text style={{ fontWeight:'600'}}>10</text> recent articles have been analyzed from time series <text style={{ fontWeight:'600'}}>{labels[0]}</text> <br></br> to <text style={{ fontWeight:'600'}}>{labels[9]}</text>
+                      <text style={{ fontWeight:'600'}}>{count}</text> recent articles have been analyzed from time series <text style={{ fontWeight:'600'}}>{labels[0]}</text> <br></br> to <text style={{ fontWeight:'600'}}>{labels[9]}</text>
                     </span>
                     <span>                    
-                      <button style={{ backgroundColor: '#28B463' , color:'white',  border:'none' }}>{sentimentCount.positive} articles sounded Postive</button>--<button style={{ backgroundColor: '#C70039' , color:'white', border:'none'}}>{sentimentCount.negative} sounded Negative</button>--<button style={{ backgroundColor: '#F7582B' , color:'white' , border:'none'}}>{sentimentCount.neutral} sounded Neutral</button>
+                      <button style={{ backgroundColor: '#28B463' , color:'white',  border:'none' }}>{sentimentCount.positive} sounded Postive</button>--<button style={{ backgroundColor: '#C70039' , color:'white', border:'none'}}>{sentimentCount.negative} sounded Negative</button>--<button style={{ backgroundColor: '#F7582B' , color:'white' , border:'none'}}>{sentimentCount.neutral} sounded Neutral</button>
                     </span>
 
                     <table>
+
                       <tr>
                         <th>Time Frame</th>
                         <th>Score</th>
                       </tr>
+
                       <tr>
-                        <th>{labels[0]} - {labels[3]}</th>
-                        <th>{((score_array[0]+score_array[1]+score_array[2]+score_array[3])/4).toFixed(2)}</th>
+                        <th>{labels[last_phase[0]]} - {labels[last_phase[last_phase.length-1]]} (Past 4 weeks)</th>
+                        {last_phase.forEach(element => {
+                          sum1 = sum1 + score_array[element];
+                        })}
+                        <th>{(sum1/last_phase.length).toFixed(2)}</th>
                       </tr>
+
                       <tr>
-                        <th>{labels[4]} - {labels[6]}</th>
-                        <th>{((score_array[4]+score_array[5]+score_array[6])/3).toFixed(2)}</th>
+                        <th>{labels[mid_phase[0]]} - {labels[mid_phase[mid_phase.length-1]]} (Past 2 weeks)</th>
+                        {mid_phase.forEach(element => {
+                          sum2 = sum2 + score_array[element];
+                        })}
+                        <th>{(sum2/mid_phase.length).toFixed(2)}</th>
                       </tr>
+
                       <tr>
-                        <th>{labels[7]} - {labels[9]}</th>
-                        <th>{((score_array[7]+score_array[8]+score_array[9])/3).toFixed(2)}</th>
+                        <th>{labels[first_phase[0]]} - {labels[first_phase[first_phase.length-1]]} (Past 1 week)</th>
+                        {first_phase.forEach(element => {
+                          sum3 = sum3 + score_array[element];
+                        })}
+                        <th>{(sum3/first_phase.length).toFixed(2)}</th>
                       </tr>
+
                     </table>
                     
                     <span>
+                      {(()=>{
+                        score = (sum1/last_phase.length)*1 + (sum2/mid_phase.length)*2 + (sum3/first_phase.length)*3
+                      })()}
+
                       The company sounds overall {score > 2 ? <text style={{ color: '#28B463' ,fontWeight:'600'}}>Very Good</text>  : (score >= 0 ? <text style={{ color: '#F7582B',fontWeight:'600' }}>Good</text> : <text style={{ color: '#C70039',fontWeight:'600' }}>Not Good</text>)} performance for the past {time}
                     </span>
                   </div> 
