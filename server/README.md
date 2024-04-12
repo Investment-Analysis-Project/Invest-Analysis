@@ -93,7 +93,7 @@ This document provides an overview of the endpoints available in the application
 
 ### Previous Search API
 #### Get Previous Searches
-- Endpoint: `/api/previoussearch`
+- Endpoint: `/api/searchhistory`
 - Method: `GET`
 - Description: Get all the previous searches made by the user.
 - Request Headers:
@@ -123,6 +123,34 @@ This document provides an overview of the endpoints available in the application
         }
     }
     ```
+
+- Endpoint: `/api/searchhistory`
+- Method: `POST`
+- Description: Get all the previous searches made by the user.
+- Request Headers:
+    ```json
+    {
+        "Authorization": "Bearer <token>"   
+    }
+    ```
+- Query Parameters:
+    - id = user id of the user
+- Request Body:
+    ```json
+    {
+        "user_id": "Integer",
+        "query" : "String"
+    }
+    ```
+- Response
+    ```json
+    {
+        "success": true,
+        "status": 201,
+        "message": "Search history added successfully",
+    }
+    ```
+
 ### Dashboard API
 #### Get dashboard content
 - Endpoint: `/api/dashboard`
