@@ -20,11 +20,15 @@ const Result = () => {
   const [company,setCompany]=useState();
   const [time,setTime]=useState('month');
   const [value,setValue]=useState([]);
+  const [status,setStatus]=useState(true);
 
   const labels=[];
   const senti_data=[];
+  let f1=0;
+  let f2=0;
+  let f3=0;
+
   let current_day = new Date();
-  
   let color;
   let score_array=[];
   let count=0;
@@ -130,6 +134,15 @@ const Result = () => {
       setLoaded(false);
       const response = await baseurl.get(`/search_key/${company}?time=${time}`);
       setValue(response.data);
+
+      const data = response.data;
+
+      if(data.success===false)
+      {
+        console.log("Error");
+        setStatus(false);
+      }
+      
       setSearched(false);
       setLoaded(true);
     }catch(err){
@@ -186,8 +199,13 @@ const Result = () => {
           </header>
 
           {!loaded && searched && <div class="loader"></div> }
+
+          {!status && loaded && (
+          <span style={{marginTop:'100px',transitionDelay:'2s'}}>Oops....! Failed to Fetch. Try Again</span>
           
-          {loaded && <><main className="main-container">
+          )}
+          
+          {loaded && status && <><main className="main-container">
 
             <div className="main-container-news">
 
@@ -203,16 +221,18 @@ const Result = () => {
               <div className="result-dash">
                 
                 <TrendGraph company={company}/>
-
+  
                 <div className="result-dash-news">
                   {value.map((res,i)=>{ 
-
-                    ++count;
-
                     const dateObject = new Date(res.news_time);
 
                     const x = parseInt((current_day-dateObject) / (1000 * 60 * 60 * 24))
 
+                    if(time==='day' && x>3)
+                      return 0;
+                    else if(time==='week' && x>7)
+                      return 0;
+                      
                     labels.push(res.news_time);
                     senti_data.push(res.news_sentiment.sentiment);
 
@@ -231,16 +251,16 @@ const Result = () => {
                       default:
                         sentimentCount.neutral++;
                         color="#F7582B";
-                        score_array.push(0);
+                        score_array.push(.1);
                         break;
                     }  
 
                     if(x<=7)
-                      first_phase.push(i)
+                      first_phase.push(count++)
                     else if(x<=14)
-                      mid_phase.push(i);
+                      mid_phase.push(count++);
                     else
-                      last_phase.push(i)
+                      last_phase.push(count++)
 
                     data=
                     {
@@ -300,7 +320,7 @@ const Result = () => {
                         <th>Score</th>
                       </tr>
 
-                      <tr>
+                    { last_phase.length>0 && (<tr>
                         <th>{labels[last_phase[0]]} - {labels[last_phase[last_phase.length-1]]}</th>
                         {last_phase.forEach(element => {
                           sum1 = sum1 + score_array[element]*weight;
@@ -309,24 +329,26 @@ const Result = () => {
                         {(()=>{
                           weight=1;
                           result=(sum1/last_phase.length).toFixed(2);
+                          f1=result;
                         })()}
-                        <th>{result} {result > 0 ? <text style={{ color: '#28B463' }}>VG</text>  : (result == 0 ? <text style={{ color: '#F7582B' }}>G</text> : <text style={{ color: '#C70039' }}>NG</text>)}</th>
-                      </tr>
+                        <th>{result} {result >= 1 ? <text style={{ color: '#28B463' }}>VG</text>  : (result < 0 ?  <text style={{ color: '#C70039' }}>NG</text> : <text style={{ color: '#F7582B' }}>G</text>) }</th>
+                      </tr>)}
 
-                      <tr>
+                      {mid_phase.length>0 && (<tr>
                         <th>{labels[mid_phase[0]]} - {labels[mid_phase[mid_phase.length-1]]}</th>
                         {mid_phase.forEach(element => {
                           sum2 = sum2 + score_array[element]*weight;
                           weight=weight+.1;
+                          f2=result;
                         })}
                         {(()=>{
                           weight=1;
                           result=(sum2/mid_phase.length).toFixed(2);
                         })()}
-                        <th>{result} {result > 0 ? <text style={{ color: '#28B463' }}>VG</text>  : (result == 0 ? <text style={{ color: '#F7582B' }}>G</text> : <text style={{ color: '#C70039' }}>NG</text>)}</th>
-                      </tr>
+                        <th>{result} {result >= 1 ? <text style={{ color: '#28B463' }}>VG</text>  : (result < 0 ?  <text style={{ color: '#C70039' }}>NG</text> : <text style={{ color: '#F7582B' }}>G</text>) }</th>
+                      </tr>)}
 
-                      <tr>
+                      {first_phase.length>0 && (<tr>
                         <th>{labels[first_phase[0]]} - {labels[first_phase[first_phase.length-1]]}</th>
                         {first_phase.forEach(element => {
                           sum3 = sum3 + score_array[element]*weight;
@@ -335,18 +357,19 @@ const Result = () => {
                         {(()=>{
                           weight=1;
                           result=(sum3/first_phase.length).toFixed(2);
+                          f3=result;
                         })()}
-                        <th>{result} {result > 0 ? <text style={{ color: '#28B463' }}>VG</text>  : (result == 0 ? <text style={{ color: '#F7582B' }}>G</text> : <text style={{ color: '#C70039' }}>NG</text>)}</th>
-                      </tr>
+                        <th>{result} {result >= 1 ? <text style={{ color: '#28B463' }}>VG</text>  : (result < 0 ?  <text style={{ color: '#C70039' }}>NG</text> : <text style={{ color: '#F7582B' }}>G</text>) }</th>
+                      </tr>)}
 
                     </table>
     
                     <span>
                       {(()=>{
-                        score = (sum1/last_phase.length)*1 + (sum2/mid_phase.length)*1.5 + (sum3/first_phase.length)*2
+                        score = f1*1 + f2*1.2 + f3*1.5
                       })()}
 
-                      The company sounds overall {score > 2 ? <text style={{ color: '#28B463' ,fontWeight:'600'}}>Very Good</text>  : (score >= 0 ? <text style={{ color: '#F7582B',fontWeight:'600' }}>Good</text> : <text style={{ color: '#C70039',fontWeight:'600' }}>Not Good</text>)} performance for the past {time}
+                      The company sounds overall {score > 1.8 ? <text style={{ color: '#28B463' ,fontWeight:'600'}}>Very Good</text>  : (score >= 0 ? <text style={{ color: '#F7582B',fontWeight:'600' }}>Good</text> : <text style={{ color: '#C70039',fontWeight:'600' }}>Not Good</text>)} performance for the past {time}
                     </span>
                   </div> 
                 </div>

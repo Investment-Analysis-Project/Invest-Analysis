@@ -128,6 +128,7 @@ const recent_news = async(req,res,next)=>{
         res.json(resultArray);
     }catch(err){
         console.log(err);
+        next(createError(500,"Server Error"));
     }
 };
 
@@ -189,7 +190,8 @@ const query = async(news_scraped,news)=>
         const news_img=news.news_img_url
         resultArray.push({news_title,news_url,news_sentiment,news_entities,news_time,news_img});
     }catch(err){
-        console.log(err)
+        console.log(err);
+        next(createError(500,"Server Error"));
     }
 }
           
