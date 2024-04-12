@@ -22,7 +22,7 @@ const login = async(req,res,next)=>{
             auth:true
         }
 
-        const token=jwt.sign(user_log,process.env.JWT,{expiresIn:"24h"});
+        const token=jwt.sign(user_log,process.env.JWT_SECRET,{expiresIn:"24h"});
         
         res.json({auth:true,token:token});
     }catch(err){
