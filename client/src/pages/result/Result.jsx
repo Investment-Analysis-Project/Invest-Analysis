@@ -15,11 +15,10 @@ const Result = () => {
   const navigate = useNavigate();
 
   const {setAuth}=useContext(ProjectsContext);
-  const [loaded,setLoaded]=useState(false);
   const [searched,setSearched]=useState(false);
+  const [loaded,setLoaded]=useState(false);
   const [company,setCompany]=useState();
   const [time,setTime]=useState('month');
-  const [shouldFetch, setShouldFetch] = useState(false);
   const [value,setValue]=useState([]);
 
   const labels=[];
@@ -34,6 +33,8 @@ const Result = () => {
   let first_phase= [];
   let sum1=0,sum2=0,sum3=0;
   let score=0;
+  let weight=1;
+  let result=0;
   
   let sentimentCount = {
     positive: 0,
@@ -119,23 +120,10 @@ const Result = () => {
     }
   }
 
-  useEffect(()=>
-  {
-    if(shouldFetch) 
-    {
-      searchForCompany();
-      setShouldFetch(false);
-    }
-  },[time,shouldFetch]);
-
-  const handleSearchButtonClick = (e) => 
+  const searchForCompany = async(e)=>
   {
     e.preventDefault();
-    setShouldFetch(true);
-  };
-  
-  const searchForCompany = async()=>
-  {
+
     try
     {
       setSearched(true);
@@ -191,13 +179,13 @@ const Result = () => {
               
               {(!loaded && searched) ? 
                 (<button className='search_button'><FontAwesomeIcon icon={faMagnifyingGlass} beat style={{color: "#ffffff",}} /></button>):
-                <button className='search_button' onClick={handleSearchButtonClick}><FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#ffffff",}}/></button>
+                <button className='search_button' onClick={searchForCompany}><FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#ffffff",}}/></button>
               }
               
             </div>
           </header>
 
-          {!loaded && searched && <Loading/>}
+          {!loaded && searched && <div class="loader"></div> }
           
           {loaded && <><main className="main-container">
 
@@ -205,7 +193,7 @@ const Result = () => {
 
               <div className="main-title">
                 <h3 className="font-weight-bold">Top Results</h3>
-                <select value={time} onChange={e=>{setTime(e.target.value);setShouldFetch(true);}}>
+                <select value={time} onChange={e=>setTime(e.target.value)}>
                   <option value="day">For Last Days</option>
                   <option value="week">For Last Week</option>
                   <option value="month">For Last Month</option>
@@ -313,34 +301,49 @@ const Result = () => {
                       </tr>
 
                       <tr>
-                        <th>{labels[last_phase[0]]} - {labels[last_phase[last_phase.length-1]]} (Past 4 weeks)</th>
+                        <th>{labels[last_phase[0]]} - {labels[last_phase[last_phase.length-1]]}</th>
                         {last_phase.forEach(element => {
-                          sum1 = sum1 + score_array[element];
+                          sum1 = sum1 + score_array[element]*weight;
+                          weight=weight+.1;
                         })}
-                        <th>{(sum1/last_phase.length).toFixed(2)}</th>
+                        {(()=>{
+                          weight=1;
+                          result=(sum1/last_phase.length).toFixed(2);
+                        })()}
+                        <th>{result} {result > 0 ? <text style={{ color: '#28B463' }}>VG</text>  : (result == 0 ? <text style={{ color: '#F7582B' }}>G</text> : <text style={{ color: '#C70039' }}>NG</text>)}</th>
                       </tr>
 
                       <tr>
-                        <th>{labels[mid_phase[0]]} - {labels[mid_phase[mid_phase.length-1]]} (Past 2 weeks)</th>
+                        <th>{labels[mid_phase[0]]} - {labels[mid_phase[mid_phase.length-1]]}</th>
                         {mid_phase.forEach(element => {
-                          sum2 = sum2 + score_array[element];
+                          sum2 = sum2 + score_array[element]*weight;
+                          weight=weight+.1;
                         })}
-                        <th>{(sum2/mid_phase.length).toFixed(2)}</th>
+                        {(()=>{
+                          weight=1;
+                          result=(sum2/mid_phase.length).toFixed(2);
+                        })()}
+                        <th>{result} {result > 0 ? <text style={{ color: '#28B463' }}>VG</text>  : (result == 0 ? <text style={{ color: '#F7582B' }}>G</text> : <text style={{ color: '#C70039' }}>NG</text>)}</th>
                       </tr>
 
                       <tr>
-                        <th>{labels[first_phase[0]]} - {labels[first_phase[first_phase.length-1]]} (Past 1 week)</th>
+                        <th>{labels[first_phase[0]]} - {labels[first_phase[first_phase.length-1]]}</th>
                         {first_phase.forEach(element => {
-                          sum3 = sum3 + score_array[element];
+                          sum3 = sum3 + score_array[element]*weight;
+                          weight=weight+.1;
                         })}
-                        <th>{(sum3/first_phase.length).toFixed(2)}</th>
+                        {(()=>{
+                          weight=1;
+                          result=(sum3/first_phase.length).toFixed(2);
+                        })()}
+                        <th>{result} {result > 0 ? <text style={{ color: '#28B463' }}>VG</text>  : (result == 0 ? <text style={{ color: '#F7582B' }}>G</text> : <text style={{ color: '#C70039' }}>NG</text>)}</th>
                       </tr>
 
                     </table>
-                    
+    
                     <span>
                       {(()=>{
-                        score = (sum1/last_phase.length)*1 + (sum2/mid_phase.length)*2 + (sum3/first_phase.length)*3
+                        score = (sum1/last_phase.length)*1 + (sum2/mid_phase.length)*1.5 + (sum3/first_phase.length)*2
                       })()}
 
                       The company sounds overall {score > 2 ? <text style={{ color: '#28B463' ,fontWeight:'600'}}>Very Good</text>  : (score >= 0 ? <text style={{ color: '#F7582B',fontWeight:'600' }}>Good</text> : <text style={{ color: '#C70039',fontWeight:'600' }}>Not Good</text>)} performance for the past {time}

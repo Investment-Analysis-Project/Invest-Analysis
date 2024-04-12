@@ -6,9 +6,8 @@ const Loading = () => {
         <iframe 
             id="loading"
             title="Loading Frame"
-            src="https://lottie.host/embed/02c107d0-a895-4fbe-88e7-b78042ea8e2d/AIfCDhb4dd.json"
+            src="https://lottie.host/embed/1bf3807c-c586-44c6-bb97-8765bf799f81/5YsBZRxvT3.json"
         >
-            
         </iframe>
     )
 }
