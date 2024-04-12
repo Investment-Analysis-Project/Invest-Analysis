@@ -139,7 +139,6 @@ const Result = () => {
 
       if(data.success===false)
       {
-        console.log("Error");
         setStatus(false);
       }
       

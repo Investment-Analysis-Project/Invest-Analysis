@@ -7,7 +7,7 @@ import { ProjectsContext } from '../../contextapi.js/projectscontext';
 const News = () => {
     const [news,setNews]=useState([]);
 
-    const {news_title,setNewtitle,news_desc,setNewsdesc,news_url,setNewsurl}=useContext(ProjectsContext);
+    const {setNewtitle,setNewsdesc,setNewsurl}=useContext(ProjectsContext);
 
     useEffect(()=>
     {
@@ -17,10 +17,10 @@ const News = () => {
             {
                 // dd4dcc554dd94d61820961820e342242
                 // afcd39b2d9c546cc9293d168cee038e7
-                // const response = await fetch(`https://newsapi.org/v2/everything?q=apple&excludeDomains=engadget.com&language=en&sortBy=popularit&from=2024-04-01&to=2024-04-10&apiKey=afcd39b2d9c546cc9293d168cee038e7`)
-                // const data = await response.json();
-                // const articles = data.articles;
-                // setNews(articles);
+                const response = await fetch(`https://newsapi.org/v2/everything?q=apple&excludeDomains=engadget.com&language=en&sortBy=popularit&from=2024-04-01&to=2024-04-10&apiKey=afcd39b2d9c546cc9293d168cee038e7`)
+                const data = await response.json();
+                const articles = data.articles;
+                setNews(articles);
             }
             catch(err)
             {

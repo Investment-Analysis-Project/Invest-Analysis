@@ -1,4 +1,4 @@
-import { useEffect,useState } from 'react';
+import { useState } from 'react';
 import baseurl from '../../baseurl/baseurl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -35,14 +35,13 @@ const Search=()=>{
                             </tr>
                         </thead>
                         <tbody>
-                            {news.map((res,i)=>{
-                                return(
-                                    <tr>
-                                        <td>{res.news_title}</td>
-                                        <td>{res.news_sentiment.score}</td>
-                                    </tr>
-                            )
-                            })}
+                        {news.map((res,i)=>{
+                            return(
+                                <tr>
+                                    <td>{res.news_title}</td>
+                                    <td>{res.news_sentiment.score}</td>
+                                </tr>
+                        )})}
                         </tbody>
                     </table>
                 </div>
