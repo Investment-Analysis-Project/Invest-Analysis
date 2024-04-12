@@ -18,3 +18,10 @@ CREATE TABLE newstable(
   publishedAt TEXT,
   content TEXT
 );
+
+CREATE TABLE searchhistory (
+  search_id SERIAL PRIMARY KEY,
+  user_id INT REFERENCES usertable(user_id),
+  search_query VARCHAR(255) NOT NULL,
+  search_timestamp TIMESTAMP DEFAULT NOW()
+);
