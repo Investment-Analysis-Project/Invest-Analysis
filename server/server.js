@@ -6,6 +6,7 @@ const auth_routes = require('./src/routes/auth');
 const search_key = require('./src/routes/search_key');
 const search = require('./src/routes/search_history');
 const dashboard = require('./src/routes/dashboard');
+const test = require('./src/routes/test')
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use('/api/auth',auth_routes);
 app.use('/api/search_key',search_key);
 app.use('/api/searchhistory',search);
 app.use('/api/dashboard',dashboard);
+app.use('/api/test',test);
 
 app.use((err,req,res,next)=>{ 
     const errorStatus = err.status|| 500;
