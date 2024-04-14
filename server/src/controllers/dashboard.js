@@ -1,10 +1,12 @@
 const createError = require('../utils/error');
 const createSuccess = require('../utils/success');
+const getTrends = require('../utils/trends');
 
 
 const content = async(req,res,next)=>{
     try{
-
+        result = await getTrends(req.query.q,req.query.tf);
+        console.log(result);
         const contents = 
         {
             company: req.query.q,
@@ -12,7 +14,8 @@ const content = async(req,res,next)=>{
             timeframe: req.query.tf,
             geo: req.query.geo||"World Wide",
             total_searches: 100,
-            peak_search: "01-01-2024",
+            peak_search: result.maxKeys,
+            peak_intrest: result.maxValue,
             recent_news: ["link.com","link.com","link.com"],
             related_companies: ["Pepsi","Adani","Coke"]
         }
