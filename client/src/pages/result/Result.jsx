@@ -20,7 +20,10 @@ const Result = () => {
   const [company,setCompany]=useState();
   const [time,setTime]=useState('1-m');
   const [value,setValue]=useState([]);
+  const [trend,setTrends]=useState();
   const [status,setStatus]=useState(true);
+  const [trendStatus,settrendStatus]=useState(true);
+  const [trendMsg,settrendMsg]=useState("");
 
   const labels=[];
   const senti_data=[];
@@ -149,15 +152,17 @@ const Result = () => {
         }
       });
 
-      setValue(response.data);
-      console.log(result.data.data.contents);
+      if(response.data.success===true)
+        setValue(response.data.data);
 
-      const data = response.data;
+      setStatus(response.data.success);
 
-      if(data.success===false)
-      {
-        setStatus(false);
-      }
+      if(result.data.success===true)
+        setTrends(result.data.data.contents)
+    
+      settrendMsg(result.data.message)
+
+      settrendStatus(result.data.success);
       
       setSearched(false);
       setLoaded(true);
@@ -236,6 +241,10 @@ const Result = () => {
 
               <div className="result-dash">
                 
+                {trendStatus ? (<><span>Peak Search At : {trend.peak_search}</span>
+                <span>Peak Interest : {trend.peak_intrest}</span></>)
+                : (<span>{trendMsg}</span>) }
+
                 <TrendGraph company={company}/>
   
                 <div className="result-dash-news">

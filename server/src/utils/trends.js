@@ -2,6 +2,7 @@ const { ExploreTrendRequest } = require('g-trends')
 const findMax = require( './findMax' )
 
 function csvTimeFrame(timeframeKey, query) {
+    
     const explorer = new ExploreTrendRequest()
 
     switch (timeframeKey) {

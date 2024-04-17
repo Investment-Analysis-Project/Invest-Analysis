@@ -1,4 +1,5 @@
 const createError = require('../utils/error');
+const createSuccess = require('../utils/success');
 const axios = require('axios');
 
 let resultArray = [{
@@ -125,10 +126,10 @@ const recent_news = async(req,res,next)=>{
         // }
 
         resultArray.sort((a,b)=>a.news_time.localeCompare(b.news_time));
-        res.json(resultArray);
+        res.json(createSuccess(200,"Previous Search",resultArray ));
     }catch(err){
         console.log(err);
-        next(createError(500,"Server Error"));
+        next(createError(500,"There was an error while fetching data."));
     }
 };
 

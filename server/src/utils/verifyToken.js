@@ -5,7 +5,7 @@ const verifyToken = (req, res, next) => {
 
     const token = req.headers.authorization ? req.headers.authorization.split(' ')[1] : null;
 
-    if (!token) {
+    if (!token || token=="null") {
         return next(createError(401, 'Access denied. No token provided.'));
     }
 
@@ -22,7 +22,6 @@ const verifyUser = (req,res,next)=>{
     verifyToken(req,res,(error)=>{
         if(error) {
             return next(error); 
-
         }
 
         if(req.user.user_id===parseInt(parseInt(req.query.id))){  
