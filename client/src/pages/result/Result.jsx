@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './result.css';
 import baseurl from '../../baseurl/baseurl';
 import { ProjectsContext } from '../../contextapi.js/projectscontext';
@@ -17,7 +17,7 @@ const Result = () => {
 
   const [searched,setSearched]=useState(false);
   const [loaded,setLoaded]=useState(false);
-  const [company,setCompany]=useState();
+  const [company,setCompany]=useState("");
   const [time,setTime]=useState('1-m');
   const [value,setValue]=useState([]);
   const [trend,setTrends]=useState();
@@ -145,24 +145,10 @@ const Result = () => {
         }
       });
 
-      const result = await baseurl.get(`/dashboard?q=${company}&tf=${time}&id=${user_id}`,
-      {
-        headers:{
-            'authorization' : `Bearer ${token}`
-        }
-      });
-
       if(response.data.success===true)
         setValue(response.data.data);
 
-      setStatus(response.data.success);
-
-      if(result.data.success===true)
-        setTrends(result.data.data.contents)
-    
-      settrendMsg(result.data.message)
-
-      settrendStatus(result.data.success);
+      setStatus(response.data.success);;
       
       setSearched(false);
       setLoaded(true);
@@ -170,6 +156,35 @@ const Result = () => {
       console.log(err);
     }
   }
+  
+  useEffect(()=>{
+
+    try{
+      const showtrendresult = async(e) =>{
+
+        const token = localStorage.getItem('token');
+
+        const result = await baseurl.get(`/dashboard?q=${company}&tf=${time}&id=${user_id}`,
+        {
+          headers:{
+              'authorization' : `Bearer ${token}`
+          }
+        });
+  
+        if(result.data.success===true)
+          setTrends(result.data.data.contents)
+
+        settrendMsg(result.data.message)
+  
+        settrendStatus(result.data.success)
+      }
+    
+      if(company!=="" || searched===true)
+        showtrendresult();
+    }catch(err){
+      settrendMsg("Ooops...! There was an error while fetching Google Trends Data")
+    }
+  },[time,searched]);
 
   return (
     <div>
@@ -241,11 +256,13 @@ const Result = () => {
 
               <div className="result-dash">
                 
-                {trendStatus ? (<><span>Peak Search At : {trend.peak_search}</span>
-                <span>Peak Interest : {trend.peak_intrest}</span></>)
+                {trendStatus ? (trend!=null && <>
+                
+                  <span>Peak Search At : {trend.peak_search}</span>
+                  <span>Peak Interest : {trend.peak_intrest}</span></>)
                 : (<span>{trendMsg}</span>) }
 
-                <TrendGraph company={company}/>
+                <TrendGraph company={company} time={time}/>
   
                 <div className="result-dash-news">
                   {value.map((res,i)=>{ 

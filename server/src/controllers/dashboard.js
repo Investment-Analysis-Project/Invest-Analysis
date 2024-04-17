@@ -15,16 +15,13 @@ const content = async(req,res,next)=>{
             peak_intrest: result.maxValue,
         }
 
-        console.log(contents);
-
         const data = {
             contents: contents
         }
         res.json(createSuccess(200,"Dashboard Data",data ));
     }catch(err){
         console.log(err);
-        return next(createError(500,"There was an error while fetching Google Trends Data"));
-        console.log("Hello");
+        return next(createError(500,"Ooops...! There was an error while fetching Google Trends Data"));
     }
 }
 

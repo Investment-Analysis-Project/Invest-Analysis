@@ -105,10 +105,10 @@ let resultArray = [{
 
 const recent_news = async(req,res,next)=>{
     try{
-        const {time} =req.query;
-        const {keyword}=req.params;
+        // const {time} =req.query;
+        // const {keyword}=req.params;
 
-        // const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&excludeDomains=engadget.com,yahoo.com&searchIn=title&sortBy=relevancy&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
+        // const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&domains=cnbc.com,businessinsider.com&excludeDomains=engadget.com,yahoo.com,bloomberg.com&searchIn=title&sortBy=relevancy&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
         // const five_news = response.data.articles.slice(0,10);
         
         // const newsArray = [];
@@ -122,14 +122,14 @@ const recent_news = async(req,res,next)=>{
         // if(x.length)
         // {
         //     x.sort((a,b)=>a.news_time.localeCompare(b.news_time))
-        //     res.json(x);
+        //     res.json(createSuccess(200,"Previous Search",x));
         // }
 
         resultArray.sort((a,b)=>a.news_time.localeCompare(b.news_time));
         res.json(createSuccess(200,"Previous Search",resultArray ));
     }catch(err){
         console.log(err);
-        next(createError(500,"There was an error while fetching data."));
+        next(createError(500,"Ooops...! There was an error while processing."));
     }
 };
 
@@ -192,7 +192,7 @@ const query = async(news_scraped,news)=>
         resultArray.push({news_title,news_url,news_sentiment,news_entities,news_time,news_img});
     }catch(err){
         console.log(err);
-        next(createError(500,"Server Error"));
+        next(createError(500,"Ooops...! There was an error while processing the data"));
     }
 }
           
