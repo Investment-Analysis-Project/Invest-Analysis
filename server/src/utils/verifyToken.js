@@ -6,14 +6,13 @@ const verifyToken = (req, res, next) => {
     const token = req.headers.authorization ? req.headers.authorization.split(' ')[1] : null;
 
     if (token==="null") {
-        next(createError(401, 'Access denied. No token provided.'));
+        return next(createError(401, 'Access denied. No token provided.'));
     }
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
-            next(createError(401, 'Invalid token.'));
+            return next(createError(401, 'Invalid token.'));
         }
-    
         req.user = decoded;
         next();
     });
