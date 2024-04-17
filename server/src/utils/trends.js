@@ -26,4 +26,4 @@ const getTrends = async(query,timeframeKey) =>{
     return max;
 }
 
-module.exports = {getTrends};
+module.exports = getTrends;

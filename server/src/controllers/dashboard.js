@@ -1,10 +1,10 @@
 const createError = require('../utils/error');
 const createSuccess = require('../utils/success');
-const trends = require('../utils/trends');
+const getTrends = require('../utils/trends');
 
 const content = async(req,res,next)=>{
     try{
-        const result = await trends.getTrends(req.query.q,req.query.tf);
+        const result = await getTrends(req.query.q,req.query.tf);
 
         const contents = 
         {
