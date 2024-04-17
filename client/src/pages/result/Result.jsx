@@ -9,6 +9,7 @@ import { faMagnifyingGlass,faUser,faClockRotateLeft,faGear,faRightFromBracket } 
 import {Chart as ChartJS} from 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {Line,Doughnut} from "react-chartjs-2";
+import History from '../../components/history/History';
 
 const Result = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const Result = () => {
   const [status,setStatus]=useState(true);
   const [trendStatus,settrendStatus]=useState(true);
   const [trendMsg,settrendMsg]=useState("");
+  const [history,setHistory]=useState(false);
 
   const labels=[];
   const senti_data=[];
@@ -138,6 +140,8 @@ const Result = () => {
 
       const token = localStorage.getItem('token');
 
+      const insert = await baseurl.post('/searchhistory/add',{user_id,query:company})
+
       const response = await baseurl.get(`/search_key/${company}?time=${time}&id=${user_id}`,
       {
         headers:{
@@ -205,7 +209,7 @@ const Result = () => {
 
             <li className="sidebar-list-item">
                 <FontAwesomeIcon icon={faClockRotateLeft} style={{color: "#ffffff",}}/>
-                <span >History</span>
+                <span onClick={()=>setHistory(!history)}>History</span>
             </li>
             
             <li className="sidebar-list-item">
@@ -219,6 +223,8 @@ const Result = () => {
             </li>
           </ul>
         </aside>
+
+        {history && <History />}
 
         <div className="grid-container">
 
@@ -272,7 +278,7 @@ const Result = () => {
 
                     if(time==='1-d' && x>3)
                       return null;
-                    else if(time==='week' && x>7)
+                    else if(time==='7-d' && x>7)
                       return null;
                       
                     labels.push(res.news_time);
