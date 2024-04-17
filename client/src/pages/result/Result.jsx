@@ -228,9 +228,9 @@ const Result = () => {
                     const x = parseInt((current_day-dateObject) / (1000 * 60 * 60 * 24))
 
                     if(time==='day' && x>3)
-                      return 0;
+                      return null;
                     else if(time==='week' && x>7)
-                      return 0;
+                      return null;
                       
                     labels.push(res.news_time);
                     senti_data.push(res.news_sentiment.sentiment);
@@ -261,6 +261,7 @@ const Result = () => {
                     else
                       last_phase.push(count++)
 
+    
                     data=
                     {
                       labels: ['Negtaive', 'Positive', 'Neutral'],
@@ -274,7 +275,7 @@ const Result = () => {
                           borderWidth:0,
                       }]
                     };
-
+                  
                     line_data =
                     {
                       labels: labels,
@@ -299,14 +300,16 @@ const Result = () => {
                   })}
                 </div>
         
-                <div className="result-dash-senti">
+                { (labels.length>0) ? <><div className="result-dash-senti">
                   <div className='pie-chart'>
                     <h3>Article Sentiment Result</h3>
                     <Doughnut data={data} options={options} plugins={[ChartDataLabels]} height={30}/>
                   </div> 
                   <div className='trends_stat'> 
                     <span>
-                      <text style={{ fontWeight:'600'}}>{count}</text> recent articles have been analyzed from time series <text style={{ fontWeight:'600'}}>{labels[0]}</text> <br></br> to <text style={{ fontWeight:'600'}}>{labels[9]}</text>
+                      <text style={{ fontWeight:'600'}}>{count}</text> recent articles have been analyzed from time series <text style={{ fontWeight:'600'}}>{labels[0]}</text>          
+                      <br></br>to 
+                      <text style={{ fontWeight:'600'}}>{labels[9]}</text>
                     </span>
                     <span>                    
                       <button style={{ backgroundColor: '#28B463' , color:'white',  border:'none' }}>{sentimentCount.positive} sounded Postive</button>--<button style={{ backgroundColor: '#C70039' , color:'white', border:'none'}}>{sentimentCount.negative} sounded Negative</button>--<button style={{ backgroundColor: '#F7582B' , color:'white' , border:'none'}}>{sentimentCount.neutral} sounded Neutral</button>
@@ -376,7 +379,10 @@ const Result = () => {
                 <div className="graph-chart" >
                     <h4>Sentiment Time Series</h4>
                     <Line data={line_data} options={line_options} height={50}/>
-                </div> 
+                </div></> 
+                
+                : <span>No results to show for the chosen time.</span>}
+
               </div>
             </div>
           </main></>}
