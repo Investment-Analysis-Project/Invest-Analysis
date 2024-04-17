@@ -4,7 +4,6 @@ const findMax = require( './findMax' )
 function csvTimeFrame(timeframeKey, query) {
     const explorer = new ExploreTrendRequest()
 
-    console.log(timeframeKey);
     switch (timeframeKey) {
         case "1-H":
             return explorer.pastHour().addKeyword(query).download();
@@ -22,11 +21,9 @@ function csvTimeFrame(timeframeKey, query) {
 }
 
 const getTrends = async(query,timeframeKey) =>{
-
-
     data = await csvTimeFrame(timeframeKey, query);
     let max = findMax(data);
     return max;
 }
 
-module.exports = getTrends;
+module.exports = {getTrends};

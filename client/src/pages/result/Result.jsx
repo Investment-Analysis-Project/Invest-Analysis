@@ -1,4 +1,4 @@
-import React, {useContext, useState,useEffect} from 'react';
+import React, {useContext, useState} from 'react';
 import './result.css';
 import baseurl from '../../baseurl/baseurl';
 import { ProjectsContext } from '../../contextapi.js/projectscontext';
@@ -9,16 +9,16 @@ import { faMagnifyingGlass,faUser,faClockRotateLeft,faGear,faRightFromBracket } 
 import {Chart as ChartJS} from 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {Line,Doughnut} from "react-chartjs-2";
-import Loading from '../../components/loading/Loading';
 
 const Result = () => {
   const navigate = useNavigate();
 
-  const {setAuth}=useContext(ProjectsContext);
+  const {setAuth,user_id}=useContext(ProjectsContext);
+
   const [searched,setSearched]=useState(false);
   const [loaded,setLoaded]=useState(false);
   const [company,setCompany]=useState();
-  const [time,setTime]=useState('month');
+  const [time,setTime]=useState('1-m');
   const [value,setValue]=useState([]);
   const [status,setStatus]=useState(true);
 
@@ -132,8 +132,25 @@ const Result = () => {
     {
       setSearched(true);
       setLoaded(false);
-      const response = await baseurl.get(`/search_key/${company}?time=${time}`);
+
+      const token = localStorage.getItem('token');
+
+      const response = await baseurl.get(`/search_key/${company}?time=${time}&id=${user_id}`,
+      {
+        headers:{
+            'authorization' : `Bearer ${token}`
+        }
+      });
+
+      const result = await baseurl.get(`/dashboard?q=${company}&tf=${time}&id=${user_id}`,
+      {
+        headers:{
+            'authorization' : `Bearer ${token}`
+        }
+      });
+
       setValue(response.data);
+      console.log(result.data.data.contents);
 
       const data = response.data;
 
@@ -211,9 +228,9 @@ const Result = () => {
               <div className="main-title">
                 <h3 className="font-weight-bold">Top Results</h3>
                 <select value={time} onChange={e=>setTime(e.target.value)}>
-                  <option value="day">For Last Days</option>
-                  <option value="week">For Last Week</option>
-                  <option value="month">For Last Month</option>
+                  <option value="1-d">For Last Days</option>
+                  <option value="7-d">For Last Week</option>
+                  <option value="1-m">For Last Month</option>
                 </select>
               </div>
 
@@ -227,7 +244,7 @@ const Result = () => {
 
                     const x = parseInt((current_day-dateObject) / (1000 * 60 * 60 * 24))
 
-                    if(time==='day' && x>3)
+                    if(time==='1-d' && x>3)
                       return null;
                     else if(time==='week' && x>7)
                       return null;
