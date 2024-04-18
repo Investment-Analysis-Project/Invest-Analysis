@@ -14,7 +14,7 @@ const content = async(req,res,next)=>{
             peak_search: result.maxKeys,
             peak_intrest: result.maxValue,
         }
-
+        
         const data = {
             contents: contents
         }

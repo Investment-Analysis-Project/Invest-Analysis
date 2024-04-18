@@ -176,7 +176,9 @@ const Result = () => {
         });
   
         if(result.data.success===true)
-          setTrends(result.data.data.contents)
+        {
+          setTrends(result.data.data.contents);
+        }
 
         settrendMsg(result.data.message)
   
@@ -207,9 +209,9 @@ const Result = () => {
                 <span>Profile</span>
             </li>
 
-            <li className="sidebar-list-item">
+            <li className="sidebar-list-item" onClick={()=>setHistory(!history)}>
                 <FontAwesomeIcon icon={faClockRotateLeft} style={{color: "#ffffff",}}/>
-                <span onClick={()=>setHistory(!history)}>History</span>
+                <span>History</span>
             </li>
             
             <li className="sidebar-list-item">
@@ -262,14 +264,6 @@ const Result = () => {
 
               <div className="result-dash">
                 
-                {trendStatus ? (trend!=null && <>
-                
-                  <span>Peak Search At : {trend.peak_search}</span>
-                  <span>Peak Interest : {trend.peak_intrest}</span></>)
-                : (<span>{trendMsg}</span>) }
-
-                <TrendGraph company={company} time={time}/>
-  
                 <div className="result-dash-news">
                   {value.map((res,i)=>{ 
                     const dateObject = new Date(res.news_time);
@@ -348,6 +342,15 @@ const Result = () => {
                     )
                   })}
                 </div>
+
+                {trendStatus ? (trend!=null && <>
+                
+                <span>Peak Interest  : {trend.peak_intrest}</span>
+                <span>Peak Search At : {(trend.peak_search.length>0) ? <>{trend.peak_search.map((res,i)=>{return(<>{res} </>)})}</> : <text>No Data</text>}</span> 
+
+                </>) : (<span>{trendMsg}</span>) }
+
+                <TrendGraph company={company} time={time}/>
         
                 { (labels.length>0) ? <><div className="result-dash-senti">
                   <div className='pie-chart'>

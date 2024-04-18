@@ -35,7 +35,7 @@ const History = () => {
             if(user_id)
                 getHistroy();
         }catch(err){
-            sethistMsg("There was an error while fetching the history");
+            sethistMsg("There was an error while fetching the history !");
         }
     },[])
 

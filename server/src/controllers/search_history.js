@@ -22,7 +22,7 @@ const getPeviousSearch = async(req,res,next)=>{
         res.json(createSuccess(200,"Previous Search",data ));
     }catch(err){
         console.log(err);
-        next(createError(500,"There was an error while fetching the history"));
+        next(createError(500,"There was an error while fetching the history !"));
     }
 }
 
