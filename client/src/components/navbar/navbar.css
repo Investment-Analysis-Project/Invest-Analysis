@@ -32,7 +32,7 @@
 }
 
 .logo span:hover{
-    border-bottom: 3px solid var(--main_blue);
+    border-bottom: 3px solid white;
 }
 
 .items{
@@ -65,7 +65,7 @@
 
 .navbut:hover{
     outline: none;
-    border-bottom: 3px solid var(--main_blue);
+    border-bottom: 3px solid white;
     transition: .2s;
 }
 

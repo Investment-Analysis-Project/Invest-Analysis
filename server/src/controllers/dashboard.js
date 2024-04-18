@@ -20,7 +20,7 @@ const content = async(req,res,next)=>{
         }
         res.json(createSuccess(200,"Dashboard Data",data ));
     }catch(err){
-        console.log(err);
+        console.log('\n'+"Google Trends Error"+'\n'+err.where+'\n');
         return next(createError(500,"Ooops...! There was an error while fetching Google Trends Data"));
     }
 }

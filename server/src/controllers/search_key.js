@@ -9,7 +9,10 @@ const recent_news = async(req,res,next)=>{
         const {time} =req.query;
         const {keyword}=req.params;
 
-        const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&domain=cnbc.com&excludeDomains=engadget.com&searchIn=title&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
+        //dd4dcc554dd94d61820961820e342242
+        //afcd39b2d9c546cc9293d168cee038e7
+
+        const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&excludeDomains=engadget.com,yahoo.com&searchIn=title&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
         const five_news = response.data.articles.slice(0,10);
         
         const newsArray = [];
@@ -31,7 +34,7 @@ const recent_news = async(req,res,next)=>{
         // resultArray.sort((a,b)=>a.news_time.localeCompare(b.news_time));
         // res.json(createSuccess(200,"Previous Search",resultArray ));
     }catch(err){
-        console.log(err);
+        console.log('\n'+"Error while fectching news"+'\n'+err.where+'\n');
         next(createError(500,"Ooops...! There was an error while processing."));
     }
 };
@@ -101,7 +104,7 @@ const query = async(news_scraped,news)=>
         const news_img=news.news_img_url
         resultArray.push({news_title,news_url,news_sentiment,news_entities,news_time,news_img});
     }catch(err){
-        console.log(err);
+        console.log('\n'+"Error while excecuting model"+'\n'+err.where+'\n');
         next(createError(500,"Ooops...! There was an error while processing the data"));
     }
 }

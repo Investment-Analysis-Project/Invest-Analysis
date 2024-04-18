@@ -1,8 +1,5 @@
 @import url('../../styles/styles.css');
 
-.universal{
-    background: var(--main_back_blue);
-}
 
 .homecontainer{
     display: flex;

@@ -26,7 +26,7 @@ const login = async(req,res,next)=>{
         
         res.json({auth:true,token:token});
     }catch(err){
-        console.log(err);
+        console.log("Error while login"+'\n'+err.where);
         next(createError(500,"Server Error"));
     }
 };
@@ -44,7 +44,7 @@ const create = async(req,res,next)=>{
         
         res.json(createSuccess(201,"User Created",{user_name:rows[0].user_name,user_id:rows[0].user_id}));
     }catch(err){
-        console.log(err);
+        console.log("Error while sign-up"+'\n'+err.where);
         next(createError(500,"Server Error"));
     }
 }

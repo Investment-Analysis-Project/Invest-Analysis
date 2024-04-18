@@ -204,21 +204,12 @@ const Result = () => {
           </div>
 
           <ul className="sidebar-list">
-            <li className="sidebar-list-item">
-                <FontAwesomeIcon icon={faUser} style={{color: "#ffffff",}}/>
-                <span>Profile</span>
-            </li>
-
+            
             <li className="sidebar-list-item" onClick={()=>setHistory(!history)}>
                 <FontAwesomeIcon icon={faClockRotateLeft} style={{color: "#ffffff",}}/>
                 <span>History</span>
             </li>
             
-            <li className="sidebar-list-item">
-                <FontAwesomeIcon icon={faGear} style={{color: "#ffffff",}}/>
-                <span >Settings</span>
-            </li>
-          
             <li className="sidebar-list-item"> 
                 <FontAwesomeIcon icon={faRightFromBracket} style={{color: "#ffffff",}}/>
                 <span  onClick={()=>{setAuth(false); localStorage.removeItem('token');navigate('/')}}>Logout</span>
@@ -264,6 +255,7 @@ const Result = () => {
 
               <div className="result-dash">
                 
+                <>
                 <div className="result-dash-news">
                   {value.map((res,i)=>{ 
                     const dateObject = new Date(res.news_time);
@@ -342,16 +334,21 @@ const Result = () => {
                     )
                   })}
                 </div>
+                <h3 className="font-weight-bold">News Articles Analyzed</h3>
+                </>
 
-                <div>
-                  <TrendGraph company={company} time={time}/>
-
+                <div className='google_trends'>
+                  <h3 className="font-weight-bold">Company in Google Trends</h3>
                   {(trendStatus && trend!=null && <>
                   
-                  <span>Peak Interest  : {trend.peak_intrest}</span>
-                  <span>Peak Search At : {(trend.peak_search.length>0) ? <>{trend.peak_search.map((res,i)=>{return(<>{res} </>)})}</> : <text>No Data</text>}</span> 
-
+                  <div className='google_trends_data'>
+                    <span>Peak Interest&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <button>{trend.peak_intrest}</button></span>
+                    <br></br>
+                    <span>Peak Search At : {(trend.peak_search.length>0) ? <>{trend.peak_search.map((res,i)=>{if(i>1) return null; return(<button>{res}</button>)})}</> : <text>No Data</text>}</span> 
+                  </div>
                   </>) }
+
+                  <TrendGraph company={company} time={time}/>
                 </div>
 
                 
