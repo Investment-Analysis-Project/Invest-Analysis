@@ -8,7 +8,7 @@
     top:33%;
     left:10.2%;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     font-size: 15px;
     border: none;
@@ -17,6 +17,14 @@
 }
 
 .history_container span{
-    color: var(--main_text_blue);
+    color: rgb(168, 2, 46);
     font-size: 15px;
+    text-align:justify;
+    width: 50%;
+}
+
+.query_time{
+    display: flex;
+    justify-content: flex-start;
+    gap:20px;
 }

@@ -9,11 +9,8 @@ const getPeviousSearch = async(req,res,next)=>{
         
         const result = await db.query("SELECT search_query,search_timestamp FROM searchhistory WHERE user_id = $1 ORDER BY search_timestamp DESC", [user_id]);
 
-        var recent_search = result.rows.map(item => item.search_query);
+        var recent_search = result.rows.map(item => ({ search_query: capitalizeWords(item.search_query), search_timestamp: item.search_timestamp }));
 
-        recent_search = recent_search.map(elements => {
-            return capitalizeWords(elements);
-        })
         const data = {
             user: req.user,
             recent_search: recent_search

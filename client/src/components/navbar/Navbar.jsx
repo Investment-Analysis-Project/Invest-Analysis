@@ -33,9 +33,6 @@ const Navbar = (props) => {
                     {profilevisible && <div className='logindropdown'>
                         <ul className='liststyle'>
                             <li>
-                            <p className='profilelistitem' onClick={()=>{navigate('/')}}>Profile</p>  
-                            </li>
-                            <li>
                                 <p className='profilelistitem' onClick={()=>{setAuth(false);setUser_id(""); localStorage.removeItem('token');navigate('/')}}>Logout</p>
                             </li>
                         </ul>
