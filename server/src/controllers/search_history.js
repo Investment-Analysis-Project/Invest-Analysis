@@ -38,8 +38,8 @@ const addToHistory = async(req,res,next) => {
             const result = await db.query('INSERT INTO searchhistory (user_id, search_query) VALUES ($1, $2) RETURNING *', [user_id, query]);
             res.json(createSuccess(201,"Search history added successfully"));
         }
-    } catch (error) {
-        console.log(error);
+    } catch (err) {
+        console.log(err);
         next(createError(500,"There was an error while updating data"));
     }
 }

@@ -343,14 +343,18 @@ const Result = () => {
                   })}
                 </div>
 
-                {trendStatus ? (trend!=null && <>
+                <div>
+                  <TrendGraph company={company} time={time}/>
+
+                  {(trendStatus && trend!=null && <>
+                  
+                  <span>Peak Interest  : {trend.peak_intrest}</span>
+                  <span>Peak Search At : {(trend.peak_search.length>0) ? <>{trend.peak_search.map((res,i)=>{return(<>{res} </>)})}</> : <text>No Data</text>}</span> 
+
+                  </>) }
+                </div>
+
                 
-                <span>Peak Interest  : {trend.peak_intrest}</span>
-                <span>Peak Search At : {(trend.peak_search.length>0) ? <>{trend.peak_search.map((res,i)=>{return(<>{res} </>)})}</> : <text>No Data</text>}</span> 
-
-                </>) : (<span>{trendMsg}</span>) }
-
-                <TrendGraph company={company} time={time}/>
         
                 { (labels.length>0) ? <><div className="result-dash-senti">
                   <div className='pie-chart'>
