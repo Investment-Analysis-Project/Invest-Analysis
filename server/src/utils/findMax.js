@@ -6,9 +6,9 @@ function findMax(data) {
         const value = parseInt(data[i][1]);
         if (value > maxValue) {
             maxValue = value;
-            maxKeys = [data[i][0]]; // Reset maxKeys to contain only the current key
+            maxKeys = [data[i][0]];
         } else if (value === maxValue) {
-            maxKeys.push(data[i][0]); // Add the current key to maxKeys if its value is equal to maxValue
+            maxKeys.push(data[i][0]);
         }
     }
     result = {
