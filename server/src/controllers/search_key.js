@@ -12,7 +12,7 @@ const recent_news = async(req,res,next)=>{
         //dd4dcc554dd94d61820961820e342242
         //afcd39b2d9c546cc9293d168cee038e7
 
-        const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&excludeDomains=engadget.com,yahoo.com&searchIn=title&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
+        const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&excludeDomains=engadget.com,yahoo.com&searchIn=title&from=2024-04-18&to=2024-03-18&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
         const five_news = response.data.articles.slice(0,10);
         
         const newsArray = [];
