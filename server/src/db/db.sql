@@ -9,19 +9,18 @@ CREATE TABLE usertable(
   created_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE newstable(
-  news_id SERIAL PRIMARY KEY,
-  title TEXT,
-  description TEXT,
-  url TEXT,
-  urlToImage TEXT,
-  publishedAt TEXT,
-  content TEXT
-);
-
 CREATE TABLE searchhistory (
   search_id SERIAL PRIMARY KEY,
   user_id INT REFERENCES usertable(user_id),
   search_query VARCHAR(255) NOT NULL,
   search_timestamp TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE api_usage (
+  id SERIAL PRIMARY KEY,
+  user_id INT REFERENCES usertable(user_id),
+  timestamp TIMESTAMP DEFAULT NOW(),
+  method VARCHAR(10) NOT NULL,
+  url TEXT NOT NULL,
+  user_agent TEXT
 );
