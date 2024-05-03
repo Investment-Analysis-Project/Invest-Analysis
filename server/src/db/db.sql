@@ -24,3 +24,10 @@ CREATE TABLE api_usage (
   url TEXT NOT NULL,
   user_agent TEXT
 );
+CREATE TABLE auth_tokens (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES usertable(user_id), 
+    token VARCHAR(255) NOT NULL,
+    expiration_date TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

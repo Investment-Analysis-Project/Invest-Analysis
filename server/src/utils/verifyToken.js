@@ -33,4 +33,23 @@ const verifyUser = (req,res,next)=>{
     });
 }
 
-module.exports = {verifyToken,verifyUser};
+const verifyApiToken = (req, res, next) => {
+
+    const token = req.query.api_key;
+    // const token = req.headers('x-api-key');
+
+
+    if (!token || token=="null") {
+        return next(createError(401, 'Access denied. No token provided.'));
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            return next(createError(401, 'Invalid token.'));
+        }
+        req.user = decoded;
+        next();
+    });
+};
+
+module.exports = {verifyToken,verifyUser,verifyApiToken};
