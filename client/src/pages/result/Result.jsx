@@ -386,7 +386,7 @@ const Result = () => {
                           result=(sum1/last_phase.length).toFixed(2);
                           f1=result;
                         })()}
-                        <th>{result} {result >= 1 ? <text style={{ color: '#28B463' }}>VG</text>  : (result < 0 ?  <text style={{ color: '#C70039' }}>NG</text> : <text style={{ color: '#F7582B' }}>G</text>) }</th>
+                        <th>{result >= 1 ? <text style={{ color: '#28B463' }}>VG</text>  : (result < 0 ?  <text style={{ color: '#C70039' }}>NG</text> : <text style={{ color: '#F7582B' }}>G</text>) }</th>
                       </tr>)}
 
                       {mid_phase.length>0 && (<tr>
@@ -400,7 +400,7 @@ const Result = () => {
                           weight=1;
                           result=(sum2/mid_phase.length).toFixed(2);
                         })()}
-                        <th>{result} {result >= 1 ? <text style={{ color: '#28B463' }}>VG</text>  : (result < 0 ?  <text style={{ color: '#C70039' }}>NG</text> : <text style={{ color: '#F7582B' }}>G</text>) }</th>
+                        <th>{result >= 1 ? <text style={{ color: '#28B463' }}>VG</text>  : (result < 0 ?  <text style={{ color: '#C70039' }}>NG</text> : <text style={{ color: '#F7582B' }}>G</text>) }</th>
                       </tr>)}
 
                       {first_phase.length>0 && (<tr>
@@ -414,7 +414,7 @@ const Result = () => {
                           result=(sum3/first_phase.length).toFixed(2);
                           f3=result;
                         })()}
-                        <th>{result} {result >= 1 ? <text style={{ color: '#28B463' }}>VG</text>  : (result < 0 ?  <text style={{ color: '#C70039' }}>NG</text> : <text style={{ color: '#F7582B' }}>G</text>) }</th>
+                        <th>{result >= 1 ? <text style={{ color: '#28B463' }}>VG</text>  : (result < 0 ?  <text style={{ color: '#C70039' }}>NG</text> : <text style={{ color: '#F7582B' }}>G</text>) }</th>
                       </tr>)}
 
                     </table>
