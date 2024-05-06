@@ -5,7 +5,7 @@ import { ProjectsContext } from '../../contextapi.js/projectscontext';
 import { useNavigate} from 'react-router-dom';
 import TrendGraph from '../../components/trendGraph/TrendGraph';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass,faUser,faClockRotateLeft,faGear,faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass,faClockRotateLeft,faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import {Chart as ChartJS} from 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {Line,Doughnut} from "react-chartjs-2";
@@ -14,7 +14,7 @@ import History from '../../components/history/History';
 const Result = () => {
   const navigate = useNavigate();
 
-  const {setAuth,user_id}=useContext(ProjectsContext);
+  const {setAuth,user_id,setUser_id,auth}=useContext(ProjectsContext);
 
   const [searched,setSearched]=useState(false);
   const [loaded,setLoaded]=useState(false);
@@ -26,6 +26,7 @@ const Result = () => {
   const [trendStatus,settrendStatus]=useState(true);
   const [trendMsg,settrendMsg]=useState("");
   const [history,setHistory]=useState(false);
+  const [respmsg,setRespMsg]=useState("");
 
   const labels=[];
   const senti_data=[];
@@ -140,7 +141,7 @@ const Result = () => {
 
       const token = localStorage.getItem('token');
 
-      const insert = await baseurl.post('/searchhistory/add',{user_id,query:company})
+      await baseurl.post('/searchhistory/add',{user_id,query:company})
 
       const response = await baseurl.get(`/search_key/${company}?time=${time}&id=${user_id}`,
       {
@@ -148,11 +149,13 @@ const Result = () => {
             'authorization' : `Bearer ${token}`
         }
       });
-
+      
       if(response.data.success===true)
         setValue(response.data.data);
+      else
+        setRespMsg(response.data.message)
 
-      setStatus(response.data.success);;
+      setStatus(response.data.success);
       
       setSearched(false);
       setLoaded(true);
@@ -203,7 +206,7 @@ const Result = () => {
             </div>
           </div>
 
-          <ul className="sidebar-list">
+          {auth && <><ul className="sidebar-list">
             
             <li className="sidebar-list-item" onClick={()=>setHistory(!history)}>
                 <FontAwesomeIcon icon={faClockRotateLeft} style={{color: "#ffffff",}}/>
@@ -212,9 +215,9 @@ const Result = () => {
             
             <li className="sidebar-list-item"> 
                 <FontAwesomeIcon icon={faRightFromBracket} style={{color: "#ffffff",}}/>
-                <span  onClick={()=>{setAuth(false); localStorage.removeItem('token');navigate('/')}}>Logout</span>
+                <span  onClick={()=>{setAuth(false);setUser_id("");localStorage.removeItem('token');navigate('/')}}>Logout</span>
             </li>
-          </ul>
+          </ul></>}
         </aside>
 
         {history && <History />}
@@ -236,8 +239,7 @@ const Result = () => {
           {!loaded && searched && <div class="loader"></div> }
 
           {!status && loaded && (
-          <span style={{marginTop:'100px',transitionDelay:'2s'}}>Oops....! Failed to Fetch. Try Again</span>
-          
+          <span style={{marginTop:'100px',transitionDelay:'2s'}}>{respmsg}</span>
           )}
           
           {loaded && status && <><main className="main-container">

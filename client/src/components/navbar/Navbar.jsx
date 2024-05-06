@@ -7,7 +7,7 @@ import {  faUser,faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = (props) => {
 
-    const {login_page,result}=props;
+    const {login_page}=props;
 
     const navigate = useNavigate();
     const [profilevisible,setprofilevisible]=useState(false);
@@ -26,7 +26,7 @@ const Navbar = (props) => {
                 </div>
 
                 {auth ? (<div className='items'>
-                    {!result && (<button className='navbut' onClick={()=>{navigate('/result')}}>Search For Company&nbsp;&nbsp; <FontAwesomeIcon icon={faSearch} style={{color: "#ffffff",}} size="sm"/></button>)}
+                    <button className='navbut' onClick={()=>{navigate('/result')}}>Search For Company&nbsp;&nbsp; <FontAwesomeIcon icon={faSearch} style={{color: "#ffffff",}} size="sm"/></button>
 
                     <button className='navbut' onClick={profileview}><FontAwesomeIcon icon={faUser} style={{color: "#ffffff",}} size="xl"/></button>
 

@@ -28,7 +28,7 @@ const verifyUser = (req,res,next)=>{
             next();
         }
         else{
-           return next(createError(401,"You are not authorized user !"));
+            return next(createError(401,"You are not authorized user ! Please Login"));
         }
     });
 }

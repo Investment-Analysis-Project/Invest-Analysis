@@ -6,13 +6,10 @@ import { ProjectsContextProvider } from './contextapi.js/projectscontext';
 import Analysis from "./pages/analysis/Analysis";
 import Profile from "./pages/profile/Profile";
 import Result from "./pages/result/Result";
-
-const isAuthenticated = () => {
-  return localStorage.getItem('token') !== null;
-};
-
+import Protectedroute from "./components/protectedroute/Protectedroute"
 
 function App() {
+
   return (
     <ProjectsContextProvider>
       <>
@@ -23,7 +20,7 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/search_key" element={<Search/>}/>
             <Route path="/profile" element={<Profile/>}/>
-            <Route path="/result" element={(isAuthenticated() ? <Result /> : <Login/>)}/>
+            <Route path="/result" element={<Protectedroute/>}/>
           </Routes>
         </BrowserRouter>
       </>
