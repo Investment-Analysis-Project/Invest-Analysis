@@ -20,8 +20,8 @@ const Home = () => {
               Unleash the power of news to make informed and profitable investment decisions in real time
             </p>
           </div>             
-        </div>
-        <News/>
+      </div>
+      <News/>
     </div>
   )
 }
