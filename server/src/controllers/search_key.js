@@ -3,11 +3,14 @@ const createSuccess = require('../utils/success');
 const axios = require('axios');
 
 let resultArray = [];
+let key;
 
 const recent_news = async(req,res,next)=>{
     try{
         const {time} =req.query;
         const {keyword}=req.params;
+
+        key=keyword;
 
         //dd4dcc554dd94d61820961820e342242
         //afcd39b2d9c546cc9293d168cee038e7
@@ -70,7 +73,7 @@ const processNewsArray = async(newsArray)=>
 const query = async(news_scraped,news)=>
 {
     try{
-        const news_entities = []
+        let news_entities = []
 
         const response1 = await fetch('http://127.0.0.1:4001/senti',
         {
@@ -96,12 +99,18 @@ const query = async(news_scraped,news)=>
             });
 
             const result2 = await response2.json();
-            news_entities.push(result2)
+            news_entities=news_entities.concat(result2);
         }
         const news_title=news.title;
         const news_url=news.url;
         const news_time=news.publishedAt;
         const news_img=news.news_img_url
+
+        news_entities = news_entities.filter(item => item !== key);
+
+        news_entities = [...new Set(news_entities)];
+        console.log(news_entities)
+
         resultArray.push({news_title,news_url,news_sentiment,news_entities,news_time,news_img});
     }catch(err){
         console.log('\n'+"Error while excecuting model"+'\n'+err.where+'\n');
