@@ -6,7 +6,7 @@ const capitalizeWords = require('../utils/capitalize')
 const getPeviousSearch = async(req,res,next)=>{
     try{
         const {user_id} = req.body;
-        
+  
         const result = await db.query("SELECT search_query,search_timestamp FROM searchhistory WHERE user_id = $1 ORDER BY search_timestamp DESC", [user_id]);
 
         var recent_search = result.rows.map(item => ({ search_query: capitalizeWords(item.search_query), search_timestamp: item.search_timestamp }));

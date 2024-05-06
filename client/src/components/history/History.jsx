@@ -15,7 +15,7 @@ const History = () => {
         try{
             const getHistroy = async() =>{
                 const result = await baseurl.post('/searchhistory/get',{
-                    user_id:15
+                    user_id:user_id
                 });
 
                 if(result.data.success===true)
@@ -43,7 +43,7 @@ const History = () => {
         (status && history.length>0 ? <>
         <div className='history_container'>
         
-        {history.map((res,i)=>{
+        {history?.map((res,i)=>{
             return(
                 <div className='query_time'>
                     <span>{res.search_query}</span>

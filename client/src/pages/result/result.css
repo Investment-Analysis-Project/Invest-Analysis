@@ -176,7 +176,7 @@ body{
 
 .result-dash-news{
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   justify-content: center;
   gap: 10px;
 }
@@ -221,10 +221,18 @@ body{
   background-color: var(--main_back_blue);
   padding: 10px;
   border-radius: 10px;
-  font-size: 12px;
+  font-size: 13px;
   flex: 1;
   min-height: 100px;
+  font-weight: 600;
   color: var(--main_text_blue)
+}
+
+.result-dash-news-detail-content-entity{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  gap: 2px;
 }
 
 .result-dash-senti{

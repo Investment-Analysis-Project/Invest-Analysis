@@ -6,6 +6,7 @@
             "sentiment": "Positive",
             "score": 0.8970250487327576
         },
+    "news_entities":['Google','Apple'],
     "news_time":"2024-03-14T09:46:00Z"
 },
 {
@@ -16,6 +17,7 @@
             "sentiment": "Negative",
             "score": 0.8970250487327576
         },
+    "news_entities":['Google','Apple'],
     "news_time":"2024-03-27T14:07:00Z"
 },
 {
@@ -26,6 +28,7 @@
             "sentiment": "Positive",
             "score": 0.8970250487327576
         },
+    "news_entities":['Google','Apple'],
     "news_time":"2024-03-26T17:24:00Z"
 },
 {
@@ -36,6 +39,7 @@
             "sentiment": "Positive",
             "score": 0.8970250487327576
         },
+    "news_entities":['Google','Apple'],
     "news_time":"2024-03-15T14:27:00Z"
 },
 {
@@ -46,6 +50,7 @@
             "sentiment": "Positive",
             "score": 0.8970250487327576
         },
+    
     "news_time":"2024-04-08T23:20:33Z"
 },
 {
@@ -56,6 +61,7 @@
             "sentiment": "Negative",
             "score": 0.8970250487327576
         },
+    "news_entities":['Google','Apple'],
     "news_time":"2024-03-21T22:43:02Z"
 },
 {
@@ -66,6 +72,7 @@
             "sentiment": "Neutral",
             "score": 0.8970250487327576
         },
+    "news_entities":['Google','Apple'],
     "news_time":"2024-03-12T19:50:15Z"
 },
 {
@@ -76,6 +83,7 @@
             "sentiment": "Neutral",
             "score": 0.8970250487327576
         },
+    "news_entities":['Google','Apple'],
     "news_time":"2024-03-22T18:30:09Z"
 },
 {
@@ -86,6 +94,7 @@
             "sentiment": "Neutral",
             "score": 0.8970250487327576
         },
+    "news_entities":['Google','Apple'],
     "news_time":"2024-04-02T14:02:53Z"
 },
 {
@@ -96,5 +105,6 @@
             "sentiment": "Neutral",
             "score": 0.8970250487327576
         },
+    "news_entities":['Google','Apple'],
     "news_time":"2024-04-10T14:02:53Z"
 }

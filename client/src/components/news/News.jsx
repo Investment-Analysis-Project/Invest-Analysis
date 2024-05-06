@@ -35,7 +35,7 @@ const News = () => {
     return (
         <div className='allnews'>
             <div className='newscontainer'>
-                {news.map((res,i)=>{
+                {news?.map((res,i)=>{
                     return(
                         <div className='newsitem' key={i}  onClick={()=>{setNewtitle(res.title);setNewsdesc(res.description);setNewsurl(res.url);navigate(`/analysis`)}} id="newspointer">
                             <span className='news-title'>{res.title}</span>

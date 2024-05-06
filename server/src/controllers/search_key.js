@@ -16,8 +16,8 @@ const recent_news = async(req,res,next)=>{
         //dd4dcc554dd94d61820961820e342242
         //afcd39b2d9c546cc9293d168cee038e7
 
-        const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&excludeDomains=engadget.com,yahoo.com&searchIn=title&from=2024-05-03&to=2024-04-03&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
-        const five_news = response.data.articles.slice(0,2);
+        const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&excludeDomains=engadget.com,yahoo.com&searchIn=title&from=2024-05-06&to=2024-04-04&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
+        const five_news = response.data.articles.slice(0,12);
         
         const newsArray = [];
         five_news.forEach(news => {
@@ -35,7 +35,8 @@ const recent_news = async(req,res,next)=>{
         else
             throw new Error('This is an error');
 
-        //  
+        // resultArray.sort((a,b)=>a.news_time.localeCompare(b.news_time));
+        // res.json(createSuccess(200,"Previous Search",resultArray ));
     }catch(err){
         console.log('\n'+"Error while fectching news"+'\n'+err.where+'\n');
         return next(createError(500,"Ooops...! There was an error while processing. Failed to fetch data. Try Again"));
@@ -106,10 +107,11 @@ const query = async(news_scraped,news)=>
         const news_time=news.publishedAt;
         const news_img=news.news_img_url
 
-        news_entities = news_entities.filter(item => item !== key);
+        news_entities = news_entities.filter(item => item !== key && item.length<=10);
 
         news_entities = [...new Set(news_entities)];
-        console.log(news_entities)
+
+
 
         resultArray.push({news_title,news_url,news_sentiment,news_entities,news_time,news_img});
     }catch(err){

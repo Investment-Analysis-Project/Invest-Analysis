@@ -259,7 +259,7 @@ const Result = () => {
                 
                 <>
                 <div className="result-dash-news">
-                  {value.map((res,i)=>{ 
+                  {value?.map((res,i)=>{ 
                     const dateObject = new Date(res.news_time);
 
                     const x = parseInt((current_day-dateObject) / (1000 * 60 * 60 * 24))
@@ -325,13 +325,20 @@ const Result = () => {
                     };
 
                     return(
-                      <div className="result-dash-news-detail" key={i} onClick={()=>window.open(res.news_url)}>
+                      <div className="result-dash-news-detail" key={i}>
                         <div className="result-dash-news-detail-content">
                           <img alt="" src="https://yt3.googleusercontent.com/rhqKhfZPaVKRfPi1UvaoekFcSVkipICyGmshnUT9SYMR2JMI8G40YqtaOqz94Ao5rdu_NE0nAw=s900-c-k-c0x00ffffff-no-rj"/>
-                          <span>{res.news_title}</span>
+                          <span onClick={()=>window.open(res.news_url)}>{res.news_title}</span>
                         </div>
                         <button>{res.news_time}</button>
                         <button style={{color:color}}>{res.news_sentiment.sentiment.toUpperCase()}</button>
+                        <div className='result-dash-news-detail-content-entity'>
+                          {res.news_entities?.map((x,y)=>{
+                              return(
+                                <button  style={{fontWeight:'400',backgroundColor:'#ACF7C1',textAlign:'center',overflow:'hidden'}}>{x}</button>
+                              )
+                          })}
+                        </div>
                       </div>
                     )
                   })}
@@ -364,7 +371,7 @@ const Result = () => {
                     <span>
                       <text style={{ fontWeight:'600'}}>{count}</text> recent articles have been analyzed from time series <text style={{ fontWeight:'600'}}>{labels[0]}</text>          
                       <br></br>to 
-                      <text style={{ fontWeight:'600'}}>{labels[9]}</text>
+                      <text style={{ fontWeight:'600'}}> {labels[9]}</text>
                     </span>
                     <span>                    
                       <button style={{ backgroundColor: '#28B463' , color:'white',  border:'none' }}>{sentimentCount.positive} sounded Postive</button>--<button style={{ backgroundColor: '#C70039' , color:'white', border:'none'}}>{sentimentCount.negative} sounded Negative</button>--<button style={{ backgroundColor: '#F7582B' , color:'white' , border:'none'}}>{sentimentCount.neutral} sounded Neutral</button>
