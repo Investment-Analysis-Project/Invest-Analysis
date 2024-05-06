@@ -7,6 +7,10 @@ import Analysis from "./pages/analysis/Analysis";
 import Profile from "./pages/profile/Profile";
 import Result from "./pages/result/Result";
 
+const isAuthenticated = () => {
+  return localStorage.getItem('token') !== null;
+};
+
 
 function App() {
   return (
@@ -19,7 +23,7 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/search_key" element={<Search/>}/>
             <Route path="/profile" element={<Profile/>}/>
-            <Route path="/result" element={<Result/>} />
+            <Route path="/result" element={(isAuthenticated() ? <Result /> : <Login/>)}/>
           </Routes>
         </BrowserRouter>
       </>
