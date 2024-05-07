@@ -96,7 +96,7 @@ const Result = () => {
           font: 
           {
             family:'Poppins',
-            size:8
+            size:6.6
           }
         },
         grid: {
@@ -266,7 +266,7 @@ const Result = () => {
 
                     if(time==='1-d' && x>3)
                       return null;
-                    else if(time==='7-d' && x>7)
+                    else if(time==='7-d' && x>14)
                       return null;
                       
                     labels.push(res.news_time);
@@ -291,9 +291,9 @@ const Result = () => {
                         break;
                     }  
 
-                    if(x<=7)
+                    if(x<=14)
                       first_phase.push(count++)
-                    else if(x<=14)
+                    else if(x<=21)
                       mid_phase.push(count++);
                     else
                       last_phase.push(count++)
@@ -354,7 +354,7 @@ const Result = () => {
                   <div className='google_trends_data'>
                     <span>Peak Interest&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <button>{trend.peak_intrest}</button></span>
                     <br></br>
-                    <span>Peak Search At : {(trend.peak_search.length>0) ? <>{trend.peak_search.map((res,i)=>{if(i>1) return null; return(<button>{res}</button>)})}</> : <text>No Data</text>}</span> 
+                    <span>Peak Search At : {(trend.peak_search.length>0) ? <>{(trend.peak_search)?.map((res,i)=>{if(i>1) return null; return(<button>{res}</button>)})}</> : <text>No Data</text>}</span> 
                   </div>
                   </>) }
 

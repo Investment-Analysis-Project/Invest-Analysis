@@ -17,7 +17,7 @@ const recent_news = async(req,res,next)=>{
         //afcd39b2d9c546cc9293d168cee038e7
 
         const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&excludeDomains=engadget.com,yahoo.com&searchIn=title&from=2024-05-07&to=2024-04-04&language=en&sortBy=relevancy&apiKey=dd4dcc554dd94d61820961820e342242`);
-        const five_news = response.data.articles.slice(0,12);
+        const five_news = response.data.articles.slice(0,25);
         
         const newsArray = [];
         five_news.forEach(news => {
@@ -49,7 +49,7 @@ const processNewsArray = async(newsArray)=>
 {
     resultArray = [];
 
-    for (let i=0,count=0;i<newsArray.length && count<10;i++)
+    for (let i=0,count=0;i<newsArray.length && count<12;i++)
     {
         const news = newsArray[i];
         const response = await fetch('http://127.0.0.1:5000/scrap',
