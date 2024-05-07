@@ -76,10 +76,12 @@ const Login = () => {
 
             new_setMessage(value.message);
 
-            if(!value.stat){
+            if(value.success){
                 setUserName(new_user_name);
                 setPassword(new_user_password);
-                loginSubmit(e);
+                setMessage("");
+                setLogin(true);
+                setSignup(false);
                 return;
             }
 
