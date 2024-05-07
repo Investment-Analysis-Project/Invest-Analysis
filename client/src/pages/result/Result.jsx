@@ -335,7 +335,8 @@ const Result = () => {
                         <div className='result-dash-news-detail-content-entity'>
                           {res.news_entities?.map((x,y)=>{
                               return(
-                                <button  style={{fontWeight:'400',backgroundColor:'#ACF7C1',textAlign:'center',overflow:'hidden'}}>{x}</button>
+                                <button  style={{fontWeight:'400',backgroundColor:'#ACF7C1',textAlign:'center',overflow:'hidden',cursor:'pointer'}}
+                                onClick={(e) => {setCompany(x);searchForCompany(e)}}>{x}</button>
                               )
                           })}
                         </div>

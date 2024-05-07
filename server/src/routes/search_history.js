@@ -4,5 +4,5 @@ const verify = require('../utils/verifyToken');
 const searchController = require('../controllers/search_history');
 
 router.post('/get', searchController.getPeviousSearch);
-router.post('/add', searchController.addToHistory);
+router.post('/add', verify.verifyUser, searchController.addToHistory);
 module.exports = router;

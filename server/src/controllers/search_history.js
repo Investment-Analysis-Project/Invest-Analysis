@@ -19,7 +19,7 @@ const getPeviousSearch = async(req,res,next)=>{
         res.json(createSuccess(200,"Previous Search",data ));
     }catch(err){
         console.log('\n'+"Error while fectching history"+'\n'+err.where+'\n');
-        next(createError(500,"There was an error while fetching the history !"));
+        return next(createError(500,"There was an error while fetching the history !"));
     }
 }
 
@@ -40,7 +40,7 @@ const addToHistory = async(req,res,next) => {
         }
     } catch (err) {
         console.log('\n'+"Error while adding history"+'\n'+err.where+'\n');
-        next(createError(500,"There was an error while updating data"));
+        return next(createError(500,"There was an error while updating data"));
     }
 }
 
