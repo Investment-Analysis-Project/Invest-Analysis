@@ -431,10 +431,10 @@ const Result = () => {
     
                     <span>
                       {(()=>{
-                        score = f1*1 + f2*1.2 + f3*1.5
+                        score = ((f1*1 + f2*1.2 + f3*1.5)/3).toFixed(2);
                       })()}
 
-                      The company sounds overall {score > 1.8 ? <text style={{ color: '#28B463' ,fontWeight:'600'}}>Very Good</text>  : (score >= 0 ? <text style={{ color: '#F7582B',fontWeight:'600' }}>Good</text> : <text style={{ color: '#C70039',fontWeight:'600' }}>Not Good</text>)} performance for the past {time}
+                      The company sounds overall {score > 1.5 ? <text style={{ color: '#28B463' ,fontWeight:'600'}}>Very Good</text>  : (score >= 0 ? <text style={{ color: '#F7582B',fontWeight:'600' }}>Good</text> : <text style={{ color: '#C70039',fontWeight:'600' }}>Not Good</text>)} performance for the past {time}
                     </span>
                   </div> 
                 </div>
