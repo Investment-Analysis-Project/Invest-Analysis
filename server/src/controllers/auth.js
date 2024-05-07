@@ -23,11 +23,11 @@ const login = async(req,res,next)=>{
         }
 
         const token=jwt.sign(user_log,process.env.JWT_SECRET,{expiresIn:"24h"});
-        
-        res.json({auth:true,token:token});
+
+        res.json(createSuccess(201,"Login Success",{auth:true,token:token}));
     }catch(err){
         console.log("Error while login"+'\n'+err.where);
-        return next(createError(500,"Error while Login"));
+        return next(createError(500,"Login Failed"));
     }
 };
 
@@ -45,7 +45,7 @@ const create = async(req,res,next)=>{
         res.json(createSuccess(201,"User Created",{user_name:rows[0].user_name,user_id:rows[0].user_id}));
     }catch(err){
         console.log("Error while sign-up"+'\n'+err.where);
-        return next(createError(500,"Error while Sign-Up"));
+        return next(createError(500,"Sign-Up Failed"));
     }
 }
 

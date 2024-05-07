@@ -38,17 +38,17 @@ const Login = () => {
 
             const value = response.data;
 
-            if(!value.auth){
-                setMessage(value.message);
-                return;
-            }
+            setMessage(value.message);
 
-            const token = value.token;
-            const decodedToken = jwt(token);
+            if(!value.success)
+                return;
+
+            const token = value.data.token;
+            const decodedToken =jwt(token);
 
             localStorage.setItem('token', token);
 
-            setAuth(value.auth);
+            setAuth(value.data.auth);
             setUser_id(decodedToken.user_id);
               
             navigate('/');
@@ -76,14 +76,14 @@ const Login = () => {
 
             new_setMessage(value.message);
 
-            if(value.success){
-                setUserName(new_user_name);
-                setPassword(new_user_password);
-                setMessage("");
-                setLogin(true);
-                setSignup(false);
+            if(!value.success)
                 return;
-            }
+
+            setUserName(new_user_name);
+            setPassword(new_user_password);
+            setMessage("");
+            setLogin(true);
+            setSignup(false);
 
         }catch(err){
             console.log(err);
