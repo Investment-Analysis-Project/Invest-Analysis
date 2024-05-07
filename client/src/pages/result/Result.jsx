@@ -250,7 +250,7 @@ const Result = () => {
                 <h3 className="font-weight-bold">Top Results</h3>
                 <select value={time} onChange={e=>setTime(e.target.value)}>
                   <option value="1-d">For Last Days</option>
-                  <option value="7-d">For Last Week</option>
+                  <option value="7-d">For Last Weeks</option>
                   <option value="1-m">For Last Month</option>
                 </select>
               </div>
